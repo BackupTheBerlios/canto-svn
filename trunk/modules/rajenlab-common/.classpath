@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="source/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/canto-thirdparty/acegi-security-1.0.3.jar"/>
+	<classpathentry kind="lib" path="/canto-thirdparty/commons-lang-2.1.jar"/>
+	<classpathentry kind="lib" path="/canto-thirdparty/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/canto-thirdparty/spring-2.0.2.jar"/>
+	<classpathentry kind="lib" path="/canto-thirdparty/hibernate-3.2.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
