@@ -34,14 +34,14 @@ public class XmlContentHandler implements ContentHandler {
 	public static final String ENCODING_PROPERTY = "xml.attachment.encoding";
 	public static final String ENCODING_PROPERTY_DEFAULT = "ISO-8859-1";
 	
-	private Document content;
-	private Attachment attachment;
+	private Document content_;
+	private Attachment attachment_;
 	
 	public XmlContentHandler() {
 	}
 	
 	public XmlContentHandler( Document content ) {
-		this.content = content;
+		this.content_ = content;
 	}
 	
 	public String getContentType() {
@@ -49,8 +49,8 @@ public class XmlContentHandler implements ContentHandler {
 	}
 
 	public void attach(Attachment attachment) {
-		this.attachment = attachment;
-		if ( content != null ) {
+		this.attachment_ = attachment;
+		if ( content_ != null ) {
 			store();
 		} else {
 			load();
@@ -58,9 +58,9 @@ public class XmlContentHandler implements ContentHandler {
 	}
 
 	protected void load() {
-		if ( attachment != null ) {
+		if ( attachment_ != null ) {
 			try {
-				content = XmlParser.parse(attachment.getContent());
+				content_ = XmlParser.parse(attachment_.getContent());
 			} catch ( Exception e ) {
 				throw new RuntimeException(e);
 			}
@@ -68,22 +68,22 @@ public class XmlContentHandler implements ContentHandler {
 	}
 	
 	protected void store() {
-		if ( attachment != null ) {
+		if ( attachment_ != null ) {
 			try {
-				attachment.setContent(XmlWriter.format(content));
+				attachment_.setContent(XmlWriter.format(content_));
 			} catch ( Exception e ) {
 				throw new RuntimeException(e);
 			}
-			attachment.setContentType( CONTENT_TYPE );
+			attachment_.setContentType( CONTENT_TYPE );
 		}
 	}
 
 	public Document getContent() {
-		return content;
+		return content_;
 	}
 
 	public void setContent(Document content) {
-		this.content = content;
+		this.content_ = content;
 		store();
 	}
 	
@@ -93,8 +93,8 @@ public class XmlContentHandler implements ContentHandler {
 	
 	@Override
     public String toString() {
-		if ( this.content != null ) {
-			return XmlWriter.formatToString(content);
+		if ( this.content_ != null ) {
+			return XmlWriter.formatToString(content_);
 		}
 		return "";
 	}

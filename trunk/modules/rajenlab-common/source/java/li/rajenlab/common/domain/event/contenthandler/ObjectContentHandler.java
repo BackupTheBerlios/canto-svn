@@ -35,14 +35,14 @@ public class ObjectContentHandler implements ContentHandler {
 
 	public static final String CONTENT_TYPE = "java-application/object";
 	
-	private Object content;
-	private Attachment attachment;
+	private Object content_;
+	private Attachment attachment_;
 	
 	public ObjectContentHandler() {
 	}
 	
 	public ObjectContentHandler( Object content ) {
-		this.content = content;
+		this.content_ = content;
 	}
 	
 	public String getContentType() {
@@ -50,8 +50,8 @@ public class ObjectContentHandler implements ContentHandler {
 	}
 
 	public void attach(Attachment attachment) {
-		this.attachment = attachment;
-		if ( content != null ) {
+		this.attachment_ = attachment;
+		if ( content_ != null ) {
 			store();
 		} else {
 			load();
@@ -59,9 +59,9 @@ public class ObjectContentHandler implements ContentHandler {
 	}
 
 	protected void load() {
-		if ( attachment != null ) {
+		if ( attachment_ != null ) {
 			try {
-				content = deserialise(attachment.getContent());
+				content_ = deserialise(attachment_.getContent());
 			} catch ( Exception e ) {
 				throw new RuntimeException(e);
 			}
@@ -69,24 +69,24 @@ public class ObjectContentHandler implements ContentHandler {
 	}
 	
 	protected void store() {
-		if ( attachment != null ) {
+		if ( attachment_ != null ) {
 			try {
-				attachment.setContent(serialise(content));
+				attachment_.setContent(serialise(content_));
 			} catch ( NotSerializableException nse ) {
-				attachment.setContent(null);
+				attachment_.setContent(null);
 			} catch ( Exception e ) {
 				throw new RuntimeException(e);
 			}
-			attachment.setContentType( CONTENT_TYPE );
+			attachment_.setContentType( CONTENT_TYPE );
 		}
 	}
 
 	public Object getContent() {
-		return content;
+		return content_;
 	}
 
 	public void setContent(Object content) {
-		this.content = content;
+		this.content_ = content;
 		store();
 	}
 	
@@ -130,8 +130,8 @@ public class ObjectContentHandler implements ContentHandler {
 
 	@Override
     public String toString() {
-		if ( this.content != null ) {
-			return this.content.toString();
+		if ( this.content_ != null ) {
+			return this.content_.toString();
 		}
 		return "";
 	}

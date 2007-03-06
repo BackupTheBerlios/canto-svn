@@ -28,11 +28,11 @@ import li.rajenlab.common.domain.event.contenthandler.EmptyContentHandler;
  * @version $Id$
  */
 public class Attachment {
-    private ContentHandler contentHandler;
 
-    private Properties properties = new Properties();
-    private byte[] content;
-    private String contentType;
+    private ContentHandler contentHandler_;
+    private Properties properties_ = new Properties();
+    private byte[] content_;
+    private String contentType_;
     
     public Attachment() {
         this( new EmptyContentHandler() );
@@ -49,16 +49,16 @@ public class Attachment {
     }
     
     public ContentHandler getContentHandler() {
-        return contentHandler;
+        return contentHandler_;
     }
 
     public void setContentHandler(ContentHandler contentHandler) {
-        this.contentHandler = contentHandler;
-        this.contentHandler.attach(this);
+        this.contentHandler_ = contentHandler;
+        this.contentHandler_.attach(this);
     }
 
     public byte[] getContent() {
-        return content;
+        return content_;
     }
 
     /**
@@ -77,62 +77,62 @@ public class Attachment {
     }
     
     public int getContentLength() {
-        return content != null ? content.length : 0;
+        return content_ != null ? content_.length : 0;
     }
     
     public void setContent(byte[] content) {
-        this.content = content;
+        this.content_ = content;
     }
 
     public String getContentType() {
-        return contentType;
+        return contentType_;
     }
 
     public void setContentType(String contentType) {
-        this.contentType = contentType;
+        this.contentType_ = contentType;
     }
 
     public void addProperty( String name, String value ) {
-        properties.put(name,value);
+        properties_.put(name,value);
     }
     
     public String getProperty( String name ) {
-        return (String)properties.get(name);
+        return (String)properties_.get(name);
     }
     
     public void removeProperty( String name ) {
-        properties.remove(name);
+        properties_.remove(name);
     }
     
     public Properties getProperties() {
-        return properties;
+        return properties_;
     }
     
     public void addProperties( Properties properties ) {
-        this.properties.putAll(properties);
+        this.properties_.putAll(properties);
     }
     
     @SuppressWarnings("unchecked")
     public List<String> getPropertyNames() {
-        return new ArrayList( properties.keySet() );
+        return new ArrayList( properties_.keySet() );
     }
 
     @Override
     public String toString() {
         StringBuffer s = new StringBuffer();
-        s.append( "ContentType=").append( contentType );
-        if ( content != null ) {
-            s.append(" Length=" ).append( content.length ).append("\n");
+        s.append( "ContentType=").append( contentType_ );
+        if ( content_ != null ) {
+            s.append(" Length=" ).append( content_.length ).append("\n");
         } else {
             s.append(" No content.\n");
         }
-        Iterator iterator = this.properties.keySet().iterator();
+        Iterator iterator = this.properties_.keySet().iterator();
         while( iterator.hasNext() ) {
             String key = (String)iterator.next();
-            s.append( key ).append("=").append(this.properties.get(key)).append("\n");
+            s.append( key ).append("=").append(this.properties_.get(key)).append("\n");
         }
-        if ( contentHandler != null ) {
-            s.append(" Content=").append(contentHandler);
+        if ( contentHandler_ != null ) {
+            s.append(" Content=").append(contentHandler_);
         }
         return s.toString();
     }

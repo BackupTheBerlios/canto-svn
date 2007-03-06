@@ -46,13 +46,13 @@ public class StringValuedEnumType <T extends Enum & StringValuedEnum> implements
     /**
      * Enum class for this particular user type.
      */
-    private Class<T> enumClass;
+    private Class<T> enumClass_;
     
 
     /**
      * Value to use if null.
      */
-    private String defaultValue;
+    private String defaultValue_;
     //-------------------------------------------------------------------------
     //CONSTRUCTORS
     //-------------------------------------------------------------------------
@@ -75,7 +75,7 @@ public class StringValuedEnumType <T extends Enum & StringValuedEnum> implements
     public void setParameterValues(Properties parameters) {
         String enumClassName = parameters.getProperty("enum");
         try {
-            enumClass = (Class<T>) Class.forName(enumClassName).asSubclass(Enum.class).
+            enumClass_ = (Class<T>) Class.forName(enumClassName).asSubclass(Enum.class).
                     asSubclass(StringValuedEnum.class); //Validates the class but does not eliminate the cast
         } catch (ClassNotFoundException cnfe) {
             throw new HibernateException("Enum class not found", cnfe);
@@ -85,11 +85,11 @@ public class StringValuedEnumType <T extends Enum & StringValuedEnum> implements
     }
 
     public String getDefaultValue() {
-        return defaultValue;
+        return defaultValue_;
     }
     
     public void setDefaultValue(String defaultValue) {
-        this.defaultValue = defaultValue;
+        this.defaultValue_ = defaultValue;
     }
     
     /**
@@ -97,7 +97,7 @@ public class StringValuedEnumType <T extends Enum & StringValuedEnum> implements
      * @return Class
      */
     public Class returnedClass() {
-        return enumClass;
+        return enumClass_;
     }
 
     /**
@@ -137,8 +137,8 @@ public class StringValuedEnumType <T extends Enum & StringValuedEnum> implements
                 return null;
             }
         }
-        String name = getNameFromValue(enumClass, value);
-        Object res = name == null ? null : Enum.valueOf(enumClass, name);
+        String name = getNameFromValue(enumClass_, value);
+        Object res = name == null ? null : Enum.valueOf(enumClass_, name);
 
         return res;
     }
@@ -238,8 +238,8 @@ public class StringValuedEnumType <T extends Enum & StringValuedEnum> implements
      */
     @SuppressWarnings("unchecked")
     public Object fromXMLString(String xmlValue) {
-        String name = getNameFromValue(enumClass, xmlValue);
-        return Enum.valueOf(enumClass, name);
+        String name = getNameFromValue(enumClass_, xmlValue);
+        return Enum.valueOf(enumClass_, name);
     }
     //-------------------------------------------------------------------------
     //PROTECTED METHODS

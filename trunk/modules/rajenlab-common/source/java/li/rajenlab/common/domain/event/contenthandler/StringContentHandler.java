@@ -32,14 +32,14 @@ public class StringContentHandler implements ContentHandler {
 	public static final String ENCODING_PROPERTY = "string.attachment.encoding";
 	public static final String ENCODING_PROPERTY_DEFAULT = "ISO-8859-1";
 	
-	private String content;
-	private Attachment attachment;
+	private String content_;
+	private Attachment attachment_;
 	
 	public StringContentHandler() {
 	}
 	
 	public StringContentHandler( String content ) {
-		this.content = content;
+		this.content_ = content;
 	}
 	
 	public String getContentType() {
@@ -47,8 +47,8 @@ public class StringContentHandler implements ContentHandler {
 	}
 
 	public void attach(Attachment attachment) {
-		this.attachment = attachment;
-		if ( content != null ) {
+		this.attachment_ = attachment;
+		if ( content_ != null ) {
 			store();
 		} else {
 			load();
@@ -56,9 +56,9 @@ public class StringContentHandler implements ContentHandler {
 	}
 
 	protected void load() {
-		if ( attachment != null ) {
+		if ( attachment_ != null ) {
 			try {
-				content = new String(attachment.getContent(), attachment.getProperty(ENCODING_PROPERTY) );
+				content_ = new String(attachment_.getContent(), attachment_.getProperty(ENCODING_PROPERTY) );
 			} catch ( UnsupportedEncodingException uee ) {
 				throw new RuntimeException(uee);
 			}
@@ -66,23 +66,23 @@ public class StringContentHandler implements ContentHandler {
 	}
 	
 	protected void store() {
-		if ( attachment != null ) {
+		if ( attachment_ != null ) {
 			try {
-				attachment.setContent(content.getBytes(ENCODING_PROPERTY_DEFAULT));
+				attachment_.setContent(content_.getBytes(ENCODING_PROPERTY_DEFAULT));
 			} catch ( UnsupportedEncodingException uee ) {
 				throw new RuntimeException(uee);
 			}
-			attachment.setContentType( CONTENT_TYPE );
-			attachment.addProperty(ENCODING_PROPERTY, ENCODING_PROPERTY_DEFAULT);
+			attachment_.setContentType( CONTENT_TYPE );
+			attachment_.addProperty(ENCODING_PROPERTY, ENCODING_PROPERTY_DEFAULT);
 		}
 	}
 
 	public String getContent() {
-		return content;
+		return content_;
 	}
 
 	public void setContent(String content) {
-		this.content = content;
+		this.content_ = content;
 		store();
 	}
 	
@@ -92,8 +92,8 @@ public class StringContentHandler implements ContentHandler {
 	
 	@Override
     public String toString() {
-		if ( this.content != null ) {
-			return this.content;
+		if ( this.content_ != null ) {
+			return this.content_;
 		}
 		return "";
 	}

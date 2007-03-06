@@ -23,11 +23,11 @@ public class EmptyContentHandler implements ContentHandler {
 
 	public static final String CONTENT_TYPE = "application/empty";
 	
-	private byte[] content;
-	private Attachment attachment;
+	private byte[] content_;
+	private Attachment attachment_;
 	
 	public EmptyContentHandler() {
-		this.content = new byte[0];
+		this.content_ = new byte[0];
 	}
 	
 	public String getContentType() {
@@ -35,8 +35,8 @@ public class EmptyContentHandler implements ContentHandler {
 	}
 
 	public void attach(Attachment attachment) {
-		this.attachment = attachment;
-		if ( content != null ) {
+		this.attachment_ = attachment;
+		if ( content_ != null ) {
 			store();
 		} else {
 			load();
@@ -44,20 +44,20 @@ public class EmptyContentHandler implements ContentHandler {
 	}
 
 	protected void load() {
-		if ( attachment != null ) {
-			content = attachment.getContent();
+		if ( attachment_ != null ) {
+			content_ = attachment_.getContent();
 		}
 	}
 	
 	protected void store() {
-		if ( attachment != null ) {
-			attachment.setContent(content);
-			attachment.setContentType( CONTENT_TYPE );
+		if ( attachment_ != null ) {
+			attachment_.setContent(content_);
+			attachment_.setContentType( CONTENT_TYPE );
 		}
 	}
 
 	public byte[] getContent() {
-		return content;
+		return content_;
 	}
 
 	public Object getContentObject() {
@@ -65,7 +65,7 @@ public class EmptyContentHandler implements ContentHandler {
 	}
 	
 	public void setContent(byte[] content) {
-		this.content = content;
+		this.content_ = content;
 		store();
 	}
 	

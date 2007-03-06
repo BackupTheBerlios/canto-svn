@@ -24,14 +24,14 @@ public class BinaryContentHandler implements ContentHandler {
 
 	public static final String CONTENT_TYPE = "application/octet-stream";
 	
-	private byte[] content;
-	private Attachment attachment;
+	private byte[] content_;
+	private Attachment attachment_;
 	
 	public BinaryContentHandler() {
 	}
 	
 	public BinaryContentHandler( byte[] content ) {
-		this.content = content;
+		this.content_ = content;
 	}
 	
 	public String getContentType() {
@@ -39,8 +39,8 @@ public class BinaryContentHandler implements ContentHandler {
 	}
 
 	public void attach(Attachment attachment) {
-		this.attachment = attachment;
-		if ( content != null ) {
+		this.attachment_ = attachment;
+		if ( content_ != null ) {
 			store();
 		} else {
 			load();
@@ -48,31 +48,31 @@ public class BinaryContentHandler implements ContentHandler {
 	}
 
 	protected void load() {
-		if ( attachment != null ) {
-			content = attachment.getContent();
+		if ( attachment_ != null ) {
+			content_ = attachment_.getContent();
 		}
 	}
 	
 	protected void store() {
-		if ( attachment != null ) {
-			attachment.setContent(content);
-			attachment.setContentType( CONTENT_TYPE );
+		if ( attachment_ != null ) {
+			attachment_.setContent(content_);
+			attachment_.setContentType( CONTENT_TYPE );
 		}
 	}
 
 	public byte[] getContent() {
-		return content;
+		return content_;
 	}
 
 	public void setContent(byte[] content) {
-		this.content = content;
+		this.content_ = content;
 		store();
 	}
 	
 	@Override
     public String toString() {
-		if ( this.content != null ) {
-			return "byte["+content.length+"]";
+		if ( this.content_ != null ) {
+			return "byte["+content_.length+"]";
 		}
 		return "";
 	}
