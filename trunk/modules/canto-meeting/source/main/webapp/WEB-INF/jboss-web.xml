@@ -1,0 +1,16 @@
+<jboss-web>
+  <!-- Uncomment the security-domain to enable security. You will
+      need to edit the htmladaptor login configuration to setup the
+      login modules used to authentication users.
+      <security-domain>java:/jaas/jmx-console</security-domain>
+  -->
+  <context-root>/canto-meeting</context-root>
+  
+   
+  <resource-ref>
+    <res-ref-name>jdbc/CantoDS</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <jndi-name>java:/CantoDS</jndi-name>
+  </resource-ref>
+
+</jboss-web>
