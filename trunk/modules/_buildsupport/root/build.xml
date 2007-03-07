@@ -34,6 +34,9 @@
 	<target name="junitintegration.execute" description="run integration tests without first doing a clean build" depends="-junitintegration"/>
 	<target name="checkenv" description="check if the current environment is suitable for build" depends="-checkenv"/>
 	<target name="generate.module.build" description="generate a part of an overall build file" depends="-generate.module.build"/>
+	<target name="dist" description="dist" depends="-clean,-configure,-build,-dist"/>
+	<target name="undist" description="undist" depends="-clean,-configure,-build,-undist"/>
+		
 	
 	<!-- below targets are used from (new) generated module build -->
 	<!-- they are currently overriden in container build to do nothing 
@@ -43,6 +46,8 @@
 	<target name="module.build" depends="build"/>
 	<target name="module.junitintegration" depends="junitintegration"/>
 	<target name="module.junit" depends="junit"/>
+	<target name="module.dist" depends="dist"/>
+	<target name="module.undist" depends="undist"/>
 	<target name="module.junitintegration.execute" depends="junitintegration.execute"/>
 	<target name="module.junit.execute" depends="junit.execute"/>
 	
@@ -65,8 +70,8 @@
 	<target name="-build"/>
 	<target name="-junit"/>
 	<target name="-junitintegration"/>
-	<target name="-deploy"/>
-	<target name="-undeploy"/>
+	<target name="-dist"/>
+	<target name="-undist"/>
 	
 	<target name="-usage">
 		<echo>
@@ -124,5 +129,32 @@ to see a list of all public targets</echo>
 		
 		<echo>all environment checks passed</echo>
 	</target>
+	
+	<target name="-jboss.dist">
+		<echo>deploying to jboss ${jboss.server}/deploy</echo>
+		<!-- in order to use this someone must define the propery dist.file.name -->
+		<copy file="${target.dist}/${dist.file.name}" todir="${jboss.server}/deploy"/>
+		<touch file="${jboss.server}/deploy/${dist.file.name}"/>
+	</target>
+	
+	<target name="-jboss.undist">
+		<echo>undeploying from jboss ${jboss.server}/deploy file ${jboss.server}/deploy/${dist.file.name}</echo>
+		<!-- in order to use this someone must define the propery dist.file.name -->
+		<delete file="${jboss.server}/deploy/${dist.file.name}"/>
+	</target>
+	
+	<!-- private targets which can be used from other 
+		     build files but which are not used locally by default -->
+		<target name="-jboss.lib.dist">
+			<echo>deploying to jboss ${jboss.server}/lib</echo>
+			<!-- in order to use this someone must define the propery dist.file.name -->
+			<copy file="${target.dist}/${dist.file.name}" todir="${jboss.server}/lib" overwrite="true"/>
+		</target>
+		
+		<target name="-jboss.lib.undist">
+			<echo>undeploying from jboss ${jboss.server}/lib file ${jboss.server}/lib/${dist.file.name}</echo>
+			<!-- in order to use this someone must define the propery dist.file.name -->
+			<delete file="${jboss.server}/lib/${dist.file.name}"/>
+		</target>
 	
 </project>
