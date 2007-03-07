@@ -10,7 +10,7 @@
 	<!-- filesets/paths which are only set to default in here but should be overridden as necessary -->
 	<path id="junit.classpath"/>
 	
-	<!-- UNIT TESTS NEEDING XIP DB -->
+	<!-- UNIT TESTS NEEDING CANTO DB -->
 	<target name="-junit">
 		<antcall target="-junit.pre"/>
 		
@@ -41,7 +41,7 @@
 	<target name="-junit.post"/>
 	
 	
-	<!-- INTEGRATION TESTS NEEDING A RUNNING XIP JBOSS INSTANCE -->
+	<!-- INTEGRATION TESTS NEEDING A RUNNING CANTO JBOSS INSTANCE -->
 	<target name="-junitintegration">
 		<antcall target="-junitintegration.pre"/>
 		

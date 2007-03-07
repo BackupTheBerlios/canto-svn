@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="jboss-server-build" default="usage" basedir="..">
+<project name="jboss-server-build"  basedir="..">
 	<!-- for files which extend this build file the property 
 	     build.support must already be set if different from .
 	-->
@@ -17,74 +17,74 @@
 	</target>
 	
 	<target name="-jboss.server.build">
-		<antcall target="-jboss.server.build.pre"/>
-		
-		<delete dir="${target.jboss.home}"/>
-		<mkdir dir="${target.jboss.server}"/>
-		
-		<!-- copy the original server files to the build dir -->
-		<copy todir="${target.jboss.server}">
-			<fileset dir="${src.jboss.server.original}"/>
-		</copy>
-		
-		<!-- delete all directories which contain a .whack file in ${src.jboss.server.delete} -->
-		<copy todir="${target.jboss.server}" overwrite="true">
-			<fileset dir="${src.jboss.server.delete}">
-				<include name="**/.delete-dir"/>
-			</fileset>
-		</copy>
-		<for param="whack.file">
-			<path>
-				<fileset dir="${target.jboss.server}">
+			<antcall target="-jboss.server.build.pre"/>
+			
+			<delete dir="${target.jboss.home}"/>
+			<mkdir dir="${target.jboss.server}"/>
+			
+			<!-- copy the original server files to the build dir -->
+			<copy todir="${target.jboss.server}">
+				<fileset dir="${src.jboss.server.original}"/>
+			</copy>
+			
+			<!-- delete all directories which contain a .whack file in ${src.jboss.server.delete} -->
+			<copy todir="${target.jboss.server}" overwrite="true">
+				<fileset dir="${src.jboss.server.delete}">
 					<include name="**/.delete-dir"/>
 				</fileset>
-			</path>
-			<sequential>
-				<echo level="debug">deleting directory of file @{whack.file}</echo>
-				<!-- note although whack file is not actually a directory this 
-				     statement resolves to the containing directory and deletes it -->
-				<delete dir="@{whack.file}/.."/>
-			</sequential>
-		</for>
-		
-		<!-- delete individual files based on ${src.jboss.server.delete} -->
-		<delete includeemptydirs="true">
-			<fileset dir="${target.jboss.server}">
-				<present targetdir="${src.jboss.server.delete}"/>
-			</fileset>
-		</delete>
+			</copy>
+			<for param="whack.file">
+				<path>
+					<fileset dir="${target.jboss.server}">
+						<include name="**/.delete-dir"/>
+					</fileset>
+				</path>
+				<sequential>
+					<echo level="debug">deleting directory of file @{whack.file}</echo>
+					<!-- note although whack file is not actually a directory this 
+					     statement resolves to the containing directory and deletes it -->
+					<delete dir="@{whack.file}/.."/>
+				</sequential>
+			</for>
+			
+			<!-- delete individual files based on ${src.jboss.server.delete} -->
+			<delete includeemptydirs="true">
+				<fileset dir="${target.jboss.server}">
+					<present targetdir="${src.jboss.server.delete}"/>
+				</fileset>
+			</delete>
 
-		<!-- copy new and modified text files (.xml and .property files), 
-		     replacing properties as needed -->
-		<copy todir="${target.jboss.server}" overwrite="true">
-			<fileset dir="${src.jboss.server.modified}">
-				<include name="**/*.xml"/>
-				<include name="**/*.properties"/>
-			</fileset>
-			<fileset dir="${src.jboss.server.new}">
-				<include name="**/*.xml"/>
-				<include name="**/*.properties"/>
-			</fileset>
-			<filterset filtersfile="${configuration.file}"/>
-		</copy>
-		<!-- copy all new and modified NON text files
-		     no replacing done during this copy -->
-		<copy todir="${target.jboss.server}" overwrite="true">
-			<fileset dir="${src.jboss.server.modified}">
-				<exclude name="**/*.xml"/>
-				<exclude name="**/*.properties"/>
-			</fileset>
-			<fileset dir="${src.jboss.server.new}">
-				<exclude name="**/*.xml"/>
-				<exclude name="**/*.properties"/>
-			</fileset>
-		</copy>
+			<!-- copy new and modified text files (.xml and .property files), 
+			     replacing properties as needed -->
+			<copy todir="${target.jboss.server}" overwrite="true">
+				<fileset dir="${src.jboss.server.modified}">
+					<include name="**/*.xml"/>
+					<include name="**/*.properties"/>
+				</fileset>
+				<fileset dir="${src.jboss.server.new}">
+					<include name="**/*.xml"/>
+					<include name="**/*.properties"/>
+				</fileset>
+				<filterset filtersfile="${configuration.file}"/>
+			</copy>
+			<!-- copy all new and modified NON text files
+			     no replacing done during this copy -->
+			<copy todir="${target.jboss.server}" overwrite="true">
+				<fileset dir="${src.jboss.server.modified}">
+					<exclude name="**/*.xml"/>
+					<exclude name="**/*.properties"/>
+				</fileset>
+				<fileset dir="${src.jboss.server.new}">
+					<exclude name="**/*.xml"/>
+					<exclude name="**/*.properties"/>
+				</fileset>
+			</copy>
 
-		<copy todir="${target.jboss.server}/lib" flatten="true" overwrite="true">
-			<fileset refid="runtime.libs"/>
-		</copy>
-		<antcall target="-jboss.server.build.post"/>
-	</target>
+			<copy todir="${target.jboss.server}/lib" flatten="true" overwrite="true">
+				<fileset refid="runtime.libs"/>
+			</copy>
+			<antcall target="-jboss.server.build.post"/>
+		</target>
 	<target name="-jboss.server.build.pre"/>
 	<target name="-jboss.server.build.post"/>
 	
