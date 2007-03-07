@@ -1,11 +1,11 @@
 /****************************************************************************** 
- * $LastChangedBy$
- * $LastChangedRevision$
- * $LastChangedDate$
+ * $LastChangedBy:neoraph $
+ * $LastChangedRevision:48 $
+ * $LastChangedDate:2007-03-07 13:51:41 +0000 (Mi, 07 Mrz 2007) $
  ******************************************************************************
  * Project: rajenlab-common
  ******************************************************************************
- * $HeadURL$
+ * $HeadURL:svn+ssh://svn.berlios.de/svnroot/repos/canto/trunk/modules/rajenlab-common/source/main/java/li/rajenlab/common/support/date/ComplexDateTimeFormatter.java $
  ******************************************************************************/
 package li.rajenlab.common.support.date;
 
@@ -32,7 +32,7 @@ import java.util.Date;
  * days:    yyyy-MM-dd
  * 
  * @author  raph (raph@rajenlab.li)
- * @version $Id$
+ * @version $Id:ComplexDateTimeFormatter.java 48 2007-03-07 13:51:41 +0000 (Mi, 07 Mrz 2007) neoraph $
  */
 public class ComplexDateTimeFormatter implements DateTimeFormatter {
 
@@ -61,7 +61,7 @@ public class ComplexDateTimeFormatter implements DateTimeFormatter {
     
 	/**
 	 * Tries to parse the date string to the most specific formatter.
-     * @see sunrise.xip.common.support.date.DateTimeFormatter#parse(String)
+     * @see li.rajenlab.common.support.date.DateTimeFormatter#parse(String)
 	 */
 	public Date parse( String date ) throws ParseException {
 		if ( date == null ) {
@@ -96,7 +96,7 @@ public class ComplexDateTimeFormatter implements DateTimeFormatter {
 	/**
 	 * Tries to format the date to the most specific format, whilst reducing
 	 * the format according to the {@link DateTimeFormatSpecification#getReduceTimeToField()}
-     * @see sunrise.xip.common.support.date.DateTimeFormatter#format(Date)
+     * @see li.rajenlab.common.support.date.DateTimeFormatter#format(Date)
 	 * 
 	 * @param date
 	 * @return the formatted date.

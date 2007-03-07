@@ -1,11 +1,11 @@
 /****************************************************************************** 
- * $LastChangedBy$
- * $LastChangedRevision$
- * $LastChangedDate$
+ * $LastChangedBy:neoraph $
+ * $LastChangedRevision:48 $
+ * $LastChangedDate:2007-03-07 13:51:41 +0000 (Mi, 07 Mrz 2007) $
  ******************************************************************************
  * Project: rajenlab-common
  ******************************************************************************
- * $HeadURL$
+ * $HeadURL:svn+ssh://svn.berlios.de/svnroot/repos/canto/trunk/modules/rajenlab-common/source/main/java/li/rajenlab/common/support/date/DateTimeFormatSpecification.java $
  ******************************************************************************/
 package li.rajenlab.common.support.date;
 
@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
  * time resolutions.
  * 
  * @author  raph (raph@rajenlab.li)
- * @version $Id$
+ * @version $Id:DateTimeFormatSpecification.java 48 2007-03-07 13:51:41 +0000 (Mi, 07 Mrz 2007) neoraph $
  */
 public class DateTimeFormatSpecification {
 
@@ -45,7 +45,7 @@ public class DateTimeFormatSpecification {
     //-------------------------------------------------------------------------
 
 	/**
-	 * DateTimeFormatSpecification based on XIP standard date time formats.
+	 * DateTimeFormatSpecification based on CANTO standard date time formats.
 	 * 
 	 * Uses {@link #STANDARD_DATE_FORMAT} for day format.
 	 * Uses {@link #STANDARD_DATEMINUTES_FORMAT} for minutes format.
