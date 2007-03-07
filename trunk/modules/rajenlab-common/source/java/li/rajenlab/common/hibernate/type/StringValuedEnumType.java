@@ -8,7 +8,7 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.common.dao.hibernate;
+package li.rajenlab.common.hibernate.type;
 
 import static li.rajenlab.common.lang.StringValuedEnumReflect.getNameFromValue;
 
@@ -73,7 +73,7 @@ public class StringValuedEnumType <T extends Enum & StringValuedEnum> implements
      */
     @SuppressWarnings("unchecked")
     public void setParameterValues(Properties parameters) {
-        String enumClassName = parameters.getProperty("enum");
+        String enumClassName = parameters.getProperty("enumClass");
         try {
             enumClass_ = (Class<T>) Class.forName(enumClassName).asSubclass(Enum.class).
                     asSubclass(StringValuedEnum.class); //Validates the class but does not eliminate the cast
