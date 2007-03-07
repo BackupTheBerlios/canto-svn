@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<project name="rajenlab-common"  basedir=".">
+	<property name="modules" value="${basedir}/.."/>
+	<property name="build.support" value="${modules}/_buildsupport"/>
+	<import file="${build.support}/jar/build.xml"/>
+	<import file="${lib}/build.xml"/>
+	<import file="${build.support}/hibernate/build.xml"/>
+
+    <fileset id="hibernate.mapping.files" dir="${modules}">
+        <include name="rajenlab-common/target/classes/**/*.hbm.xml"/>
+	</fileset>
+	
+	<path id="compile.classpath">
+        <fileset refid="runtime.libs"/>
+        <fileset refid="runtime.provided.libs"/>
+        <fileset refid="testtime.libs"/>
+        <fileset refid="log4j.libs"/>
+        <fileset refid="castor.libs"/>
+	</path>
+
+	<!-- override -deploy target as we have deployable components-->
+	<target name="-deploy"/>
+	<target name="-undeploy"/>
+	
+</project>
+
