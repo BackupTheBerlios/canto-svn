@@ -2,35 +2,32 @@
  * $LastChangedBy$
  * $LastChangedRevision$
  * $LastChangedDate$
- * 
- * 
  ******************************************************************************
- * Project: canto-core
+ * Project: canto-meeting
  ******************************************************************************
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.core.domain.resource;
+package li.rajenlab.canto.meeting.domain.meeting;
 
 import li.rajenlab.common.lang.StringValuedEnum;
 
 /**
- * @author  neoraph (neoraph@rajen-lab.li)
+ * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public enum ResourceType implements StringValuedEnum {
-    
-    ELECTRONIC_MATERIAL("ELECTRONIC_MATERIAL"),
-    BEAMER("BEAMER"),
-    OFFICE_MATERIAL("OFFICE_MATERIAL"),
-    VIRTUAL("VIRTUAL"),
-    ROOM("ROOM");
-    
-    private String resourceType_;
+public enum MeetingType implements StringValuedEnum {
     
     
-    private ResourceType(String resourceType){
-        this.resourceType_ = resourceType;
+    CONFERENCE_CALL("CONFERENCE_CALL"),
+    STANDARD("STANDARD");
+    
+    
+    private String meetingType_;
+    
+    
+    private MeetingType(String meetingType){
+        this.meetingType_ = meetingType;
     }
 
 
@@ -38,8 +35,9 @@ public enum ResourceType implements StringValuedEnum {
      * @see li.rajenlab.common.lang.StringValuedEnum#getValue()
      */
     public String getValue() {
-        return resourceType_;
+        return meetingType_;
     }
-
     
+    
+
 }

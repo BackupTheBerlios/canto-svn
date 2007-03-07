@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="/canto-thirdparty/hibernate-3.2.2.jar"/>
 	<classpathentry kind="lib" path="/canto-thirdparty/spring-mock-2.0.2.jar"/>
 	<classpathentry kind="lib" path="/canto-thirdparty/junit-3.8.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/canto-core"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

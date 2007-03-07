@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import li.rajenlab.canto.core.domain.participant.Participant;
+import li.rajenlab.canto.core.domain.organizer.Organizer;
 import li.rajenlab.canto.core.domain.resource.Resource;
 import li.rajenlab.common.domain.AbstractEntity;
 
@@ -27,12 +27,13 @@ import li.rajenlab.common.domain.AbstractEntity;
 public abstract class AbstractEventEntity extends AbstractEntity {
     
     
-    
-    private Participant organizer_;
+    private String title_;
+    private String description_;
+    private Organizer organizer_;
     private Set<Resource> resources_;
     private Date startDate_;
     private Date endDate_;  
-    private Resource location_;
+    private Date reminderDate_;
     
     
     
@@ -52,13 +53,13 @@ public abstract class AbstractEventEntity extends AbstractEntity {
     /**
      * @return the organizer
      */
-    public Participant getOrganizer() {
+    public Organizer getOrganizer() {
         return this.organizer_;
     }
     /**
      * @param organizer the organizer to set
      */
-    public void setOrganizer(Participant organizer) {
+    public void setOrganizer(Organizer organizer) {
         this.organizer_ = organizer;
     }
     /**
@@ -101,16 +102,42 @@ public abstract class AbstractEventEntity extends AbstractEntity {
     }
     
     /**
-     * @return the location
+     * @return the description
      */
-    public Resource getLocation() {
-        return this.location_;
+    public String getDescription() {
+        return this.description_;
     }
     /**
-     * @param location the location to set
+     * @param description the description to set
      */
-    public void setLocation(Resource location) {
-        this.location_ = location;
+    public void setDescription(String description) {
+        this.description_ = description;
+    }
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return this.title_;
+    }
+    /**
+     * @param title the title to set
+     */
+    public void setTitle(String title) {
+        this.title_ = title;
+    }
+    /**
+     * @return the reminderDate
+     */
+    public Date getReminderDate() {
+        return this.reminderDate_;
+    }
+    /**
+     * @param reminderDate the reminderDate to set
+     */
+    public void setReminderDate(Date reminderDate) {
+        this.reminderDate_ = reminderDate;
     }
 
+    
+    
 }

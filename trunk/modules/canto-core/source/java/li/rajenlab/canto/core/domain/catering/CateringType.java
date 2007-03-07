@@ -2,35 +2,31 @@
  * $LastChangedBy$
  * $LastChangedRevision$
  * $LastChangedDate$
- * 
- * 
  ******************************************************************************
- * Project: canto-core
+ * Project: canto-meeting
  ******************************************************************************
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.core.domain.resource;
+package li.rajenlab.canto.core.domain.catering;
 
 import li.rajenlab.common.lang.StringValuedEnum;
 
 /**
- * @author  neoraph (neoraph@rajen-lab.li)
+ * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public enum ResourceType implements StringValuedEnum {
-    
-    ELECTRONIC_MATERIAL("ELECTRONIC_MATERIAL"),
-    BEAMER("BEAMER"),
-    OFFICE_MATERIAL("OFFICE_MATERIAL"),
-    VIRTUAL("VIRTUAL"),
-    ROOM("ROOM");
-    
-    private String resourceType_;
+public enum CateringType implements StringValuedEnum {
     
     
-    private ResourceType(String resourceType){
-        this.resourceType_ = resourceType;
+    FOOD("FOOD"),
+    DRINK("DRINK");
+    
+    private String cateringType_;
+    
+    
+    private CateringType(String cateringType){
+        this.cateringType_ = cateringType;
     }
 
 
@@ -38,7 +34,7 @@ public enum ResourceType implements StringValuedEnum {
      * @see li.rajenlab.common.lang.StringValuedEnum#getValue()
      */
     public String getValue() {
-        return resourceType_;
+        return cateringType_;
     }
 
     
