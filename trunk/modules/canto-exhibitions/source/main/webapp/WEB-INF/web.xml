@@ -1,16 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!-- ...........................................................................
- Web application configuration
-
- $LastChangedBy: schumacher $
- $LastChangedRevision: 247516 $
- $LastChangedDate: 2007-02-19 16:12:51 +0100 (Mon, 19 Feb 2007) $
- $HeadURL: https://pkg-svn1/itcrap/3_Code/xip/trunk/modules/numberexchange-web/src/main/webapp/WEB-INF/web.xml $
- 
- Copyright: (c) TDC Switzerland AG 2005
-............................................................................ -->
-
 <web-app id="canto-exhibitions-web" version="2.4" 
          xmlns="http://java.sun.com/xml/ns/j2ee" 
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
