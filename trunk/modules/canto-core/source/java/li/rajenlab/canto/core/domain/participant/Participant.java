@@ -13,6 +13,7 @@
 package li.rajenlab.canto.core.domain.participant;
 
 import java.util.Properties;
+import java.util.Set;
 
 import li.rajenlab.canto.core.domain.contact.Contact;
 import li.rajenlab.common.domain.AbstractEntity;
@@ -29,11 +30,12 @@ public class Participant extends AbstractEntity {
      */
     private static final long serialVersionUID = 5128901927756989647L;
     
-    
+    private String participantId_;
     private User user_;
     private Contact contact_; 
     private Presence presence_;
     private Properties settings_;
+    private Set<ParticipantCategory> categories_;
     
    
     /**
@@ -83,6 +85,30 @@ public class Participant extends AbstractEntity {
      */
     public void setSettings(Properties settings) {
         this.settings_ = settings;
+    }
+    /**
+     * @return the participantId
+     */
+    public String getParticipantId() {
+        return this.participantId_;
+    }
+    /**
+     * @param participantId the participantId to set
+     */
+    public void setParticipantId(String participantId) {
+        this.participantId_ = participantId;
+    }
+    /**
+     * @return the categories
+     */
+    public Set<ParticipantCategory> getCategories() {
+        return this.categories_;
+    }
+    /**
+     * @param categories the categories to set
+     */
+    public void setCategories(Set<ParticipantCategory> categories) {
+        this.categories_ = categories;
     }
     
     

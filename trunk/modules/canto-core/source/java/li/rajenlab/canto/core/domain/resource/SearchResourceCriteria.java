@@ -30,6 +30,7 @@ public class SearchResourceCriteria implements Serializable {
     private ResourceType resourceType_;
     private String code_;
     private Map<String,String> settings_;
+    private int maxSearchResult_ = 50;
     
     /**
      * @return the code
@@ -66,6 +67,18 @@ public class SearchResourceCriteria implements Serializable {
      */
     public void setSettings(Map<String, String> settings) {
         this.settings_ = settings;
+    }
+    /**
+     * @return the maxSearchResult
+     */
+    public int getMaxSearchResult() {
+        return this.maxSearchResult_;
+    }
+    /**
+     * @param maxSearchResult the maxSearchResult to set
+     */
+    public void setMaxSearchResult(int maxSearchResult) {
+        this.maxSearchResult_ = maxSearchResult;
     }
     
     
