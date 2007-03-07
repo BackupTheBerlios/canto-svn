@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+
+<project name="root-build" default="usage" basedir="..">
+
+	<!-- for files which extend this build file the property 
+	     build.support must already be set if different from . -->
+	<property name="build.support" value="${basedir}"/>
+
+	<!-- config -->
+	<import file="${build.support}/config/build.xml"/>
+	
+	<!-- load any properties from the basedir of the extending build file      -->
+	<!-- note that for extending files the basedir is NOT the same as this dir -->
+	<property file="${basedir}/build.properties"/>
+	<property file="${build.support}/root/build.properties"/>
+
+	<!-- public targets are only defined in common, 
+	     but the implementations should be overridden in the respective -targets -->
+
+	<target name="usage" depends="-usage"/>
+
+	<!-- abstract public targets which by default call the private target (which may be overridden as well) -->
+	<!--
+	<target name="cleanbuild" description="clean and build" depends="clean, build"/>
+	<target name="cleandeploy" description="clean and build and deploy" depends="clean, deploy"/>
+	-->
+	<target name="clean" description="clean" depends="-clean"/>
+	<target name="configure" description="configure" depends="-clean,-configure"/>
+	<target name="compile" description="compile" depends="-clean,-configure,-compile"/>
+	<target name="build" description="build" depends="-clean,-configure, -build"/>
+	<target name="junit" description="run unit tests" depends="-clean,-configure,-compile,-junit"/>
+	<target name="junitintegration" description="run integration tests" depends="-clean,-configure,-compile,-junitintegration"/>
+	<target name="junit.execute" description="run unit tests without first doing a clean build" depends="-junit"/>
+	<target name="junitintegration.execute" description="run integration tests without first doing a clean build" depends="-junitintegration"/>
+	<target name="checkenv" description="check if the current environment is suitable for build" depends="-checkenv"/>
+	<target name="generate.module.build" description="generate a part of an overall build file" depends="-generate.module.build"/>
+	
+	<!-- below targets are used from (new) generated module build -->
+	<!-- they are currently overriden in container build to do nothing 
+	     as a workaround to support both old and new processes
+	     once container projects have been removed the workaround is no longer necessary -->
+	<target name="module.clean" depends="clean"/>
+	<target name="module.build" depends="build"/>
+	<target name="module.junitintegration" depends="junitintegration"/>
+	<target name="module.junit" depends="junit"/>
+	<target name="module.junitintegration.execute" depends="junitintegration.execute"/>
+	<target name="module.junit.execute" depends="junit.execute"/>
+	
+	
+	<!-- low level targets to be overridden and used as necessary
+	     low level target should only have dependancies to other low level targets -->
+	
+	<target name="-clean">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${target}">
+				<exclude name="eclipse/*/**"/>
+				<exclude name="configuration"/>
+				<exclude name="generated/java"/>
+				<exclude name="generated/resources"/>
+				<exclude name="generated/junit"/>
+			</fileset>
+		</delete>
+	</target>
+	<target name="-compile"/>
+	<target name="-build"/>
+	<target name="-junit"/>
+	<target name="-junitintegration"/>
+	<target name="-deploy"/>
+	<target name="-undeploy"/>
+	
+	<target name="-usage">
+		<echo>
+type :
+	ant -projecthelp
+to see a list of all public targets</echo>
+		<java classname="org.apache.tools.ant.Main">
+			<arg value="-p" />
+		</java>	    
+	</target>
+	
+	<!-- note that the default behaviour is currently to generate, however this is overwritten in container build to do nothing -->
+	<target name="-generate.module.build">
+		<condition property="generate.depends.list" value="${depends.list}">
+			<isset property="depends.list"/>
+		</condition>
+		<condition property="generate.depends.list" value="${container.children}">
+			<isset property="container.children"/>
+		</condition>
+		<property name="generate.depends.list" value=""/>
+		<!-- if the current project doesn't have a configured env.skip.list then the value should be empty -->
+		<property name="env.skip.list" value=""/>
+		
+		<xmltask source="${module.build.file}" dest="${module.build.file}">
+			<insert path="/project">
+			    <![CDATA[ 
+	<target name="${ant.project.name}" depends="-init,-check.skip.${ant.project.name},-do.${ant.project.name}" description="deploy ${ant.project.name} and it's dependencies"/>
+	<target name="-check.skip.${ant.project.name}">
+		<condition property="skip.${ant.project.name}">
+			<contains string="${env.skip.list}" substring="$${environment}"/>
+		</condition>
+	</target>
+	<target name="-do.${ant.project.name}" unless="skip.${ant.project.name}" depends="${generate.depends.list}">
+		<property name="skip.${ant.project.name}" value="true"/>
+	</target>
+			    ]]>	
+			</insert>
+		</xmltask>
+		<antcall target="-generate.module.build.call"/>
+	</target>
+	<target name="-generate.module.build.call"/>
+	
+	
+	<target name="-checkenv">
+		<fail message="java version must be 1.5">
+			<condition>
+				<not>
+					<equals arg1="${ant.java.version}" arg2="1.5"/>
+				</not>
+			</condition>
+		</fail>
+	
+		<!-- this target loads some files and checks for a few extra variables -->
+		<antcall target="-loadConfig"/>
+		
+		<echo>all environment checks passed</echo>
+	</target>
+</project>

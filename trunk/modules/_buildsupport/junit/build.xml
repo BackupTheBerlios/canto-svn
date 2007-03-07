@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<project name="unittest-build" default="-junit" basedir="..">
+	<!-- for files which extend this build file the property 
+	     build.support must already be set if different from .
+	-->
+	<property name="build.support" value="${basedir}"/>
+	<property file="${build.support}/junit/build.properties"/>
+
+	<!-- filesets/paths which are only set to default in here but should be overridden as necessary -->
+	<path id="junit.classpath"/>
+	
+	<!-- UNIT TESTS NEEDING XIP DB -->
+	<target name="-junit">
+		<antcall target="-junit.pre"/>
+		
+		<pathconvert property="junit.classpath.echo" targetos="unix">
+			<path refid="junit.classpath"/>
+		</pathconvert>
+		<echo level="debug">JUNIT CLASSPATH : ${junit.classpath.echo}</echo>
+
+		<mkdir dir="${target.generated.junit}"/>
+		
+		<junit printsummary="yes" haltonfailure="no" fork="true">
+		  <classpath refid="junit.classpath"/>
+
+		  <formatter type="plain"/>
+			
+		  <batchtest fork="yes" todir="${target.generated.junit}">
+		    <fileset dir="${src.main.java}">
+		      <include name="**/AllTests.java"/>
+		    </fileset>
+ 		  	<formatter type="xml"/>
+		  </batchtest>
+		  
+		</junit>
+		<antcall target="-junit.post"/>
+	</target>
+	
+	<target name="-junit.pre"/>
+	<target name="-junit.post"/>
+	
+	
+	<!-- INTEGRATION TESTS NEEDING A RUNNING XIP JBOSS INSTANCE -->
+	<target name="-junitintegration">
+		<antcall target="-junitintegration.pre"/>
+		
+		<pathconvert property="junit.classpath.echo" targetos="unix">
+			<path refid="junit.classpath"/>
+		</pathconvert>
+		<echo level="debug">JUNIT CLASSPATH : ${junit.classpath.echo}</echo>
+
+		<mkdir dir="${target.generated.junit}"/>
+		
+		<junit printsummary="yes" haltonfailure="no" fork="true">
+		  <classpath refid="junit.classpath"/>
+
+		  <formatter type="plain"/>
+			
+		  <batchtest fork="yes" todir="${target.generated.junit}">
+		    <fileset dir="${src.main.java}">
+		      <include name="**/AllTests.java"/>
+		      <include name="**/AllIntegrationTests.java"/>
+		    </fileset>
+ 		  	<formatter type="xml"/>
+		  </batchtest>
+		  
+		</junit>
+		<antcall target="-junitintegration.post"/>
+	</target>
+	
+	<target name="-junitintegration.pre"/>
+	<target name="-junitintegration.post"/>
+
+</project>
