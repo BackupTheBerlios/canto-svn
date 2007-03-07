@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="inet-common" basedir=".">
+<project name="canto-core" basedir=".">
 	<property name="modules" value="${basedir}/.."/>
 	<property name="build.support" value="${modules}/_buildsupport"/>
 	<import file="${build.support}/jar/build.xml"/>
