@@ -1,13 +1,13 @@
 /****************************************************************************** 
- * $LastChangedBy$
- * $LastChangedRevision$
- * $LastChangedDate$
+ * $LastChangedBy:neoraph $
+ * $LastChangedRevision:43 $
+ * $LastChangedDate:2007-03-07 13:22:46 +0000 (Mi, 07 Mrz 2007) $
  * 
  * 
  ******************************************************************************
  * Project: canto-core
  ******************************************************************************
- * $HeadURL$
+ * $HeadURL:svn+ssh://svn.berlios.de/svnroot/repos/canto/trunk/modules/canto-core/source/main/java/li/rajenlab/canto/core/domain/organizer/Organizer.java $
  ******************************************************************************/
 
 package li.rajenlab.canto.core.domain.organizer;
@@ -18,7 +18,7 @@ import li.rajenlab.common.domain.security.User;
 
 /**
  * @author  neoraph (neoraph@rajen-lab.li)
- * @version $Id$
+ * @version $Id:Organizer.java 43 2007-03-07 13:22:46 +0000 (Mi, 07 Mrz 2007) neoraph $
  */
 public class Organizer extends AbstractEntity {
 
@@ -30,6 +30,7 @@ public class Organizer extends AbstractEntity {
     
     private String organizerId_;
     private Contact contact_; 
+    private Contact billingContact_;
     private User user_;
     
     /**
@@ -67,6 +68,18 @@ public class Organizer extends AbstractEntity {
      */
     public void setUser(User user) {
         this.user_ = user;
+    }
+    /**
+     * @return the billingContact
+     */
+    public Contact getBillingContact() {
+        return this.billingContact_;
+    }
+    /**
+     * @param billingContact the billingContact to set
+     */
+    public void setBillingContact(Contact billingContact) {
+        this.billingContact_ = billingContact;
     }
     
     

@@ -8,7 +8,7 @@
  * $HeadURL:svn+ssh://svn.berlios.de/svnroot/repos/canto/trunk/modules/canto-meeting/source/main/java/li/rajenlab/canto/meeting/domain/meeting/Meeting.java $
  ******************************************************************************/
 
-package li.rajenlab.canto.conference.domain.vmeeting;
+package li.rajenlab.canto.conference.domain.meeting;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,10 +17,13 @@ import li.rajenlab.canto.core.domain.AbstractEventEntity;
 import li.rajenlab.canto.core.domain.participant.Participant;
 
 /**
+ * A Meeting is an online "meeting" where the communication is many-to-many. Every
+ * participant of the meeting can interact. The lifecylce of the meeting can
+ * be influenced by all participants of the meeting
  * @author  raph (raph@rajenlab.li)
  * @version $Id:Meeting.java 45 2007-03-07 13:24:16 +0000 (Mi, 07 Mrz 2007) neoraph $
  */
-public class VirtualMeeting extends AbstractEventEntity {
+public class Meeting extends AbstractEventEntity {
 
     /**
      * Comment for <code>serialVersionUID</code>
@@ -31,7 +34,7 @@ public class VirtualMeeting extends AbstractEventEntity {
     private Set<Participant> acceptedInvitees_;
     private Set<Participant> invitees_;
     private boolean confidential_;
-    private VirtualMeetingType meetingType_;
+    private MeetingType meetingType_;
     private String meetingId_;
   
     
@@ -103,13 +106,13 @@ public class VirtualMeeting extends AbstractEventEntity {
     /**
      * @return the meetingType
      */
-    public VirtualMeetingType getMeetingType() {
+    public MeetingType getMeetingType() {
         return this.meetingType_;
     }
     /**
      * @param meetingType the meetingType to set
      */
-    public void setMeetingType(VirtualMeetingType meetingType) {
+    public void setMeetingType(MeetingType meetingType) {
         this.meetingType_ = meetingType;
     }
    
