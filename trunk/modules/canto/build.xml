@@ -27,21 +27,5 @@
 			<ant dir="${modules}/rajenlab-common" target="build" 
 				inheritall="false"/>
   </target>
-  <target name="build.cantocore" 
-			description="build canto core alone">
-			    <ant dir="${modules}/rajenlab-common" target="build" 
-					inheritall="false"/>
-				<ant dir="${modules}/canto-core" target="build" 
-					inheritall="false"/>
-   </target>
-   <target name="build.cantoconference" 
-					description="build canto conference alone">
-					<ant dir="${modules}/rajenlab-common" target="build" 
-						inheritall="false"/>
-					<ant dir="${modules}/canto-core" target="build" 
-						inheritall="false"/>					
-					<ant dir="${modules}/canto-conference" target="build" 
-							inheritall="false"/>
-   </target>
 	
 </project>
