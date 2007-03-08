@@ -92,6 +92,9 @@
 	<patternset id="xml.impl.patternset">
         <include name="xml/xercesImpl-2.6.2.jar"/>
 	</patternset>
+	<patternset id="ejb.patternset">
+	        <include name="ejb/ejb-2.1.jar"/>
+		</patternset>
 	
 
 	<patternset id="runtime.provided.libs.patternset">
@@ -100,6 +103,7 @@
 		<patternset refid="mail.patternset"/>
 		<patternset refid="junit.patternset"/>
 		<patternset refid="xml.impl.patternset"/>
+		<patternset refid="ejb.patternset"/>
 	</patternset>
 
 	<fileset id="log4j.libs" dir="${lib}">
