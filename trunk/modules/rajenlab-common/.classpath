@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="/canto-thirdparty/spring/spring-2.0.2.jar"/>
 	<classpathentry kind="lib" path="/canto-thirdparty/spring/spring-mock-2.0.2.jar"/>
 	<classpathentry kind="lib" path="/canto-thirdparty/junit/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="/canto-thirdparty/ejb/ejb-2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
