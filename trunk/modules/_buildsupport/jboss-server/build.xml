@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <project name="jboss-server-build"  basedir="..">
 	<!-- for files which extend this build file the property 
 	     build.support must already be set if different from .
