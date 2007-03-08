@@ -1,13 +1,13 @@
 /****************************************************************************** 
- * $LastChangedBy$
- * $LastChangedRevision$
- * $LastChangedDate$
+ * $LastChangedBy:neoraph $
+ * $LastChangedRevision:43 $
+ * $LastChangedDate:2007-03-07 13:22:46 +0000 (Mi, 07 Mrz 2007) $
  * 
  * 
  ******************************************************************************
  * Project: canto-core
  ******************************************************************************
- * $HeadURL$
+ * $HeadURL:svn+ssh://svn.berlios.de/svnroot/repos/canto/trunk/modules/canto-core/source/test/java/li/rajenlab/canto/core/BaseTest.java $
  ******************************************************************************/
 
 package li.rajenlab.canto.core;
@@ -16,7 +16,7 @@ import org.springframework.test.AbstractTransactionalDataSourceSpringContextTest
 
 /**
  * @author  neoraph (neoraph@rajen-lab.li)
- * @version $Id$
+ * @version $Id:BaseTest.java 43 2007-03-07 13:22:46 +0000 (Mi, 07 Mrz 2007) neoraph $
  */
 public class BaseTest extends
         AbstractTransactionalDataSourceSpringContextTests {
@@ -34,6 +34,7 @@ public class BaseTest extends
     /**
      * @see org.springframework.test.AbstractTransactionalDataSourceSpringContextTests#onSetUpBeforeTransaction()
      */
+    @Override
     protected void onSetUpBeforeTransaction() throws Exception {
     	setDefaultRollback(false);
     	startNewTransaction();
@@ -67,6 +68,7 @@ public class BaseTest extends
     /**
      * @see org.springframework.test.AbstractTransactionalDataSourceSpringContextTests#onTearDownAfterTransaction()
      */
+    @Override
     protected void onTearDownAfterTransaction() throws Exception {
     	setDefaultRollback(false);
     	startNewTransaction();
