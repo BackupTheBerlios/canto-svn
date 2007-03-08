@@ -253,8 +253,9 @@ public class StatefullProcessImpl extends BaseProcess implements StatefullProces
 		this.processInstanceDAO_ = processInstanceDAO;
 	}
 
-	/* (non-Javadoc)
-	 * @see sunrise.itcrpe.common.service.process.StatefullProcess#getStateFactory()
+	/**
+     * 
+     * @see li.rajenlab.common.service.process.StatefullProcess#getStateFactory()
 	 */
 	public StateFactory getStateFactory() {
 		return stateFactory_;
