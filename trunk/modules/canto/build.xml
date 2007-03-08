@@ -43,14 +43,5 @@
 					<ant dir="${modules}/canto-conference" target="build" 
 							inheritall="false"/>
    </target>
-   <target name="build.cantoexhibitions" 
-						description="build canto exhibitions alone">
-						<ant dir="${modules}/rajenlab-common" target="build" 
-							inheritall="false"/>
-						<ant dir="${modules}/canto-core" target="build" 
-							inheritall="false"/>					
-						<ant dir="${modules}/canto-exhibitions" target="build" 
-								inheritall="false"/>
-    </target>
 	
 </project>
