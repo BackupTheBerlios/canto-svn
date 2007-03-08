@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<project name="canto" basedir=".">
+  <property file="${basedir}/build.properties"/>
+  
+  <import file="${build.support}/config/build.xml"/>	
+  <property file="${build.support}/root/build.properties"/>
+
+  <property environment="env"/>
+
+  <condition property="ant.opts" value="${env.ANT_OPTS}">
+		<isset property="env.ANT_OPTS"/>
+  </condition>
+  <property name="ant.opts" value=""/>
+			
+  <condition property="ant.args" value="${env.ANT_ARGS}">
+		<isset property="env.ANT_ARGS"/>
+  </condition>
+  <property name="ant.args" value=""/>
+
+  <path id="ant.classpath">
+	<pathelement location="${ant.library.dir}/ant-launcher.jar"/>
+  </path>	
+	
+  <target name="build.rajenlab" 
+		description="build rajenlab alone">
+			<ant dir="${modules}/rajenlab-common" target="build" 
+				inheritall="false"/>
+  </target>
+  <target name="build.cantocore" 
+			description="build canto core alone">
+			    <ant dir="${modules}/rajenlab-common" target="build" 
+					inheritall="false"/>
+				<ant dir="${modules}/canto-core" target="build" 
+					inheritall="false"/>
+   </target>
+   <target name="build.cantomeeting" 
+				description="build canto meeting alone">
+					<ant dir="${modules}/rajenlab-common" target="build" 
+						inheritall="false"/>
+					<ant dir="${modules}/canto-core" target="build" 
+						inheritall="false"/>
+					<ant dir="${modules}/canto-meeting" target="build" 
+						inheritall="false"/>
+   </target>
+   <target name="build.cantoconference" 
+					description="build canto meeting alone" depends="build.cantocore">
+					<ant dir="${modules}/rajenlab-common" target="build" 
+						inheritall="false"/>
+					<ant dir="${modules}/canto-core" target="build" 
+						inheritall="false"/>					
+					<ant dir="${modules}/canto-conference" target="build" 
+							inheritall="false"/>
+   </target>
+   <target name="build.cantoexhibitions" 
+						description="build canto meeting alone" depends="build.cantocore">
+						<ant dir="${modules}/rajenlab-common" target="build" 
+							inheritall="false"/>
+						<ant dir="${modules}/canto-core" target="build" 
+							inheritall="false"/>					
+						<ant dir="${modules}/canto-exhibitions" target="build" 
+								inheritall="false"/>
+    </target>
+	
+</project>
