@@ -35,7 +35,7 @@
 					inheritall="false"/>
    </target>
    <target name="build.cantoconference" 
-					description="build canto meeting alone" depends="build.cantocore">
+					description="build canto conference alone">
 					<ant dir="${modules}/rajenlab-common" target="build" 
 						inheritall="false"/>
 					<ant dir="${modules}/canto-core" target="build" 
@@ -44,7 +44,7 @@
 							inheritall="false"/>
    </target>
    <target name="build.cantoexhibitions" 
-						description="build canto meeting alone" depends="build.cantocore">
+						description="build canto exhibitions alone">
 						<ant dir="${modules}/rajenlab-common" target="build" 
 							inheritall="false"/>
 						<ant dir="${modules}/canto-core" target="build" 
