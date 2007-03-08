@@ -8,7 +8,7 @@
  * $HeadURL:svn+ssh://svn.berlios.de/svnroot/repos/canto/trunk/modules/canto-meeting/source/main/java/li/rajenlab/canto/meeting/domain/meeting/Meeting.java $
  ******************************************************************************/
 
-package li.rajenlab.canto.conference.domain.meeting;
+package li.rajenlab.canto.conference.domain.vmeeting;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,7 @@ import li.rajenlab.canto.core.domain.participant.Participant;
  * @author  raph (raph@rajenlab.li)
  * @version $Id:Meeting.java 45 2007-03-07 13:24:16 +0000 (Mi, 07 Mrz 2007) neoraph $
  */
-public class Meeting extends AbstractEventEntity {
+public class VirtualMeeting extends AbstractEventEntity {
 
     /**
      * Comment for <code>serialVersionUID</code>
@@ -31,7 +31,7 @@ public class Meeting extends AbstractEventEntity {
     private Set<Participant> acceptedInvitees_;
     private Set<Participant> invitees_;
     private boolean confidential_;
-    private MeetingType meetingType_;
+    private VirtualMeetingType meetingType_;
     private String meetingId_;
   
     
@@ -103,13 +103,13 @@ public class Meeting extends AbstractEventEntity {
     /**
      * @return the meetingType
      */
-    public MeetingType getMeetingType() {
+    public VirtualMeetingType getMeetingType() {
         return this.meetingType_;
     }
     /**
      * @param meetingType the meetingType to set
      */
-    public void setMeetingType(MeetingType meetingType) {
+    public void setMeetingType(VirtualMeetingType meetingType) {
         this.meetingType_ = meetingType;
     }
    

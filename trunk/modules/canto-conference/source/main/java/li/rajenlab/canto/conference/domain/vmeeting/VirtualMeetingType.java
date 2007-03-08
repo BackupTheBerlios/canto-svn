@@ -8,7 +8,7 @@
  * $HeadURL:svn+ssh://svn.berlios.de/svnroot/repos/canto/trunk/modules/canto-meeting/source/main/java/li/rajenlab/canto/meeting/domain/meeting/MeetingType.java $
  ******************************************************************************/
 
-package li.rajenlab.canto.conference.domain.meeting;
+package li.rajenlab.canto.conference.domain.vmeeting;
 
 import li.rajenlab.common.lang.StringValuedEnum;
 
@@ -16,7 +16,7 @@ import li.rajenlab.common.lang.StringValuedEnum;
  * @author  raph (raph@rajenlab.li)
  * @version $Id:MeetingType.java 45 2007-03-07 13:24:16 +0000 (Mi, 07 Mrz 2007) neoraph $
  */
-public enum MeetingType implements StringValuedEnum {
+public enum VirtualMeetingType implements StringValuedEnum {
     
     
     CONFERENCE_CALL("CONFERENCE_CALL"),
@@ -26,7 +26,7 @@ public enum MeetingType implements StringValuedEnum {
     private String meetingType_;
     
     
-    private MeetingType(String meetingType){
+    private VirtualMeetingType(String meetingType){
         this.meetingType_ = meetingType;
     }
 

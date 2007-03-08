@@ -8,13 +8,13 @@
  * $HeadURL:svn+ssh://svn.berlios.de/svnroot/repos/canto/trunk/modules/canto-meeting/source/main/java/li/rajenlab/canto/meeting/dao/meeting/MeetingDaoHibernateImpl.java $
  ******************************************************************************/
 
-package li.rajenlab.canto.conference.dao.meeting;
+package li.rajenlab.canto.conference.dao.vmeeting;
 
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-import li.rajenlab.canto.conference.domain.meeting.Meeting;
+import li.rajenlab.canto.conference.domain.vmeeting.VirtualMeeting;
 import li.rajenlab.canto.core.domain.organizer.Organizer;
 import li.rajenlab.common.dao.hibernate.AbstractSimpleDaoHibernateImpl;
 import li.rajenlab.common.support.DateUtils;
@@ -28,15 +28,15 @@ import org.hibernate.criterion.Restrictions;
  * @author  raph (raph@rajenlab.li)
  * @version $Id:MeetingDaoHibernateImpl.java 45 2007-03-07 13:24:16 +0000 (Mi, 07 Mrz 2007) neoraph $
  */
-public class MeetingDaoHibernateImpl extends AbstractSimpleDaoHibernateImpl<Meeting>
-        implements MeetingDao {
+public class VirtualMeetingDaoHibernateImpl extends AbstractSimpleDaoHibernateImpl<VirtualMeeting>
+        implements VirutalMeetingDao {
 
     /**
      * @see li.rajenlab.common.dao.hibernate.AbstractSimpleDaoHibernateImpl#getEntityClass()
      */
     @Override
-    public Class<Meeting> getEntityClass() {
-        return Meeting.class;
+    public Class<VirtualMeeting> getEntityClass() {
+        return VirtualMeeting.class;
     }
 
     /**
@@ -48,10 +48,10 @@ public class MeetingDaoHibernateImpl extends AbstractSimpleDaoHibernateImpl<Meet
     }
 
     /**
-     * @see li.rajenlab.canto.meeting.dao.meeting.MeetingDao#getRunningMeetings()
+     * @see li.rajenlab.canto.meeting.dao.meeting.VirutalMeetingDao#getRunningMeetings()
      */
     @SuppressWarnings("unchecked")
-    public List<Meeting> getRunningMeetings() {
+    public List<VirtualMeeting> getRunningMeetings() {
         DetachedCriteria detachedCriteria = getDetachedCriteria();
         
         Calendar today = Calendar.getInstance();
@@ -62,10 +62,10 @@ public class MeetingDaoHibernateImpl extends AbstractSimpleDaoHibernateImpl<Meet
     }
 
     /**
-     * @see li.rajenlab.canto.meeting.dao.meeting.MeetingDao#searchMeetingsByOrganizer(li.rajenlab.canto.core.domain.organizer.Organizer)
+     * @see li.rajenlab.canto.meeting.dao.meeting.VirutalMeetingDao#searchMeetingsByOrganizer(li.rajenlab.canto.core.domain.organizer.Organizer)
      */
     @SuppressWarnings("unchecked")
-    public List<Meeting> searchMeetingsByOrganizer(Organizer organizer) {
+    public List<VirtualMeeting> searchMeetingsByOrganizer(Organizer organizer) {
         if (organizer!=null){
             DetachedCriteria detachedCriteria = getDetachedCriteria();
             
