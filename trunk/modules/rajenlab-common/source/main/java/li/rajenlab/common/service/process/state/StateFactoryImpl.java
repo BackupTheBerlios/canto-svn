@@ -8,7 +8,7 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.common.service.state;
+package li.rajenlab.common.service.process.state;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +42,7 @@ public class StateFactoryImpl implements BeanFactoryAware, InitializingBean, Sta
     private List<String> stateRefs_;
     private String initialStateRef_;
     private String finalStateRef_;
+    private String timerMethodName_;
     //-------------------------------------------------------------------------
     //CONSTRUCTORS
     //-------------------------------------------------------------------------
@@ -63,7 +64,7 @@ public class StateFactoryImpl implements BeanFactoryAware, InitializingBean, Sta
         }
     }
     /**
-     * @see li.rajenlab.common.service.state.StateFactory#getFinalState()
+     * @see li.rajenlab.common.service.process.state.StateFactory#getFinalState()
      */
     public State getFinalState() {
         if ( getFinalStateRef() != null ) {
@@ -73,7 +74,7 @@ public class StateFactoryImpl implements BeanFactoryAware, InitializingBean, Sta
     }
 
     /**
-     * @see li.rajenlab.common.service.state.StateFactory#getInitialState()
+     * @see li.rajenlab.common.service.process.state.StateFactory#getInitialState()
      */
     public State getInitialState() {
         if ( getInitialStateRef() != null ) {
@@ -83,7 +84,7 @@ public class StateFactoryImpl implements BeanFactoryAware, InitializingBean, Sta
     }
 
     /**
-     * @see li.rajenlab.common.service.state.StateFactory#getState(java.lang.String)
+     * @see li.rajenlab.common.service.process.state.StateFactory#getState(java.lang.String)
      */
     public synchronized State getState(String stateName) {
         String beanName = stateBeanMap_.get(stateName);
@@ -135,4 +136,17 @@ public class StateFactoryImpl implements BeanFactoryAware, InitializingBean, Sta
     public void setStateRefs(List<String> stateRefs) {
         this.stateRefs_ = stateRefs;
     }
+    /**
+     * @return the timerMethodName
+     */
+    public String getTimerMethodName() {
+        return this.timerMethodName_;
+    }
+    /**
+     * @param timerMethodName the timerMethodName to set
+     */
+    public void setTimerMethodName(String timerMethodName) {
+        this.timerMethodName_ = timerMethodName;
+    }
+    
 }

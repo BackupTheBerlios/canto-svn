@@ -8,7 +8,7 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.common.service.state;
+package li.rajenlab.common.service.process.state;
 
 
 /**
@@ -39,5 +39,13 @@ public interface StateFactory {
      * @return the final State.
      */
     public State getFinalState();
+    
+    /**
+     * The method to call on each State in case of a timer trigger. The 
+     * method name must be the same for each State in the Factory.
+     * 
+     * @return the method name of the timer trigger.
+     */
+    public String getTimerMethodName();
 
 }

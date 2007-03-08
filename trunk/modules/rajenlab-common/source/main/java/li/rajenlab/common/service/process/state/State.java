@@ -8,15 +8,34 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.common.service.state;
+package li.rajenlab.common.service.process.state;
 
 import li.rajenlab.common.domain.event.Event;
+import li.rajenlab.common.domain.process.ProcessInstance;
+import li.rajenlab.common.service.process.Process;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
 public interface State {
+    
+    
+    
+    /**
+     * The Process which this State is associated with.
+     * 
+     * @param process the Process associated with this State.
+     */
+    public void setProcess( Process process );
+    
+    
+    /**
+     * The ProcessInstance in this State.
+     *  
+     * @param instance the ProcessInstance.
+     */
+    public void setProcessInstance( ProcessInstance instance );
     
     
     /**
