@@ -20,6 +20,10 @@ import li.rajenlab.common.domain.security.User;
 public class OrderNote extends AbstractEntity {
     
     
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = -4756470558081585264L;
     private Order order_;
     private String message_;
     private User   user_;
