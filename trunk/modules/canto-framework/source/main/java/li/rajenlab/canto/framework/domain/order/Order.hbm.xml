@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="li.rajenlab.framework.domain.order">
+
+  <class name="OrderNote" table="CANTO_ORDER_XML">
+  
+	<!-- Entity mapping -->
+    <id name="id" column="ID" type="long">
+      <generator class="native"/>
+    </id>
+    <property name="creationTime" type="timestamp">
+      <column name="CREATION_TIME"/>
+    </property>
+    <property name="modifiedDate" type="timestamp">
+      <column name="CHANGE_TIME"/>
+    </property>
+     
+	<!-- Order mapping -->
+	<property name="orderId">
+    	<column name="ORDER_UID" unique="true" not-null="true"/>
+    </property>	
+    <property name="orderStatus">
+       <column name="ORDER_STATUS"/>
+       <type name="li.rajenlab.common.hibernate.type.StringValuedEnumType">
+         <param name="enumClass">li.rajenlab.canto.framework.domain.order.OrderStatus</param>
+       </type>
+    </property>
+    <component name="orderType" class="OrderType">
+      <property name="version">
+        <column name="OT_VERSION"/>
+      </property>
+      <property name="requestType">
+        <column name="OT_REQUEST_TYPE" length="100"/>
+      </property>
+      <property name="serviceType">
+        <column name="OT_SERVICE_TYPE" length="100"/>
+      </property>
+    </component>
+    
+    <!-- Associations  -->
+    <many-to-one name="createdBy" column="CREATED_BY_USER_ID"/> 
+    <set name="orderNotes" inverse="true" cascade="all" order-by="CREATION_TIME asc">
+      <key column="ORDER_ID"/>
+      <one-to-many class="OrderNote"/>
+    </set>
+    <one-to-one name="orderXml" class="OrderXML" property-ref="order" cascade="all"/>
+    <map name="orderAttributes" table="CANTO_ORDER_ATTRIBUTE" order-by="key asc">
+    	<key column="orderId"/>
+    	<index column="key" type="string"/>
+    	<element column="value" type="string"/>
+    </map> 
+    
+  </class>
+  
+</hibernate-mapping>

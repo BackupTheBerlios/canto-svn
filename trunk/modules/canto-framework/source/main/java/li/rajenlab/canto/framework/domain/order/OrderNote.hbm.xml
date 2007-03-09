@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="li.rajenlab.framework.domain.order">
+
+  <class name="OrderNote" table="CANTO_ORDER_XML">
+  
+	<!-- Entity mapping -->
+    <id name="id" column="ID" type="long">
+      <generator class="native"/>
+    </id>
+    <property name="creationTime" type="timestamp">
+      <column name="CREATION_TIME"/>
+    </property>
+    <property name="modifiedDate" type="timestamp">
+      <column name="CHANGE_TIME"/>
+    </property>
+     
+	<!-- OrderNote mapping -->
+	<property name="message">
+      <column name="MESSAGE" length="4000"/>
+    </property>
+   <property name="orderStatus">
+       <column name="ORDER_STATUS"/>
+       <type name="li.rajenlab.common.hibernate.type.StringValuedEnumType">
+         <param name="enumClass">li.rajenlab.canto.framework.domain.order.OrderStatus</param>
+       </type>
+    </property>
+    
+    <!-- Associations  -->
+    <many-to-one name="order" column="ORDER_ID"/>    
+    <many-to-one name="user" column="USER_ID"/>  
+    
+  </class>
+  
+</hibernate-mapping>
