@@ -10,8 +10,6 @@
 
 package li.rajenlab.canto.framework.domain.provisioning.order;
 
-import li.rajenlab.canto.framework.domain.provisioning.ProvisioningEngine;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -21,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
  * @version $Id$
  */
 public class DefaultOrderProvisioningEngine 
-    implements ProvisioningEngine<OrderProvisioningContext> {
+    implements OrderProvisioningEngine {
 
     //-------------------------------------------------------------------------
     //PUBLIC CONSTANTS

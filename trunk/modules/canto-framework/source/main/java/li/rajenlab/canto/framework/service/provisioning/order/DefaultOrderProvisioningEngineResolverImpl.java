@@ -13,7 +13,7 @@ package li.rajenlab.canto.framework.service.provisioning.order;
 import java.util.Map;
 
 import li.rajenlab.canto.framework.domain.order.OrderType;
-import li.rajenlab.canto.framework.domain.provisioning.ProvisioningEngine;
+import li.rajenlab.canto.framework.domain.provisioning.order.OrderProvisioningEngine;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,7 +35,7 @@ public class DefaultOrderProvisioningEngineResolverImpl implements
     protected static Log log = LogFactory
             .getLog(DefaultOrderProvisioningEngineResolverImpl.class);
 
-    private Map<String,ProvisioningEngine> engineBeanRefs_;
+    private Map<String,OrderProvisioningEngine> engineBeanRefs_;
     private String delimiter_ = "_";
     //-------------------------------------------------------------------------
     //CONSTRUCTORS
@@ -47,11 +47,11 @@ public class DefaultOrderProvisioningEngineResolverImpl implements
     /**
      * @see li.rajenlab.canto.framework.service.provisioning.order.OrderProvisioningEngineResolver#resolveProvisioningEngineForOrder(li.rajenlab.canto.framework.domain.order.OrderType)
      */
-    public ProvisioningEngine resolveProvisioningEngineForOrder(
+    public OrderProvisioningEngine resolveProvisioningEngineForOrder(
             OrderType orderType) {
         String engineBeanRefKey  = orderType.getRequestType() + getDelimiter() +orderType.getServiceType();
         
-        ProvisioningEngine engine = getEngineBeanRefs().get(engineBeanRefKey);
+        OrderProvisioningEngine engine = getEngineBeanRefs().get(engineBeanRefKey);
         if (engine == null){
             throw new IllegalArgumentException("No ProvisionEngine found for key ["+engineBeanRefKey+"]");
         }
@@ -73,14 +73,14 @@ public class DefaultOrderProvisioningEngineResolverImpl implements
     /**
      * @return the engineBeanRefs
      */
-    public Map<String, ProvisioningEngine> getEngineBeanRefs() {
+    public Map<String, OrderProvisioningEngine> getEngineBeanRefs() {
         return this.engineBeanRefs_;
     }
 
     /**
      * @param engineBeanRefs the engineBeanRefs to set
      */
-    public void setEngineBeanRefs(Map<String, ProvisioningEngine> engineBeanRefs) {
+    public void setEngineBeanRefs(Map<String, OrderProvisioningEngine> engineBeanRefs) {
         this.engineBeanRefs_ = engineBeanRefs;
     }
 

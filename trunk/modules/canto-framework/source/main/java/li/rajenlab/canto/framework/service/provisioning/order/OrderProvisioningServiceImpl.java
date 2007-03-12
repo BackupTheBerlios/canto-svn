@@ -13,9 +13,9 @@ package li.rajenlab.canto.framework.service.provisioning.order;
 import li.rajenlab.canto.framework.dao.order.OrderDao;
 import li.rajenlab.canto.framework.domain.order.Order;
 import li.rajenlab.canto.framework.domain.order.OrderStatus;
-import li.rajenlab.canto.framework.domain.provisioning.ProvisioningEngine;
 import li.rajenlab.canto.framework.domain.provisioning.order.OrderProvisioningContext;
 import li.rajenlab.canto.framework.domain.provisioning.order.OrderProvisioningContextFactory;
+import li.rajenlab.canto.framework.domain.provisioning.order.OrderProvisioningEngine;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -60,7 +60,7 @@ public class OrderProvisioningServiceImpl implements OrderProvisioningService {
                                         + "] of Type ["+order.getOrderType()+"]");
         
         
-        ProvisioningEngine engine = getOrderProvisioningEngineResolver().resolveProvisioningEngineForOrder(order.getOrderType());
+        OrderProvisioningEngine engine = getOrderProvisioningEngineResolver().resolveProvisioningEngineForOrder(order.getOrderType());
         OrderProvisioningContext provContext = getOrderProvisioningContextFactory().createContext();
         provContext.getOrderProvisioningRequest().setOrder(order);
         
