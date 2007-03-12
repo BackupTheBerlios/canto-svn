@@ -13,6 +13,7 @@ package li.rajenlab.canto.framework.service.provisioning.order;
 import java.util.Map;
 
 import li.rajenlab.canto.framework.domain.order.OrderType;
+import li.rajenlab.canto.framework.domain.provisioning.order.DefaultOrderProvisioningEngine;
 import li.rajenlab.canto.framework.domain.provisioning.order.OrderProvisioningEngine;
 
 import org.apache.commons.logging.Log;
@@ -37,6 +38,7 @@ public class DefaultOrderProvisioningEngineResolverImpl implements
 
     private Map<String,OrderProvisioningEngine> engineBeanRefs_;
     private String delimiter_ = "_";
+    private OrderProvisioningEngine defaultOrderProvisioningEngine_ = new DefaultOrderProvisioningEngine();
     //-------------------------------------------------------------------------
     //CONSTRUCTORS
     //-------------------------------------------------------------------------
@@ -49,13 +51,19 @@ public class DefaultOrderProvisioningEngineResolverImpl implements
      */
     public OrderProvisioningEngine resolveProvisioningEngineForOrder(
             OrderType orderType) {
-        String engineBeanRefKey  = orderType.getRequestType() + getDelimiter() +orderType.getServiceType();
-        
-        OrderProvisioningEngine engine = getEngineBeanRefs().get(engineBeanRefKey);
-        if (engine == null){
-            throw new IllegalArgumentException("No ProvisionEngine found for key ["+engineBeanRefKey+"]");
+        if (orderType.getRequestType()!=null && orderType.getServiceType()!=null){
+            String engineBeanRefKey  = orderType.getRequestType() + getDelimiter() +orderType.getServiceType();
+            OrderProvisioningEngine engine = getEngineBeanRefs().get(engineBeanRefKey);
+            if (engine == null){
+                throw new IllegalArgumentException("No ProvisionEngine found for key ["+engineBeanRefKey+"]");
+            }
+            return engine;
+        } else {
+            // return default
+            return getDefaultOrderProvisioningEngine();
         }
-        return engine;
+        
+       
     }
     //-------------------------------------------------------------------------
     //PROTECTED METHODS
@@ -100,6 +108,25 @@ public class DefaultOrderProvisioningEngineResolverImpl implements
      */
     public void setDelimiter(String delimiter) {
         this.delimiter_ = delimiter;
+    }
+
+
+
+    /**
+     * @return the defaultOrderProvisioningEngine
+     */
+    public OrderProvisioningEngine getDefaultOrderProvisioningEngine() {
+        return this.defaultOrderProvisioningEngine_;
+    }
+
+
+
+    /**
+     * @param defaultOrderProvisioningEngine the defaultOrderProvisioningEngine to set
+     */
+    public void setDefaultOrderProvisioningEngine(
+            OrderProvisioningEngine defaultOrderProvisioningEngine) {
+        this.defaultOrderProvisioningEngine_ = defaultOrderProvisioningEngine;
     }
   
 
