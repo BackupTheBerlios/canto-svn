@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="li.rajenlab.common.domain.errorhandler">
+
+  <class name="ErrorEvent" table="ERROR_EVENT">
+    <!-- Entity mapping -->
+    <id name="id" column="ID" type="long">
+      <generator class="native" />
+    </id>
+    <property name="creationTime" type="timestamp">
+      <column name="CREATION_TIME" />
+    </property>
+    <property name="changeTime" type="timestamp">
+      <column name="CHANGE_TIME" />
+    </property>
+
+    <!-- Base ErrorEvent mapping -->
+    <property name="timestamp" type="timestamp">
+      <column name="ORIGINATING_TIMESTAMP" />
+    </property>
+    <property name="module">
+      <column name="MODULE" length="255" />
+    </property>
+    <property name="category">
+      <column name="CATEGORY" length="255" />
+    </property>
+    <property name="subcategory">
+      <column name="SUB_CATEGORY" length="255" />
+    </property>
+    <property name="reference">
+      <column name="REFERENCE" length="255" />
+    </property>
+    <property name="detail">
+      <column name="DETAIL" length="4000" />
+    </property>
+    <property name="stacktrace"
+      type="org.springframework.orm.hibernate3.support.ClobStringType">
+      <column name="STACK_TRACE" />
+    </property>
+
+    <!--  associations -->
+    <list name="data" table="ERROR_DATA" cascade="all">
+      <key column="ERROR_EVENT_ID" />
+      <list-index column="DATA_ID"/>      
+      <composite-element class="ErrorData">
+        <property name="name">
+          <column name="NAME" length="255" />
+        </property>
+        <property name="value">
+          <column name="VALUE" length="4000"/>
+        </property>
+      </composite-element>
+    </list>
+
+  </class>
+
+</hibernate-mapping>

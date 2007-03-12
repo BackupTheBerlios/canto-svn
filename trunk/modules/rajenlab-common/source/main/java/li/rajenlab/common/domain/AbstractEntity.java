@@ -1,13 +1,13 @@
 /****************************************************************************** 
- * $LastChangedBy$
- * $LastChangedRevision$
- * $LastChangedDate$
+ * $LastChangedBy:neoraph $
+ * $LastChangedRevision:48 $
+ * $LastChangedDate:2007-03-07 13:51:41 +0000 (Mi, 07 Mrz 2007) $
  * 
  * 
  ******************************************************************************
  * Project: canto-core
  ******************************************************************************
- * $HeadURL$
+ * $HeadURL:svn+ssh://svn.berlios.de/svnroot/repos/canto/trunk/modules/rajenlab-common/source/main/java/li/rajenlab/common/domain/AbstractEntity.java $
  ******************************************************************************/
 
 package li.rajenlab.common.domain;
@@ -17,14 +17,14 @@ import java.util.Date;
 
 /**
  * @author  neoraph (neoraph@rajen-lab.li)
- * @version $Id$
+ * @version $Id:AbstractEntity.java 48 2007-03-07 13:51:41 +0000 (Mi, 07 Mrz 2007) neoraph $
  */
 public abstract class AbstractEntity implements Serializable {
     
     
     private Serializable id_;
     private Date createTime_;
-    private Date modifiedDate_;
+    private Date changeTime_;
     
     /**
      * @return the createTime
@@ -51,17 +51,19 @@ public abstract class AbstractEntity implements Serializable {
         this.id_ = id;
     }
     /**
-     * @return the modifiedDate
+     * @return the changeTime
      */
-    public Date getModifiedDate() {
-        return this.modifiedDate_;
+    public Date getChangeTime() {
+        return this.changeTime_;
     }
     /**
-     * @param modifiedDate the modifiedDate to set
+     * @param changeTime the changeTime to set
      */
-    public void setModifiedDate(Date modifiedDate) {
-        this.modifiedDate_ = modifiedDate;
+    public void setChangeTime(Date changeTime) {
+        this.changeTime_ = changeTime;
     }
+
+    
     
     
     
