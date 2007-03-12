@@ -58,7 +58,7 @@ public class ErrorEventDaoHibernateImpl extends HibernateDaoSupport implements
      */
     @SuppressWarnings("unchecked")
     public List<ErrorEvent> loadAll() throws DataAccessException {
-        return (List<ErrorEvent>) getHibernateTemplate().loadAll(ErrorEvent.class);
+        return getHibernateTemplate().loadAll(ErrorEvent.class);
     }
 
     /*

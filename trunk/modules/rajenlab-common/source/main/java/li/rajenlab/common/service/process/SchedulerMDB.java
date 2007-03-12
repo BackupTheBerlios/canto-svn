@@ -88,6 +88,7 @@ public class SchedulerMDB extends AbstractMessageDrivenBean implements
     /**
      * EJB lifecycle method. Load shared Spring Application Context.
      */
+    @Override
     public void setMessageDrivenContext(MessageDrivenContext messageDrivenContext)
     {
         super.setMessageDrivenContext( messageDrivenContext );
@@ -110,6 +111,7 @@ public class SchedulerMDB extends AbstractMessageDrivenBean implements
      * EJB lifecycle method. Create the Spring Application Context and retrieve
      * the SchedulerListener from it given the name in the MDB's environment.
      */
+    @Override
     public void onEjbCreate()
     {
         log.info("SchedulerMDB created.");

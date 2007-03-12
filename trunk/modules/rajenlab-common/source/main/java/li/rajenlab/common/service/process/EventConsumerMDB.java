@@ -126,6 +126,7 @@ public class EventConsumerMDB extends AbstractMessageDrivenBean
      *
      * @param messageDrivenContext
      */
+    @Override
     public void setMessageDrivenContext(
         MessageDrivenContext messageDrivenContext) {
         super.setMessageDrivenContext(messageDrivenContext);
@@ -152,6 +153,7 @@ public class EventConsumerMDB extends AbstractMessageDrivenBean
      * containing the incoming FileInputHandles is
      * configured via the MDB's environment.
      */
+    @Override
     public void onEjbCreate() {
         log.info("EventConsumerMDB onEjbCreate()");
 
