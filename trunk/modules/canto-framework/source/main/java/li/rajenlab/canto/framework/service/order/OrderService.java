@@ -11,6 +11,7 @@
 package li.rajenlab.canto.framework.service.order;
 
 import li.rajenlab.canto.framework.domain.order.Order;
+import li.rajenlab.common.support.validation.ValidationException;
 
 /**
  * @author  raph (raph@rajenlab.li)
@@ -24,6 +25,7 @@ public interface OrderService {
      * @param wsFlag
      * @return
      */
-    public Order createOrder(Order order, boolean wsFlag);
+    public Order createOrder(Order order, boolean wsFlag)
+        throws ValidationException;
 
 }

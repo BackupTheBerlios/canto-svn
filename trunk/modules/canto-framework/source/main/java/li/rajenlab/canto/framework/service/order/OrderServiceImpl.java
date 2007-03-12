@@ -12,8 +12,11 @@ package li.rajenlab.canto.framework.service.order;
 
 import li.rajenlab.canto.framework.dao.order.OrderDao;
 import li.rajenlab.canto.framework.domain.order.Order;
+import li.rajenlab.canto.framework.domain.order.OrderStatus;
 import li.rajenlab.canto.framework.service.process.OrderProcessService;
 import li.rajenlab.canto.framework.service.uid.OrderUIDService;
+import li.rajenlab.canto.framework.support.OrderValidator;
+import li.rajenlab.common.support.validation.ValidationException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,6 +38,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao_;
     private OrderProcessService orderProcessService_;
     private OrderUIDService orderUIDService_;
+    private OrderValidator orderValidator_;
     //-------------------------------------------------------------------------
     //CONSTRUCTORS
     //-------------------------------------------------------------------------
@@ -45,7 +49,8 @@ public class OrderServiceImpl implements OrderService {
     /**
      * @see li.rajenlab.canto.framework.service.order.OrderService#createOrder(li.rajenlab.canto.framework.domain.order.Order, boolean)
      */
-    public Order createOrder(Order order, boolean wsFlag) {
+    public Order createOrder(Order order, boolean wsFlag)
+        throws ValidationException {
         if( order == null ) {
             throwMissing("create", "order");
         }
@@ -54,9 +59,11 @@ public class OrderServiceImpl implements OrderService {
         }
         
         // do the validation
+        getOrderValidator().validate(order);
         
         // generate the order id
         order.setOrderId(getOrderUIDService().generate());
+        order.setOrderStatus(OrderStatus.NEW);
         
         Order newOrder = new Order();
         order.copyTo(newOrder);
@@ -120,6 +127,20 @@ public class OrderServiceImpl implements OrderService {
      */
     public void setOrderUIDService(OrderUIDService orderUIDService) {
         this.orderUIDService_ = orderUIDService;
+    }
+
+    /**
+     * @return the orderValidator
+     */
+    public OrderValidator getOrderValidator() {
+        return this.orderValidator_;
+    }
+
+    /**
+     * @param orderValidator the orderValidator to set
+     */
+    public void setOrderValidator(OrderValidator orderValidator) {
+        this.orderValidator_ = orderValidator;
     }
 
     //-------------------------------------------------------------------------
