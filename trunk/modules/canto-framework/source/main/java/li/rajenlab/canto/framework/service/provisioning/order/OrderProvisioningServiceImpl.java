@@ -12,6 +12,7 @@ package li.rajenlab.canto.framework.service.provisioning.order;
 
 import li.rajenlab.canto.framework.dao.order.OrderDao;
 import li.rajenlab.canto.framework.domain.order.Order;
+import li.rajenlab.canto.framework.domain.order.OrderStatus;
 import li.rajenlab.canto.framework.domain.provisioning.ProvisioningEngine;
 import li.rajenlab.canto.framework.domain.provisioning.order.OrderProvisioningContext;
 import li.rajenlab.canto.framework.domain.provisioning.order.OrderProvisioningContextFactory;
@@ -33,8 +34,8 @@ public class OrderProvisioningServiceImpl implements OrderProvisioningService {
     //PROTECTED AND PRIVATE VARIABLES AND CONSTANTS
     //-------------------------------------------------------------------------
     protected static Log log = LogFactory.getLog(OrderProvisioningServiceImpl.class);
-    private OrderProvisioningEngineResolver orderProvisioningEngineResolver_;
-    private OrderProvisioningContextFactory orderProvisioningContextFactory;
+    private OrderProvisioningEngineResolver orderProvisioningEngineResolver_ = new DefaultOrderProvisioningEngineResolverImpl();
+    private OrderProvisioningContextFactory orderProvisioningContextFactory_ = new OrderProvisioningContextFactory();
     private OrderDao orderDao_;
     
     //-------------------------------------------------------------------------
@@ -67,6 +68,15 @@ public class OrderProvisioningServiceImpl implements OrderProvisioningService {
                 + "] of Type ["+order.getOrderType()+"]");
         engine.doProvisioning(provContext);
         
+        // update the status to provisioned
+        Order provOrder = provContext.getOrderProvisioningResponse().getOrder();
+        if (provOrder!=null){
+            provOrder.setOrderStatus(OrderStatus.PROVISIONED);
+            getOrderDao().store(provOrder);
+        } else {
+            log.warn("Update of order Status to Provisioned not possible for order["+order.getOrderId()+"]," +
+                    "reason: no provisionedOrder returned from ProvisioningEngine");
+        }
         log.info("[DONE] Provisioning of order [" + order.getOrderId()+"]");
         
     }
@@ -121,7 +131,7 @@ public class OrderProvisioningServiceImpl implements OrderProvisioningService {
      * @return the orderProvisioningContextFactory
      */
     public OrderProvisioningContextFactory getOrderProvisioningContextFactory() {
-        return this.orderProvisioningContextFactory;
+        return this.orderProvisioningContextFactory_;
     }
 
 
@@ -131,7 +141,7 @@ public class OrderProvisioningServiceImpl implements OrderProvisioningService {
      */
     public void setOrderProvisioningContextFactory(
             OrderProvisioningContextFactory orderProvisioningContextFactory) {
-        this.orderProvisioningContextFactory = orderProvisioningContextFactory;
+        this.orderProvisioningContextFactory_ = orderProvisioningContextFactory;
     }
   
     
