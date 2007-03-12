@@ -8,9 +8,9 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.service.order;
+package li.rajenlab.canto.framework.service.process;
 
-import li.rajenlab.canto.framework.domain.order.Order;
+import li.rajenlab.canto.framework.domain.common.CantoProcessState;
 import li.rajenlab.canto.framework.domain.order.OrderProcessState;
 import li.rajenlab.common.domain.event.Attachment;
 import li.rajenlab.common.domain.event.Event;
@@ -37,7 +37,6 @@ public class OrderProcessServiceImpl implements OrderProcessService {
     //PROTECTED AND PRIVATE VARIABLES AND CONSTANTS
     //-------------------------------------------------------------------------
     protected static Log log = LogFactory.getLog(OrderProcessServiceImpl.class);
-    private OrderProcessMethodNameResolver orderProcessMethodNameResolver_;
     private EventQueue eventQueue_;
     private EventProcessor eventProcessor_;
     
@@ -48,29 +47,27 @@ public class OrderProcessServiceImpl implements OrderProcessService {
     //-------------------------------------------------------------------------
     //PUBLIC METHODS
     //-------------------------------------------------------------------------
+   
     /**
-     * @see li.rajenlab.canto.framework.service.order.OrderProcessService#processOrder(li.rajenlab.canto.framework.domain.order.Order)
+     * @see li.rajenlab.canto.framework.service.process.OrderProcessService#scheduleProvisionOrder(java.lang.String, boolean)
      */
-    public OrderProcessState processOrder(Order order) {
+    public OrderProcessState scheduleProvisionOrder(String orderId, boolean immediateFlag) {
+        log.info("scheduleProvisionOrder " + orderId + " immediate " + immediateFlag);
         
-        try {
-            String methodName = getOrderProcessMethodNameResolver().resolveProcessMethodName(order.getOrderType());
-            TriggerEvent trigger = new TriggerEvent(order.getOrderId(),methodName);
-           
-            return sendToProcess("urn://processOrder",trigger);
-            
-        } catch (Exception e) {
-            return OrderProcessState.FAILED;
-        }
-      
+        String method = immediateFlag ? CantoProcessState.METHOD_PROVISION_ORDER.getValue() : CantoProcessState.METHOD_SCHEDULE.getValue();
+        TriggerEvent trigger = new TriggerEvent(orderId,method);
+        
+        return sendToProcess(CantoProcessState.PROCESS_URL_PROVISION_ORDER.getValue(), trigger);
     }
+   
+
     //-------------------------------------------------------------------------
     //PROTECTED METHODS
     //-------------------------------------------------------------------------
-    private OrderProcessState sendToProcess( String processUrl, TriggerEvent trigger ) {
+    private OrderProcessState sendToProcess( String processUrl, TriggerEvent triggerEvent ) {
         
         Event event = new Event();
-        Attachment reqAttachment = new Attachment( new ObjectContentHandler(trigger));
+        Attachment reqAttachment = new Attachment( new ObjectContentHandler(triggerEvent));
         event.addAttachment( StandardEventProperties.REQUEST_ATTACHMENT_NAME, reqAttachment);
         event.addProperty( StandardEventProperties.SEND_TO, processUrl);
 
@@ -91,20 +88,6 @@ public class OrderProcessServiceImpl implements OrderProcessService {
     //-------------------------------------------------------------------------
     //PUBLIC ACCESSORS (GETTERS / SETTERS)
     //-------------------------------------------------------------------------
-    /**
-     * @return the orderProcessMethodNameResolver
-     */
-    public OrderProcessMethodNameResolver getOrderProcessMethodNameResolver() {
-        return this.orderProcessMethodNameResolver_;
-    }
-
-    /**
-     * @param orderProcessMethodNameResolver the orderProcessMethodNameResolver to set
-     */
-    public void setOrderProcessMethodNameResolver(
-            OrderProcessMethodNameResolver orderProcessMethodNameResolver) {
-        this.orderProcessMethodNameResolver_ = orderProcessMethodNameResolver;
-    }
     
     /**
      * @return the eventProcessor
@@ -130,6 +113,9 @@ public class OrderProcessServiceImpl implements OrderProcessService {
     public void setEventQueue(EventQueue eventQueue) {
         this.eventQueue_ = eventQueue;
     }
+
+
+ 
   
 
 }

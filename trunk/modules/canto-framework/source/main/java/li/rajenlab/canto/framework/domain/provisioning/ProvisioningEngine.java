@@ -8,22 +8,20 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.service.order;
+package li.rajenlab.canto.framework.domain.provisioning;
 
-import li.rajenlab.canto.framework.domain.order.Order;
-import li.rajenlab.canto.framework.domain.order.OrderProcessState;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public interface OrderProcessService {
+public interface ProvisioningEngine {
+    
     
     /**
-     * Process an order based on the orderType
-     * @param order
-     * @return
+     * Do the provisioning
+     * @param context
      */
-    public OrderProcessState processOrder(Order order);
+    public void doProvisioning(ProvisioningContext context);
 
 }

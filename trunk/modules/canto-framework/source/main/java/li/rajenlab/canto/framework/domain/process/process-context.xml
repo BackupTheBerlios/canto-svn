@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.0.xsd">
+
+
+	<!-- Bootstrap of other Processes ( must have init-method="onInit" ) -->
+	<bean id="canto.BootService" class="li.rajenlab.common.service.boot.BootServiceImpl" init-method="onInit">
+		<property name="listeners">
+			<list>
+				<ref bean="canto.process.OrderProvisioningProcess"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Used for Event serialization / deserialization -->
+	<bean id="canto.process.EventService" class="li.rajenlab.common.service.event.EventServiceImpl">
+		<property name="timestampFlag"><value>true</value></property>
+	</bean>
+
+	<bean id="canto.process.EventQueue" class="li.rajenlab.common.service.event.event.EventQueueImpl">
+	</bean>
+
+	<bean id="canto.process.EventProcessorTarget" class="li.rajenlab.common.service.event.EventProcessorImpl">
+		<property name="eventQueue"><ref local="canto.process.EventQueue"/></property>
+		<property name="eventDispatcher"><ref local="canto.process.EventDispatcher"/></property>
+	</bean>
+  	<bean id="canto.process.EventProcessor" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+ 		<property name="transactionManager"><ref bean="canto.dao.TransactionManager"/></property>
+		<property name="target"><ref local="canto.process.EventProcessorTarget"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="process">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+  	</bean>  	
+	
+	<bean id="canto.process.EventDispatcher" class="li.rajenlab.common.service.event.EventDispatcherImpl">
+		<property name="noMatchCausesErrorFlag"><value>true</value></property>
+		<property name="dispatchMap">
+			<map>
+				<entry>
+					<key><value>urn://orderProvisioningProcess</value></key>
+					<ref local="canto.process.OrderProvisioningProcessHandlerChainInvoker"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+
+	<!--  OrderProvisioningProcess Definition -->
+	<bean id="canto.service.OrderProvisioningProcessSchedulerListenerTarget" class="li.rajenlab.common.service.process.SchedulerListenerImpl">
+		<property name="delegateListener" ref="canto.process.OrderProvisioningProcess"/>
+		<property name="eventProcessor" ref="canto.process.EventProcessor"/>
+	</bean>
+  	<bean id="canto.service.OrderProvisioningProcessSchedulerListener" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+ 		<property name="transactionManager"><ref bean="canto.dao.TransactionManager"/></property>
+		<property name="target"><ref local="canto.service.OrderProvisioningProcessSchedulerListenerTarget"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<!-- each process instance timer pop requires a new Tx -->
+				<prop key="onTimer">PROPAGATION_REQUIRES_NEW</prop>
+			</props>
+		</property>
+  	</bean>
+	<bean id="canto.process.OrderProvisioningProcessTarget" class="li.rajenlab.common.service.process.StatefullProcessImpl">
+		<property name="name"><value>OrderProvisioningProcess</value></property>
+		<property name="attachmentName"><value>OrderProvisioningProcessEventMapContext</value></property>
+		<property name="maxTimersPerSchedule"><value>1000</value></property>
+		<property name="maxTimersPerSelect"><value>100</value></property>
+		<property name="stateFactory" ref="canto.process.OrderProvisioningProcessStateFactory"/>
+		<property name="processInstanceDAO" ref="canto.dao.ProcessInstanceDAO"/>
+	</bean>
+  	<bean id="canto.process.OrderProvisioningProcess" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+ 		<property name="transactionManager"><ref bean="canto.dao.TransactionManager"/></property>
+		<property name="target"><ref local="canto.process.OrderProvisioningProcessTarget"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<!-- each event processed just joins in the current Tx -->
+				<prop key="onEvent">PROPAGATION_REQUIRED</prop>
+				<prop key="onBoot">PROPAGATION_REQUIRED</prop>
+				<prop key="onTimer">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+  	</bean>  	
+
+	<bean id="canto.process.OrderProvisioningProcessStateFactory" class="li.rajenlab.common.service.process.state.StateFactoryImpl">
+		<property name="stateRefs">
+			<list>
+				<value>canto.process.OrderProvisioningProcess.InitialState</value>
+				<value>canto.process.OrderProvisioningProcess.PendingProvisioningState</value>
+				<value>canto.process.OrderProvisioningProcess.FinalState</value>
+			</list>
+		</property>
+		<property name="initialStateRef"><value>canto.process.OrderProvisioningProcess.InitialState</value></property>
+		<property name="finalStateRef"><value>canto.process.OrderProvisioningProcess.FinalState</value></property>
+		<property name="timerMethodName"><value>onTimer</value></property>
+	</bean>
+	
+	<bean id="canto.process.OrderProvisioningProcess.InitialState" class="li.rajenlab.canto.framework.domain.process.order.provisioning.InitialState" scope="prototype">
+	    <property name="errorHandlerAdapter" ref="canto.common.ErrorHandlerAdapter" />
+		<property name="orderProvisioningService" ref="canto.service.OrderProvisioningService"/>
+	    <property name="orderDao" ref="canto.dao.OrderDao"/>
+	</bean>
+	
+	<bean id="canto.process.OrderProvisioningProcess.PendingProvisioningState" class="li.rajenlab.canto.framework.domain.process.order.provisioning.PendingProvisioningState" scope="prototype">
+	    <property name="errorHandlerAdapter" ref="canto.common.ErrorHandlerAdapter" />
+		<property name="orderProvisioningService" ref="canto.service.OrderProvisioningService"/>
+	    <property name="orderDao" ref="canto.dao.OrderDao"/>
+		<property name="longRetryLimit"><value>${canto.process.orderprovisioning.longRetryLimit}</value></property>
+		<property name="longRetryInterval"><value>${canto.process.orderprovisioning..longRetryInterval}</value></property>
+		<property name="shortRetryInterval"><value>${canto.process.orderprovisioning..shortRetryInterval}</value></property>
+	</bean>
+
+	<bean id="canto.process.OrderProvisioningProcess.FinalState" class="li.rajenlab.canto.framework.domain.process.order.provisioning.FinalState" scope="prototype">
+	    <property name="errorHandlerAdapter" ref="canto.common.ErrorHandlerAdapter" />
+	</bean>
+
+	<bean id="canto.process.OrderProvisioningProcessEventMapper" class="li.rajenlab.common.service.process.eventmapper.TriggerEventMapper">
+		<property name="attachmentName"><value>OrderProvisioningProcessEventMapContext</value></property>
+	</bean>
+	
+	<bean id="canto.process.OrderProvisioningProcessHandlerChainInvoker" class="li.rajenlab.common.service.event.chain.EventChainInvokerImpl">
+		<property name="chain">
+			<ref bean="canto.process.OrderProvisioningProcessHandlerChain"/>
+		</property>
+	</bean>
+		
+	<bean id="canto.process.OrderProvisioningProcessHandlerChain" class="li.rajenlab.common.service.chain.ChainFactoryBean">
+		<property name="handler">
+			<list>
+				<bean class="li.rajenlab.common.service.event.chain.EventChainHandlerImpl">
+			      <property name="listener"><ref bean="canto.process.OrderProvisioningProcessEventMapper"/></property>
+			    </bean>
+				<bean class="li.rajenlab.common.service.event.chain.EventChainHandlerImpl">
+			      <property name="listener"><ref bean="canto.process.OrderProvisioningProcess"/></property>
+			    </bean>
+			</list>
+		</property>
+	</bean>
+
+</beans> 

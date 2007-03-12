@@ -8,24 +8,18 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.service.order;
-
-import li.rajenlab.canto.framework.domain.order.OrderType;
-import li.rajenlab.canto.framework.service.order.exceptions.NoProcessMethodFoundException;
+package li.rajenlab.canto.framework.domain.provisioning;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public interface OrderProcessMethodNameResolver {
-    
+public interface ProvisioningContextFactory<E> {
     
     /**
-     * Resolve Process Method Name
-     * @param orderType
+     * Create a provisioning context
      * @return
      */
-    public String resolveProcessMethodName(OrderType orderType)
-        throws NoProcessMethodFoundException;
+    public E createContext();
 
 }

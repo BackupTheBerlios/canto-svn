@@ -8,7 +8,7 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.domain.order;
+package li.rajenlab.canto.framework.domain.common;
 
 import li.rajenlab.common.lang.StringValuedEnum;
 
@@ -16,27 +16,30 @@ import li.rajenlab.common.lang.StringValuedEnum;
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public enum OrderStatus implements StringValuedEnum {
+public enum CantoProcessState implements StringValuedEnum {
     
-    NEW ("NEW"),
-    PENDING_PROVISIONING ("PENDING_PROVISIONING"),
-    PROVISIONED("PROVISIONED"),
-    PARKED("PARKED"),
-    CANCELLED("CANCELLED");
+    INITIAL("INITIAL"),
+    FINAL("FINAL"),
+    ORDER_PENDING_PROVISIONING("ORDER_PENDING_PROVISIONING"),
+    ORDER_PROVISIONED("ORDER_PROVISIONED"),
+    VARIABLE_RETRIES("retries"),
+    METHOD_PROVISION_ORDER("provisionOrder"),
+    METHOD_SCHEDULE("schedule"),
+    PROCESS_URL_PROVISION_ORDER("urn://orderProvisioningProcess");
 
+    private String processState_;
     
-    private String orderStatus_;
-    
-    private OrderStatus(String orderStatus){
-        this.orderStatus_ = orderStatus;
+    private CantoProcessState(String processState){
+        this.processState_ = processState;
     }
-    
     /**
      * @see li.rajenlab.common.lang.StringValuedEnum#getValue()
      */
     public String getValue() {
-        // TODO Auto-generated method stub
-        return null;
+        return processState_;
     }
+    
+    
+   
 
 }
