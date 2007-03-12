@@ -14,7 +14,7 @@
     <property name="creationTime" type="timestamp">
       <column name="CREATION_TIME"/>
     </property>
-    <property name="modifiedDate" type="timestamp">
+    <property name="changeTime" type="timestamp">
       <column name="CHANGE_TIME"/>
     </property>
     

@@ -37,7 +37,7 @@ public class Order extends AbstractEntity{
    private Map<String,String> orderAttributes_;
    private User createdBy_;
    private Set<OrderNote> orderNotes_;
-   private OrderXML orderXml_;
+   private Set<OrderItem> orderItems_;
    
     /**
      * @return the orderAttributes
@@ -194,18 +194,17 @@ public class Order extends AbstractEntity{
         this.orderNotes_ = orderNotes;
     }
     /**
-     * @return the orderXml
+     * @return the orderItems
      */
-    public OrderXML getOrderXml() {
-        return this.orderXml_;
+    public Set<OrderItem> getOrderItems() {
+        return this.orderItems_;
     }
     /**
-     * @param orderXml the orderXml to set
+     * @param orderItems the orderItems to set
      */
-    public void setOrderXml(OrderXML orderXml) {
-        this.orderXml_ = orderXml;
+    public void setOrderItems(Set<OrderItem> orderItems) {
+        this.orderItems_ = orderItems;
     }
-   
    
 
 }

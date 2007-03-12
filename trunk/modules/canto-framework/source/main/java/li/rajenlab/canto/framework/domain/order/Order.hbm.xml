@@ -14,7 +14,7 @@
     <property name="creationTime" type="timestamp">
       <column name="CREATION_TIME"/>
     </property>
-    <property name="modifiedDate" type="timestamp">
+    <property name="changeTime" type="timestamp">
       <column name="CHANGE_TIME"/>
     </property>
      
@@ -46,12 +46,15 @@
       <key column="ORDER_ID"/>
       <one-to-many class="OrderNote"/>
     </set>
-    <one-to-one name="orderXml" class="OrderXML" property-ref="order" cascade="all"/>
     <map name="orderAttributes" table="CANTO_ORDER_ATTRIBUTE" order-by="key asc">
     	<key column="orderId"/>
     	<index column="key" type="string"/>
     	<element column="value" type="string"/>
     </map> 
+    <set name="orderItem" inverse="true" cascade="all" order-by="CREATION_TIME asc">
+      <key column="ORDER_ID"/>
+      <one-to-many class="OrderItem"/>
+    </set>
     
   </class>
   

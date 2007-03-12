@@ -5,7 +5,7 @@
 
 <hibernate-mapping package="li.rajenlab.framework.domain.order">
 
-  <class name="OrderNote" table="CANTO_ORDER_XML">
+  <class name="OrderNote" table="CANTO_ORDER_NOTE">
   
 	<!-- Entity mapping -->
     <id name="id" column="ID" type="long">
@@ -14,7 +14,7 @@
     <property name="creationTime" type="timestamp">
       <column name="CREATION_TIME"/>
     </property>
-    <property name="modifiedDate" type="timestamp">
+    <property name="changeTime" type="timestamp">
       <column name="CHANGE_TIME"/>
     </property>
      
