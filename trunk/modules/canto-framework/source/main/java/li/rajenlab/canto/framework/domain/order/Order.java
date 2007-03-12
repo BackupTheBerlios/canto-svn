@@ -11,6 +11,9 @@
 package li.rajenlab.canto.framework.domain.order;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -206,5 +209,33 @@ public class Order extends AbstractEntity{
         this.orderItems_ = orderItems;
     }
    
+    public void copyTo(Order to){
+        to.setOrderId(to.getOrderId());
+        to.setOrderAttributes(new Hashtable<String,String>());
+        if (getOrderAttributes()!=null){
+            for (String name : getOrderAttributes().keySet()){
+               to.addOrderAttribute(name, getOrderAttributes().get(name));   
+            }
+        }
+        
+        to.setOrderNotes(new HashSet<OrderNote>());
+        if (getOrderNotes()!=null){
+            Iterator<OrderNote> it = getOrderNotes().iterator();
+            while (it.hasNext()){
+                to.getOrderNotes().add(it.next());
+            }
+        }
+        
+        to.setOrderItems(new HashSet<OrderItem>());
+        if (getOrderItems()!=null){
+            Iterator<OrderItem> it = getOrderItems().iterator();
+            while (it.hasNext()){
+                to.getOrderItems().add(it.next());
+            }
+        }
+        
+        to.setOrderStatus(getOrderStatus());
+        to.setOrderType(getOrderType());
+    }
 
 }
