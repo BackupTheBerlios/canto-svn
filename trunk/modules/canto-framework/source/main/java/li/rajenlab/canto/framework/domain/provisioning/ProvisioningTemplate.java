@@ -8,21 +8,19 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.domain.process.order.provisioning;
+package li.rajenlab.canto.framework.domain.provisioning;
 
-import li.rajenlab.canto.framework.domain.common.CantoProcessState;
+import li.rajenlab.common.domain.AbstractEntity;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class InitialState extends BaseProvisioningState {
+public class ProvisioningTemplate extends AbstractEntity {
 
     /**
-     * @see li.rajenlab.common.service.process.state.State#getName()
+     * Comment for <code>serialVersionUID</code>
      */
-    public String getName() {
-        return CantoProcessState.INITIAL.getValue();
-    }
-   
+    private static final long serialVersionUID = 6380074452451117335L;
+
 }

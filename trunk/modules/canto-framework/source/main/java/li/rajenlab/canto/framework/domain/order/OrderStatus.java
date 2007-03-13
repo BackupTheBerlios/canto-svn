@@ -19,10 +19,11 @@ import li.rajenlab.common.lang.StringValuedEnum;
 public enum OrderStatus implements StringValuedEnum {
     
     NEW ("NEW"),
-    PENDING_PROVISIONING ("PENDING_PROVISIONING"),
-    PROVISIONED("PROVISIONED"),
-    PARKED("PARKED"),
-    CANCELLED("CANCELLED");
+    PENDING("PENDING"),
+    CLOSED("CLOSED"),
+    CANCELLED("CANCELLED"),
+    FAILED("FAILED"),
+    IN_PROGRESS("IN_PROGRESS");
 
     
     private String orderStatus_;
@@ -35,8 +36,7 @@ public enum OrderStatus implements StringValuedEnum {
      * @see li.rajenlab.common.lang.StringValuedEnum#getValue()
      */
     public String getValue() {
-        // TODO Auto-generated method stub
-        return null;
+        return orderStatus_;
     }
 
 }

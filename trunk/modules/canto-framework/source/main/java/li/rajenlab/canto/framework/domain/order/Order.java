@@ -209,6 +209,32 @@ public class Order extends AbstractEntity{
         this.orderItems_ = orderItems;
     }
    
+    public synchronized void addOrderNote(OrderNote orderNote){
+        if (getOrderNotes()==null){
+            orderNotes_ = new HashSet<OrderNote>();
+        }
+        orderNotes_.add(orderNote);
+    }
+    
+    public synchronized void removeOrderNote(OrderNote orderNote){
+        if (getOrderNotes()!=null){
+            orderNotes_.remove(orderNote);
+        }
+    }
+    
+    public synchronized void addOrderItem(OrderItem orderItem){
+        if (getOrderItems()==null){
+            orderItems_ = new HashSet<OrderItem>();
+        }
+        orderItems_.add(orderItem);
+    }
+    
+    public synchronized void removeOrderItem(OrderItem orderItem){
+        if (getOrderItems()!=null){
+            orderItems_.remove(orderItem);
+        }
+    }
+    
     public void copyTo(Order to){
         to.setOrderId(to.getOrderId());
         to.setOrderAttributes(new Hashtable<String,String>());

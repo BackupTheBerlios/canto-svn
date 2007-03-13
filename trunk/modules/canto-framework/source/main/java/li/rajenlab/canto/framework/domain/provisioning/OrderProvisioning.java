@@ -10,12 +10,33 @@
 
 package li.rajenlab.canto.framework.domain.provisioning;
 
-import java.io.Serializable;
+import li.rajenlab.canto.framework.domain.order.Order;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public interface ProvisioningResponse extends Serializable {
+public class OrderProvisioning extends AbstractProvisioning {
+    
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = -3940669605857188059L;
+    
+    private Order order_;
+
+    /**
+     * @return the order
+     */
+    public Order getOrder() {
+        return this.order_;
+    }
+
+    /**
+     * @param order the order to set
+     */
+    public void setOrder(Order order) {
+        this.order_ = order;
+    }
 
 }

@@ -12,10 +12,12 @@ package li.rajenlab.canto.framework.service.order;
 
 import li.rajenlab.canto.framework.dao.order.OrderDao;
 import li.rajenlab.canto.framework.domain.order.Order;
+import li.rajenlab.canto.framework.domain.order.OrderNote;
 import li.rajenlab.canto.framework.domain.order.OrderStatus;
-import li.rajenlab.canto.framework.service.process.OrderProcessService;
 import li.rajenlab.canto.framework.service.uid.OrderUIDService;
 import li.rajenlab.canto.framework.support.OrderValidator;
+import li.rajenlab.common.dao.EntityNotFoundException;
+import li.rajenlab.common.service.security.AuthenticatedService;
 import li.rajenlab.common.support.validation.ValidationException;
 
 import org.apache.commons.logging.Log;
@@ -36,9 +38,9 @@ public class OrderServiceImpl implements OrderService {
     //-------------------------------------------------------------------------
     protected static Log log = LogFactory.getLog(OrderServiceImpl.class);
     private OrderDao orderDao_;
-    private OrderProcessService orderProcessService_;
     private OrderUIDService orderUIDService_;
     private OrderValidator orderValidator_;
+    private AuthenticatedService authenticatedService_;
     //-------------------------------------------------------------------------
     //CONSTRUCTORS
     //-------------------------------------------------------------------------
@@ -71,12 +73,99 @@ public class OrderServiceImpl implements OrderService {
         // persists the order
         getOrderDao().store(newOrder);
         
-        // do the provisioning (if not ws then immediately execute!)
-        getOrderProcessService().scheduleProvisionOrder(newOrder.getOrderId(), !wsFlag);
+        // start the provisioning...
+        
         
         return order;
     }
     
+    
+    
+    
+    /**
+     * @see li.rajenlab.canto.framework.service.order.OrderService#cancelOrder(li.rajenlab.canto.framework.domain.order.Order, boolean)
+     */
+    public Order cancelOrder(Order order, boolean wsFlag) throws ValidationException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+
+
+    /**
+     * @see li.rajenlab.canto.framework.service.order.OrderService#updateOrderStatus(java.lang.String, li.rajenlab.canto.framework.domain.order.OrderStatus)
+     */
+    public Order updateOrderStatus(String orderId, OrderStatus newStatus) 
+        throws EntityNotFoundException, InvalidOrderStatusTransitionException {
+        
+        if( orderId == null ) {
+            throwMissing("updateOrderStatus", "orderId");
+        }
+        
+        Order currentOrder = getOrderDao().load(orderId);
+        OrderStatus currentStatus = currentOrder.getOrderStatus();
+        
+        // not transition state allowed in cancelled or close mode
+        if (OrderStatus.CANCELLED.equals(currentStatus) || 
+                OrderStatus.CLOSED.equals(currentStatus)){
+            throw new InvalidOrderStatusTransitionException("currentStatus ["+currentStatus+"] " +
+                    "does not allow to update order status to ["+newStatus+"]");
+        }
+        
+        // check the validation of the transition
+        // NEW -> PENDING or CANCELLED or CLOSED or FAILED OR IN_PROGRESS
+        // PENDING -> CANCELLED or IN_PROGRESS
+        // FAILED -> CANCELLED or CLOSED OR IN_PROGRESS
+        // IN_PROGRESS -> CANCELLED or CLOSED or FAILED
+        boolean allowStatusTransition = false;
+        if (OrderStatus.NEW.equals(currentStatus) && 
+                (OrderStatus.PENDING.equals(newStatus) 
+                        || OrderStatus.CANCELLED.equals(newStatus)
+                        || OrderStatus.CLOSED.equals(newStatus)
+                        || OrderStatus.FAILED.equals(newStatus)
+                        || OrderStatus.IN_PROGRESS.equals(newStatus))){
+            allowStatusTransition = true;
+        } else if (OrderStatus.PENDING.equals(currentStatus) && 
+                    (OrderStatus.CANCELLED.equals(newStatus)
+                            || OrderStatus.IN_PROGRESS.equals(newStatus))){
+            allowStatusTransition = true;
+        } else if (OrderStatus.FAILED.equals(currentStatus) && 
+                     (OrderStatus.CANCELLED.equals(newStatus)
+                             || OrderStatus.CLOSED.equals(newStatus)
+                             || OrderStatus.IN_PROGRESS.equals(newStatus))){
+            allowStatusTransition = true;
+        } else if (OrderStatus.IN_PROGRESS.equals(currentStatus) && 
+                       (OrderStatus.CANCELLED.equals(newStatus)
+                               || OrderStatus.CLOSED.equals(newStatus)
+                               || OrderStatus.FAILED.equals(newStatus))){
+            allowStatusTransition = true;
+        }
+        
+        if (!allowStatusTransition){
+            throw new InvalidOrderStatusTransitionException("currentStatus ["+currentStatus+"] " +
+                    "does not allow the transition to state ["+newStatus+"]");
+        }
+        
+        currentOrder.setOrderStatus(newStatus);
+        OrderNote orderNote = new OrderNote();
+        orderNote.setUser(getAuthenticatedService().getUser());
+        orderNote.setOrder(currentOrder);
+        orderNote.setMessage("update Order Status from ["+currentStatus.getValue()
+                                            +"] to ["+newStatus.getValue()+"]");
+        currentOrder.addOrderNote(orderNote);
+        
+        getOrderDao().store(currentOrder);
+        
+        log.info("Update Order status for orderId["+currentOrder.getOrderId()+"] " +
+                "oldStatus["+currentStatus.getValue()+"], newStatus["+newStatus.getValue()+"]");
+        
+        return currentOrder;
+    }
+
+
+
+
     //-------------------------------------------------------------------------
     //PROTECTED METHODS
     //-------------------------------------------------------------------------
@@ -101,21 +190,7 @@ public class OrderServiceImpl implements OrderService {
         this.orderDao_ = orderDao;
     }
 
-    /**
-     * @return the orderProcessService
-     */
-    public OrderProcessService getOrderProcessService() {
-        return this.orderProcessService_;
-    }
-
-    /**
-     * @param orderProcessService the orderProcessService to set
-     */
-    public void setOrderProcessService(OrderProcessService orderProcessService) {
-        this.orderProcessService_ = orderProcessService;
-    }
-
-    /**
+       /**
      * @return the orderUIDService
      */
     public OrderUIDService getOrderUIDService() {
@@ -141,6 +216,26 @@ public class OrderServiceImpl implements OrderService {
      */
     public void setOrderValidator(OrderValidator orderValidator) {
         this.orderValidator_ = orderValidator;
+    }
+
+
+
+
+    /**
+     * @return the authenticatedService
+     */
+    public AuthenticatedService getAuthenticatedService() {
+        return this.authenticatedService_;
+    }
+
+
+
+
+    /**
+     * @param authenticatedService the authenticatedService to set
+     */
+    public void setAuthenticatedService(AuthenticatedService authenticatedService) {
+        this.authenticatedService_ = authenticatedService;
     }
 
     //-------------------------------------------------------------------------

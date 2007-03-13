@@ -27,7 +27,6 @@ public class OrderNote extends AbstractEntity {
     private Order order_;
     private String message_;
     private User   user_;
-    private OrderStatus orderStatus_;
     
     /**
      * @return the message
@@ -53,18 +52,7 @@ public class OrderNote extends AbstractEntity {
     public void setOrder(Order order) {
         this.order_ = order;
     }
-    /**
-     * @return the orderStatus
-     */
-    public OrderStatus getOrderStatus() {
-        return this.orderStatus_;
-    }
-    /**
-     * @param orderStatus the orderStatus to set
-     */
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus_ = orderStatus;
-    }
+   
     /**
      * @return the user
      */

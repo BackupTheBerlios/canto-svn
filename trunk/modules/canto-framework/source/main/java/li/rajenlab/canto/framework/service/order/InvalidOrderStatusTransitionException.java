@@ -8,18 +8,21 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.domain.provisioning;
+package li.rajenlab.canto.framework.service.order;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public interface ProvisioningContextFactory<E> {
-    
+public class InvalidOrderStatusTransitionException extends Exception {
+
     /**
-     * Create a provisioning context
-     * @return
+     * Comment for <code>serialVersionUID</code>
      */
-    public E createContext();
+    private static final long serialVersionUID = 6293833681006585738L;
+    
+    public InvalidOrderStatusTransitionException(String message){
+        super(message);
+    }
 
 }

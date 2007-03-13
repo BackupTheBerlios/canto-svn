@@ -8,24 +8,29 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.service.process;
+package li.rajenlab.canto.framework.domain.provisioning;
 
-import li.rajenlab.canto.framework.domain.order.OrderProcessState;
+import li.rajenlab.common.lang.StringValuedEnum;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public interface OrderProcessService {
+public enum ProvisioningStatus implements StringValuedEnum {
     
+    WAIT_FOR_NEXT_STEP("WAIT_FOR_NEXT_STEP");
+
+    private String status_;
+    
+    private ProvisioningStatus(String status){
+        this.status_ = status;
+        
+    }
     /**
-     * provisionOrder  order
-     * @param order
-     * @return
+     * @see li.rajenlab.common.lang.StringValuedEnum#getValue()
      */
-    public OrderProcessState scheduleProvisionOrder(String orderId, boolean immediateFlag);
-    
- 
-    
-    
+    public String getValue() {
+        return this.status_;
+    }
+
 }
