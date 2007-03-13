@@ -14,9 +14,9 @@ package li.rajenlab.canto.framework.service.uid;
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public interface OrderUIDService {
+public interface UIDService {
     
     
-    public abstract String generate();
+    public abstract String generate(UIDType uidType);
 
 }

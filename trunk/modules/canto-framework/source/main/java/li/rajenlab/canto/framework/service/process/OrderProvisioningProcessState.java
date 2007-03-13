@@ -8,7 +8,7 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.domain.provisioning;
+package li.rajenlab.canto.framework.service.process;
 
 import li.rajenlab.common.lang.StringValuedEnum;
 
@@ -16,23 +16,27 @@ import li.rajenlab.common.lang.StringValuedEnum;
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public enum ProvisioningStatus implements StringValuedEnum {
+public enum OrderProvisioningProcessState implements StringValuedEnum {
     
-    WAIT_NEXT_PROVISIONING_STEP("WAIT_NEXT_PROVISIONING_STEP"),
-    IN_PROVISIONING_STEP("IN_PROVISIONING_STEP"),
-    PROVISIONED("PROVISIONED");
-
-    private String status_;
+    INITIAL("INITIAL"),
+    ORDER_PROVISIONING_STEP_PENDING("ORDER_PROVISIONING_STEP_PENDING"),
+    ORDER_PROVISIONING_STEP_EXECUTED("ORDER_PROVISIONING_STEP_EXECUTED"),
+    FINAL("FINAL"),
+    PROCESS_URL_ORDER_PROVISIONING_STEP("urn://OrderProvisioningStepProcess"),
+    METHOD_PROCESS_ORDER_PROVISIONING_STEP("processOrderProvisioningStep"),
+    VARIABLE_RETRIES("retries");
     
-    private ProvisioningStatus(String status){
-        this.status_ = status;
-        
+    private String processState_;
+    
+    private OrderProvisioningProcessState(String processState){
+        this.processState_ = processState;
     }
+
     /**
      * @see li.rajenlab.common.lang.StringValuedEnum#getValue()
      */
     public String getValue() {
-        return this.status_;
+        return processState_;
     }
 
 }

@@ -8,7 +8,7 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.domain.provisioning;
+package li.rajenlab.canto.framework.process.orderprovisioning;
 
 import li.rajenlab.common.lang.StringValuedEnum;
 
@@ -16,23 +16,21 @@ import li.rajenlab.common.lang.StringValuedEnum;
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public enum ProvisioningStatus implements StringValuedEnum {
+public enum OrderProvisioningStateType implements StringValuedEnum {
     
-    WAIT_NEXT_PROVISIONING_STEP("WAIT_NEXT_PROVISIONING_STEP"),
-    IN_PROVISIONING_STEP("IN_PROVISIONING_STEP"),
-    PROVISIONED("PROVISIONED");
+    WAIT_NEXT_PROV_STEP_SCHEDULER("WAIT_NEXT_PROV_STEP_SCHEDULER"),
+    VARIABLE_PARAM_RETRY_COUNTER("VARIABLE_PARAM_RETRY_COUNTER");
 
-    private String status_;
+    private String stateType_;
     
-    private ProvisioningStatus(String status){
-        this.status_ = status;
-        
+    private OrderProvisioningStateType(String stateType){
+        this.stateType_ = stateType;
     }
     /**
      * @see li.rajenlab.common.lang.StringValuedEnum#getValue()
      */
     public String getValue() {
-        return this.status_;
+        return stateType_;
     }
 
 }

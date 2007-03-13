@@ -8,25 +8,18 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.dao.uid;
+package li.rajenlab.canto.framework.service.provisioning;
 
+import li.rajenlab.canto.framework.domain.order.OrderType;
+import li.rajenlab.canto.framework.domain.provisioning.ProvisioningTemplate;
 
 /**
- * Interface definition of the persistence layer of the UID
- * @author  RothR (raphael.roth@sunrise.net)
+ * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public interface UidDao {
+public interface ProvisioningTemplateResolver {
     
-    /**
-     * Get next Uid.
-     * @return the next Uid
-     */
-    public abstract long getNextUid();
     
-    /**
-     * Get next Uid with a prefix
-     * @return the next Uid
-     */
-    public abstract String getNextUidWithPrefix();
+    public ProvisioningTemplate resolveProvisiongTemplate(OrderType orderType);
+
 }

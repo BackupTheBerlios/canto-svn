@@ -8,25 +8,22 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.dao.uid;
+package li.rajenlab.canto.framework.process.orderprovisioning.provstep;
 
+import li.rajenlab.canto.framework.service.process.OrderProvisioningProcessState;
+import li.rajenlab.common.service.process.state.BaseState;
 
 /**
- * Interface definition of the persistence layer of the UID
- * @author  RothR (raphael.roth@sunrise.net)
+ * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public interface UidDao {
-    
+public class FinalState extends BaseState {
+
     /**
-     * Get next Uid.
-     * @return the next Uid
+     * @see li.rajenlab.common.service.process.state.State#getName()
      */
-    public abstract long getNextUid();
-    
-    /**
-     * Get next Uid with a prefix
-     * @return the next Uid
-     */
-    public abstract String getNextUidWithPrefix();
+    public String getName() {
+        return OrderProvisioningProcessState.FINAL.getValue();
+    }
+
 }

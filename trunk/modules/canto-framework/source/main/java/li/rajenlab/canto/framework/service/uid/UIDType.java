@@ -8,25 +8,15 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.dao.uid;
-
+package li.rajenlab.canto.framework.service.uid;
 
 /**
- * Interface definition of the persistence layer of the UID
- * @author  RothR (raphael.roth@sunrise.net)
+ * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public interface UidDao {
+public enum UIDType {
     
-    /**
-     * Get next Uid.
-     * @return the next Uid
-     */
-    public abstract long getNextUid();
-    
-    /**
-     * Get next Uid with a prefix
-     * @return the next Uid
-     */
-    public abstract String getNextUidWithPrefix();
+    ORDER,
+    PROVISIONING;
+
 }

@@ -8,25 +8,22 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.dao.uid;
-
+package li.rajenlab.canto.framework.domain.provisioning;
 
 /**
- * Interface definition of the persistence layer of the UID
- * @author  RothR (raphael.roth@sunrise.net)
+ * Definition of a provision action of provision step. The action is invoked
+ * by using the action name defined {@link ProvisioningStep#getProvisioningActionName()}
+ * by reflection
+ * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public interface UidDao {
+public interface ProvisioningAction {
+    
     
     /**
-     * Get next Uid.
-     * @return the next Uid
+     * Peform the action
+     *
      */
-    public abstract long getNextUid();
-    
-    /**
-     * Get next Uid with a prefix
-     * @return the next Uid
-     */
-    public abstract String getNextUidWithPrefix();
+    public void doAction(ProvisioningActionContext context);
+
 }

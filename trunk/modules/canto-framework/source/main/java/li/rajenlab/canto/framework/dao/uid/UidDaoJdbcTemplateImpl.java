@@ -8,18 +8,17 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.service.uid;
-
-import li.rajenlab.canto.framework.dao.uid.UidDao;
+package li.rajenlab.canto.framework.dao.uid;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.jdbc.support.incrementer.DataFieldMaxValueIncrementer;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class OrderUIDServiceImpl implements OrderUIDService {
+public class UidDaoJdbcTemplateImpl implements UidDao {
 
     //-------------------------------------------------------------------------
     //PUBLIC CONSTANTS
@@ -28,8 +27,11 @@ public class OrderUIDServiceImpl implements OrderUIDService {
     //-------------------------------------------------------------------------
     //PROTECTED AND PRIVATE VARIABLES AND CONSTANTS
     //-------------------------------------------------------------------------
-    protected static Log log = LogFactory.getLog(OrderUIDServiceImpl.class);
-    private UidDao orderUidDao_;
+    protected static Log log = LogFactory.getLog(UidDaoJdbcTemplateImpl.class);
+
+    private DataFieldMaxValueIncrementer incrementer_;
+    private String prefix_ = "U";
+   
     //-------------------------------------------------------------------------
     //CONSTRUCTORS
     //-------------------------------------------------------------------------
@@ -38,31 +40,54 @@ public class OrderUIDServiceImpl implements OrderUIDService {
     //PUBLIC METHODS
     //-------------------------------------------------------------------------
     /**
-     * @see li.rajenlab.canto.framework.service.uid.OrderUIDService#generate()
+     * @see li.rajenlab.canto.framework.dao.uid.UidDao#getNextUid()
      */
-    public String generate() {
-        int uid = getOrderUidDao().getNextUid();
-        return "O"+uid;
+    public long getNextUid() {
+        return incrementer_.nextLongValue();
     }
+    
+    /**
+     * @see li.rajenlab.canto.framework.dao.uid.UidDao#getNextUidWithPrefix()
+     */
+    public String getNextUidWithPrefix() {
+        return getPrefix()!=null ? getPrefix() : "U" + getNextUid();
+    }
+
     //-------------------------------------------------------------------------
     //PROTECTED METHODS
     //-------------------------------------------------------------------------
 
+ 
+
     /**
-     * @return the orderUidDao
+     * @return the incrementer
      */
-    public UidDao getOrderUidDao() {
-        return this.orderUidDao_;
+    public DataFieldMaxValueIncrementer getIncrementer() {
+        return this.incrementer_;
     }
 
     /**
-     * @param orderUidDao the orderUidDao to set
+     * @param incrementer the incrementer to set
      */
-    public void setOrderUidDao(UidDao orderUidDao) {
-        this.orderUidDao_ = orderUidDao;
+    public void setIncrementer(DataFieldMaxValueIncrementer incrementer) {
+        this.incrementer_ = incrementer;
     }
 
-    //-------------------------------------------------------------------------
+    /**
+     * @return the prefix
+     */
+    public String getPrefix() {
+        return this.prefix_;
+    }
+
+    /**
+     * @param prefix the prefix to set
+     */
+    public void setPrefix(String prefix) {
+        this.prefix_ = prefix;
+    }
+
+        //-------------------------------------------------------------------------
     //PRIVATE METHODS
     //-------------------------------------------------------------------------
 
@@ -70,5 +95,6 @@ public class OrderUIDServiceImpl implements OrderUIDService {
     //PUBLIC ACCESSORS (GETTERS / SETTERS)
     //-------------------------------------------------------------------------
     
+   
 
 }

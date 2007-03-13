@@ -14,7 +14,8 @@ import li.rajenlab.canto.framework.dao.order.OrderDao;
 import li.rajenlab.canto.framework.domain.order.Order;
 import li.rajenlab.canto.framework.domain.order.OrderNote;
 import li.rajenlab.canto.framework.domain.order.OrderStatus;
-import li.rajenlab.canto.framework.service.uid.OrderUIDService;
+import li.rajenlab.canto.framework.service.uid.UIDService;
+import li.rajenlab.canto.framework.service.uid.UIDType;
 import li.rajenlab.canto.framework.support.OrderValidator;
 import li.rajenlab.common.dao.EntityNotFoundException;
 import li.rajenlab.common.service.security.AuthenticatedService;
@@ -38,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
     //-------------------------------------------------------------------------
     protected static Log log = LogFactory.getLog(OrderServiceImpl.class);
     private OrderDao orderDao_;
-    private OrderUIDService orderUIDService_;
+    private UIDService orderUIDService_;
     private OrderValidator orderValidator_;
     private AuthenticatedService authenticatedService_;
     //-------------------------------------------------------------------------
@@ -64,7 +65,7 @@ public class OrderServiceImpl implements OrderService {
         getOrderValidator().validate(order);
         
         // generate the order id
-        order.setOrderId(getOrderUIDService().generate());
+        order.setOrderId(getOrderUIDService().generate(UIDType.ORDER));
         order.setOrderStatus(OrderStatus.NEW);
         
         Order newOrder = new Order();
@@ -193,14 +194,14 @@ public class OrderServiceImpl implements OrderService {
        /**
      * @return the orderUIDService
      */
-    public OrderUIDService getOrderUIDService() {
+    public UIDService getOrderUIDService() {
         return this.orderUIDService_;
     }
 
     /**
      * @param orderUIDService the orderUIDService to set
      */
-    public void setOrderUIDService(OrderUIDService orderUIDService) {
+    public void setOrderUIDService(UIDService orderUIDService) {
         this.orderUIDService_ = orderUIDService;
     }
 
