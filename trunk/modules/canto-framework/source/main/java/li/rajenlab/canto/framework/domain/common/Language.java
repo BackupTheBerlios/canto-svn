@@ -8,7 +8,7 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.domain.channel;
+package li.rajenlab.canto.framework.domain.common;
 
 import li.rajenlab.common.lang.StringValuedEnum;
 
@@ -16,15 +16,23 @@ import li.rajenlab.common.lang.StringValuedEnum;
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public enum ChannelType implements StringValuedEnum {
-    ;
+public enum Language implements StringValuedEnum {
+    
+    EN("EN"),
+    DE("DE"),
+    FR("FR"),
+    IT("IT");
 
+    private String language_;
+    
+    private Language(String language){
+        this.language_ = language;
+    }
     /**
      * @see li.rajenlab.common.lang.StringValuedEnum#getValue()
      */
     public String getValue() {
-        // TODO Auto-generated method stub
-        return null;
+        return language_;
     }
 
 }
