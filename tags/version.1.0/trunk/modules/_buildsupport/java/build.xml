@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+
+<project name="java-build"  basedir="..">
+	<!-- for files which extend this build file the property 
+	     build.support must already be set if different from .
+	-->
+	<property name="build.support" value="${basedir}"/>
+	<import file="${build.support}/root/build.xml"/>
+	<property file="${build.support}/java/build.properties"/>
+
+	<!-- properties which are only set in the build -->
+	<available file="${src.main.wsdl}" property="src.main.wsdl.exists"/>
+	<available file="${src.main.castor}" property="src.main.castor.exists"/>
+
+	<!-- filesets/paths which are only set to default in here but should be overridden as necessary -->
+	<path id="compile.classpath"/>
+	
+	<!-- extend targets -->
+	<target name="-build"/>
+
+	<target name="-compile" depends="-generate.sources">
+		<antcall target="-compile.pre"/>
+		<pathconvert property="compile.classpath.echo" targetos="unix">
+			<path refid="compile.classpath"/>
+		</pathconvert>
+		<echo level="debug">COMPILE CLASSPATH : ${compile.classpath.echo}</echo>
+		<mkdir dir="${target.classes}"/>
+		<mkdir dir="${target.generated.java}"/>
+		<javac destdir="${target.classes}" debug="true">
+			<src path="${src.main.java}"/>
+			<src path="${target.generated.java}"/>
+			<classpath refid="compile.classpath"/>
+		</javac>
+		<copy todir="${target.classes}">
+			<fileset dir="${src.main.java}">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+		
+		<antcall target="-compile.post"/>
+	</target>
+	
+	<target name="-compile.pre"/>
+	<target name="-compile.post"/>
+	
+	<!-- can be extended in a build to generate sources -->
+	<target name="-generate.sources" depends="-generate.sources.wsdl,-generate.sources.castor"/>
+
+	<target name="-generate.sources.wsdl" if="src.main.wsdl.exists">
+		<delete dir="${target.generated.java}"/>
+		<mkdir dir="${target.generated.java}"/>
+		<foreach target="-generate.sources.wsdl.file" param="generate.sources.wsdl.file">
+			<path>
+				<fileset dir="${src.main.wsdl}" >
+					<include name="**/*.wsdl"/>
+				</fileset>
+			</path>
+		</foreach>
+	</target>
+
+	<target name="-generate.sources.wsdl.file">
+		<!-- in the default behaviour there must be a mapping 
+		     file with the same name as the wsdl in the same directory,
+		     with .mapping appended
+		-->
+		<echo level="debug" message="generate.sources.wsdl for file ${generate.sources.wsdl.file} using mapping file ${generate.sources.wsdl.file}.mapping"/>
+		
+	</target>
+
+	<target name="-generate.sources.castor" if="src.main.castor.exists">
+		<mkdir dir="${target.generated.java}"/>
+		<foreach target="-generate.sources.castor.file" param="generate.sources.castor.file">
+			<path>
+				<fileset dir="${src.main.castor}" >
+					<include name="**/*.xsd"/>
+				</fileset>
+			</path>
+		</foreach>
+	</target>
+
+	<target name="-generate.sources.castor.file">
+		<!-- in the default behaviour there must be a mapping 
+		     file with the same name as the wsdl in the same directory,
+		     with .mapping appended
+		-->
+		<echo level="debug" message="generate.sources.castor for file ${generate.sources.castor.file} using mapping file ${generate.sources.castor.file}.mapping"/>
+	    
+	    <path id="castor.build.path">
+	        <pathelement location="${lib}/xml/xercesImpl-2.6.2.jar"/>
+	        <pathelement location="${lib}/castor/castor-1.0.3.jar"/>
+	        <pathelement location="${lib}/castor/castor-1.0.3-srcgen-ant-task.jar"/>
+	        <pathelement location="${lib}/commons/commons-logging-1.0.4.jar"/>
+	    </path>
+
+		<taskdef name="castor-srcgen"
+	                classname="org.exolab.castor.tools.ant.taskdefs.CastorSourceGenTask"
+	                classpathref="castor.build.path" />
+	    <castor-srcgen file="${generate.sources.castor.file}"
+	                      todir="${target.generated.java}"
+	                      bindingfile="${generate.sources.castor.file}.binding.xml"
+	                      types="j2"
+	                      warnings="false" />
+	    
+	</target>
+    
+    <target name="-generate.module.build.call">
+		<xmltask source="${module.build.file}" dest="${module.build.file}">
+			<insert path="/project/target[@name='-do.${ant.project.name}']">
+			    <![CDATA[ 
+				<ant-exec dir="$${basedir}/${ant.project.name}" target="module.$${selected.target}"/>
+			    ]]> 				
+			</insert>
+		</xmltask>
+	</target>
+	
+</project>

@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project name="librariesFileSet" default="default" basedir=".">
+	
+	<!-- property should be overridden by anyone using this lib build file -->
+	<property name="lib" value="${basedir}"/>
+	
+	<!-- define everything as patternsets relative to lib
+	     in this way they can be used in multiple filesets which relate to lib -->
+	<patternset id="commons.logging.patternset">
+        <include name="commons/commons-logging-1.0.4.jar"/> 
+	</patternset>
+	
+	<patternset id="xml.patternset">
+        <include name="xml/xmlParserAPIs-2.6.2.jar"/>
+	</patternset>
+	<patternset id="commons.patternset">
+		<patternset refid="commons.logging.patternset"/>
+        <include name="commons/commons-lang-2.1.jar"/>
+        <include name="commons/commons-beanutils-1.7.0.jar" /> 
+        <include name="commons/commons-digester-1.6.jar"/>
+        <include name="commons/commons-collections-3.2.jar"/>  
+        <include name="commons/commons-codec-1.3.jar"/> 
+        <include name="crypto/bcprov-jdk15-131.jar"/>
+	</patternset>
+
+	
+	<patternset id="hibernate.patternset">
+        <include name="dom4j/dom4j-1.6.1.jar"/>
+        <include name="ant/antlr-2.7.6rc1.jar"/>
+        <include name="hibernate/hibernate-3.2.2.jar"/>
+        <include name="ehcache/ehcache-1.2.4.jar"/>
+	</patternset>
+	
+	<patternset id="spring.patternset">
+        <include name="spring/spring-2.0.2.jar"/>
+		<include name="cglib/cglib-nodep-2.1_3.jar"/>
+		<include name="oro/oro-2.0.8.jar"/>
+        <include name="acegi/acegi-security-1.0.3.jar"/> 
+    </patternset>
+
+	
+	<patternset id="myfaces.patternset">
+	   <include name="myfaces/myfaces-api-1.1.5.jar"/>
+		<include name="myfaces/myfaces-impl-1.1.5.jar"/>
+	</patternset>
+	
+    <!-- JSTL taglibs from Jakarta -->
+	<patternset id="jstl.patternset">
+	    <include name="jstl/standard-1.1.2.jar"/>
+	    <include name="jstl/jstl-1.1.2.jar"/>
+	</patternset>
+	
+
+
+	<patternset id="xpath.patternset">
+		<include name="jaxen/jaxen-1.1-beta-8.jar"/>
+	</patternset>
+
+    
+	<patternset id="log4j.patternset">
+		<include name="log4j/log4j-1.2.13.jar"/>
+	</patternset>
+
+	<patternset id="castor.patternset">
+		<include name="castor/castor-1.0.3-xml.jar"/>
+	</patternset>
+	
+	
+	<patternset id="runtime.libs.patternset">
+		<patternset refid="xml.patternset"/>
+		<patternset refid="commons.patternset"/>
+		<patternset refid="hibernate.patternset"/>
+		<patternset refid="spring.patternset"/>
+		<patternset refid="jstl.patternset"/>
+		<patternset refid="xpath.patternset"/>
+		<patternset refid="castor.patternset"/>
+	</patternset>
+	
+	<patternset id="servletapi.patternset">
+        <include name="servlet/servlet-api-2.4.jar"/>
+        <include name="servlet/javax.servlet.jsp.jar"/>
+	</patternset>
+	<patternset id="jms.patternset">
+        <include name="jms/jms-1.1.jar"/>
+	</patternset>
+	<patternset id="mail.patternset">
+        <include name="javamail/javamail-1.0.jar"/>
+	</patternset>
+	<patternset id="junit.patternset">
+        <include name="junit/junit-3.8.1.jar"/>
+	</patternset>
+	<patternset id="xml.impl.patternset">
+        <include name="xml/xercesImpl-2.6.2.jar"/>
+	</patternset>
+	<patternset id="ejb.patternset">
+	        <include name="ejb/ejb-2.1.jar"/>
+		</patternset>
+	
+
+	<patternset id="runtime.provided.libs.patternset">
+		<patternset refid="servletapi.patternset"/>
+		<patternset refid="jms.patternset"/>
+		<patternset refid="mail.patternset"/>
+		<patternset refid="junit.patternset"/>
+		<patternset refid="xml.impl.patternset"/>
+		<patternset refid="ejb.patternset"/>
+	</patternset>
+
+	<fileset id="log4j.libs" dir="${lib}">
+        <patternset refid="log4j.patternset"/>
+	</fileset>
+
+	<fileset id="castor.libs" dir="${lib}">
+        <patternset refid="castor.patternset"/>
+	</fileset>
+    
+    <fileset id="commons.logging" dir="${lib}">
+        <patternset refid="commons.logging.patternset"/>
+	</fileset>
+
+    <!--  The runtime.libs are deployed to the applications WEB-INF/libs -->
+    <fileset id="runtime.libs" dir="${lib}">
+        <patternset refid="runtime.libs.patternset"/>
+	</fileset>
+    
+    <!-- 
+      The buildtime.libs are additional libaries required only during build time.
+      (e.g. Stub generators, Unit test classes, J2EE APIs. These libaries are
+      NOT deployed to the application server for run-time
+     -->
+    <fileset id="runtime.provided.libs" dir="${lib}">        
+    	<patternset refid="runtime.provided.libs.patternset"/>
+    </fileset>
+    
+    <!-- 
+      The testtime.libs are additional libaries required only during test time.
+      These libaries are NOT deployed to the application server for run-time
+     -->
+    <fileset id="testtime.libs" dir="${lib}">        
+        <include name="jaxen/jaxen-1.1-beta-4.jar"/>
+        <include name="spring/spring-mock-2.0.2.jar"/>
+        <include name="xml/xercesImpl-2.6.2.jar"/>
+    </fileset>
+
+	<!-- not actually used by our build scripts at the moment -->
+	
+    <!-- The default classpath used during build time. -->
+    <path id="buildtime.classpath">
+        <!-- external libs -->
+        <fileset refid="runtime.libs"/>
+        <!-- external libs -->
+        <fileset refid="runtime.provided.libs"/>
+    </path>
+<!--
+    <path id="testtime.classpath">
+        <fileset refid="runtime.libs"/>
+        <fileset refid="runtime.provided.libs"/>
+        <fileset refid="testtime.libs"/>
+        <pathelement path="${build.dir.java}"/>
+        <pathelement path="${build.dir.test}"/>
+    </path>
+-->
+    <target name="default"/>
+
+</project>

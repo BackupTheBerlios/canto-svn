@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<project name="jboss-server-build"  basedir="..">
+	<!-- for files which extend this build file the property 
+	     build.support must already be set if different from .
+	-->
+	<property name="build.support" value="${basedir}"/>
+	<import file="${build.support}/root/build.xml"/>
+	<property file="${build.support}/jboss-server/build.properties"/>
+	<import file="${lib}/build.xml"/>
+	
+	<!-- extend targets -->
+	<target name="-build" depends="-jboss.server.build"/>
+
+	<target name="-jboss.server.properties.load">
+		<property file="${configuration.file}"/>
+	</target>
+	
+	<target name="-jboss.server.build">
+			<antcall target="-jboss.server.build.pre"/>
+			
+			<delete dir="${target.jboss.home}"/>
+			<mkdir dir="${target.jboss.server}"/>
+			
+			<!-- copy the original server files to the build dir -->
+			<copy todir="${target.jboss.server}">
+				<fileset dir="${src.jboss.server.original}"/>
+			</copy>
+			
+			<!-- delete all directories which contain a .whack file in ${src.jboss.server.delete} -->
+			<copy todir="${target.jboss.server}" overwrite="true">
+				<fileset dir="${src.jboss.server.delete}">
+					<include name="**/.delete-dir"/>
+				</fileset>
+			</copy>
+			<for param="whack.file">
+				<path>
+					<fileset dir="${target.jboss.server}">
+						<include name="**/.delete-dir"/>
+					</fileset>
+				</path>
+				<sequential>
+					<echo level="debug">deleting directory of file @{whack.file}</echo>
+					<!-- note although whack file is not actually a directory this 
+					     statement resolves to the containing directory and deletes it -->
+					<delete dir="@{whack.file}/.."/>
+				</sequential>
+			</for>
+			
+			<!-- delete individual files based on ${src.jboss.server.delete} -->
+			<delete includeemptydirs="true">
+				<fileset dir="${target.jboss.server}">
+					<present targetdir="${src.jboss.server.delete}"/>
+				</fileset>
+			</delete>
+
+			<!-- copy new and modified text files (.xml and .property files), 
+			     replacing properties as needed -->
+			<copy todir="${target.jboss.server}" overwrite="true">
+				<fileset dir="${src.jboss.server.modified}">
+					<include name="**/*.xml"/>
+					<include name="**/*.properties"/>
+				</fileset>
+				<fileset dir="${src.jboss.server.new}">
+					<include name="**/*.xml"/>
+					<include name="**/*.properties"/>
+				</fileset>
+				<filterset filtersfile="${configuration.file}"/>
+			</copy>
+			<!-- copy all new and modified NON text files
+			     no replacing done during this copy -->
+			<copy todir="${target.jboss.server}" overwrite="true">
+				<fileset dir="${src.jboss.server.modified}">
+					<exclude name="**/*.xml"/>
+					<exclude name="**/*.properties"/>
+				</fileset>
+				<fileset dir="${src.jboss.server.new}">
+					<exclude name="**/*.xml"/>
+					<exclude name="**/*.properties"/>
+				</fileset>
+			</copy>
+
+			<copy todir="${target.jboss.server}/lib" flatten="true" overwrite="true">
+				<fileset refid="runtime.libs"/>
+			</copy>
+			<antcall target="-jboss.server.build.post"/>
+		</target>
+	<target name="-jboss.server.build.pre"/>
+	<target name="-jboss.server.build.post"/>
+	
+	<target name="-deploy" depends="-jboss.server.deploy"/>
+	<target name="-jboss.server.deploy">
+		<antcall target="-jboss.server.deploy.pre"/>
+		<copy todir="${jboss.server}">
+			<fileset dir="${target.jboss.server}"/>
+		</copy>
+		<echo level="info" message="correcting permissions in ${jboss.server}/conf"/>
+		<chmod perm="400" dir="${jboss.server}/conf" includes="**/*.key"/>
+		<antcall target="-jboss.server.deploy.post"/>
+	</target>
+	<target name="-jboss.server.deploy.pre"/>
+	<target name="-jboss.server.deploy.post"/>
+
+	
+	<target name="-undeploy" depends="-jboss.server.undeploy"/>
+
+	<target name="-jboss.server.undeploy">
+		<echo level="info">deleting jboss server ${jboss.server}</echo>
+		<delete dir="${jboss.server}"/>
+	</target>
+	
+    <target name="-generate.module.build.call">
+		<xmltask source="${module.build.file}" dest="${module.build.file}">
+			<insert path="/project/target[@name='-do.${ant.project.name}']">
+			    <![CDATA[ 
+				<ant-exec dir="$${basedir}/${ant.project.name}" target="module.$${selected.target}"/>
+			    ]]> 				
+			</insert>
+		</xmltask>
+	</target>
+
+</project>
