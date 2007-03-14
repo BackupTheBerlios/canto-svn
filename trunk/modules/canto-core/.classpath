@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="/thirdparty/ejb/ejb-2.1.jar"/>
 	<classpathentry kind="lib" path="/thirdparty/castor/castor-1.0.3.jar"/>
 	<classpathentry kind="lib" path="/thirdparty/castor/castor-1.0.3-xml.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/rajenlab-common"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
