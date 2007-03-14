@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- ...........................................................................
+ Poa Mapping File 
+
+ $LastChangedBy: laenzlinger $
+ $LastChangedRevision: 192890 $
+ $LastChangedDate: 2005-07-14 22:21:56 +0200 (Thu, 14 Jul 2005) $
+ $HeadURL: http://pkg-svn1/itcrap/3_Code/ec/branches/R12/modules/vobb/src/conf/java/sunrise/vobb/dao/order.hbm.xml $
+ 
+ Copyright: (c) TDC Switzerland AG 2005
+............................................................................ -->
+
+<hibernate-mapping package="li.rajenlab.canto.core.domain.salary">
+
+  <class name="SalaryRange" table="SALARY_RANGE">
+  
+	<!-- Entity mapping -->
+    <id name="id" column="ID" type="long">
+      <generator class="native"/>
+    </id>
+    <property name="creationTime" type="timestamp">
+      <column name="CREATION_TIME"/>
+    </property>
+    <property name="changeTime" type="timestamp">
+      <column name="CHANGE_TIME"/>
+    </property>
+    
+    <!-- Property mapping -->
+    <property name="name" length="100">
+    	<column name="name"/>
+    </property>
+    <property name="salaryRangeId">
+        <column name="CODE" not-null="true" unique="true"/>
+    </property>
+    <property name="lowerBound">
+       <column name="LOWER_BOUND" not-null="true"/>
+    </property>
+    <property name="upperBound">
+      <column name="UPPER_BOUND" not-null="true"/>
+    </property>
+
+  </class>
+    
+</hibernate-mapping>   
