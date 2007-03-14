@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="li.rajenlab.canto.common.domain.price">
+
+  <class name="PriceList" table="CANTO_PRICELIST">
+  
+	<!-- Entity mapping -->
+    <id name="id" column="ID" type="long">
+      <generator class="native"/>
+    </id>
+    <property name="creationTime" type="timestamp">
+      <column name="CREATION_TIME"/>
+    </property>
+    <property name="changeTime" type="timestamp">
+      <column name="CHANGE_TIME"/>
+    </property>
+    
+    <!-- Property mapping -->
+    <property name="priceListId">
+    	<column name="PRICELIST_UID" unique="true" not-null="true"/>
+    </property>
+     <property name="introductionDate" type="timestamp">
+      <column name="START_TIME"/>
+    </property>
+       <property name="expirationDate" type="timestamp">
+      <column name="EXPIRY_TIME"/>
+    </property>
+    <property name="name" length="100">
+       <column name="NAME"/>
+    </property>
+    <property name="default">
+       <column name="IS_DEFAULT"/>
+    </property>
+  
+  </class>
+    
+</hibernate-mapping>   

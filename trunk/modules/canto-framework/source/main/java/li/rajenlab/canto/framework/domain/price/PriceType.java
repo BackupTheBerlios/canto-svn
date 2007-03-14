@@ -8,37 +8,29 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.domain.account;
+package li.rajenlab.canto.framework.domain.price;
 
-import li.rajenlab.common.domain.AbstractEntity;
+import li.rajenlab.common.lang.StringValuedEnum;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class AccountType extends AbstractEntity {
+public enum PriceType implements StringValuedEnum {
     
-    
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
-    private static final long serialVersionUID = 6664342313625019195L;
-    private String name_;
+    RECURRING("RECURRING"),
+    ONE_TIME("ONE_TIME");
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return this.name_;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name_ = name;
-    }
+    private String priceType_;
     
-    
+    private PriceType(String priceType){
+        this.priceType_ = priceType;
+    }
+    /**
+     * @see li.rajenlab.common.lang.StringValuedEnum#getValue()
+     */
+    public String getValue() {
+        return priceType_;
+    }
 
 }

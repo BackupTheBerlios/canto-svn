@@ -8,36 +8,39 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.domain.account;
+package li.rajenlab.canto.framework.domain.subscription;
 
-import li.rajenlab.common.domain.AbstractEntity;
+import li.rajenlab.canto.framework.domain.product.ChannelPackage;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class AccountType extends AbstractEntity {
-    
-    
+public class PackageSubscription extends AbstractSubscription {
+
     /**
      * Comment for <code>serialVersionUID</code>
      */
-    private static final long serialVersionUID = 6664342313625019195L;
-    private String name_;
+    private static final long serialVersionUID = -7203860604795731314L;
+    
+    private ChannelPackage channelPackage_;
+    
 
     /**
-     * @return the name
+     * @return the channelPackage
      */
-    public String getName() {
-        return this.name_;
+    public ChannelPackage getChannelPackage() {
+        return this.channelPackage_;
     }
 
     /**
-     * @param name the name to set
+     * @param channelPackage the channelPackage to set
      */
-    public void setName(String name) {
-        this.name_ = name;
+    public void setChannelPackage(ChannelPackage channelPackage) {
+        this.channelPackage_ = channelPackage;
     }
+    
+    
     
     
 

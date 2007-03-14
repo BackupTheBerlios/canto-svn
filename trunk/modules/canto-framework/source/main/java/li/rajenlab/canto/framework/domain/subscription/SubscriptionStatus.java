@@ -8,35 +8,31 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.framework.domain.account;
+package li.rajenlab.canto.framework.domain.subscription;
 
-import li.rajenlab.common.domain.AbstractEntity;
+import li.rajenlab.common.lang.StringValuedEnum;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class AccountType extends AbstractEntity {
+public enum SubscriptionStatus implements StringValuedEnum {
     
-    
-    /**
-     * Comment for <code>serialVersionUID</code>
-     */
-    private static final long serialVersionUID = 6664342313625019195L;
-    private String name_;
+    ACTIVE("ACTIVE"),
+    SUSPENDEND("SUSPENDED"),
+    CEASED("CEASED");
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return this.name_;
+    private String status_;
+    
+    private SubscriptionStatus(String status){
+        this.status_ = status;
     }
-
+    
     /**
-     * @param name the name to set
+     * @see li.rajenlab.common.lang.StringValuedEnum#getValue()
      */
-    public void setName(String name) {
-        this.name_ = name;
+    public String getValue() {
+        return status_;
     }
     
     

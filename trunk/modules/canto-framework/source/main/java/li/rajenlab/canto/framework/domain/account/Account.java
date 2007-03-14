@@ -29,7 +29,7 @@ public class Account extends AbstractEntity {
     private Contact billingContact_;
     private Contact mailingContact_;
     private AccountStatus status_ = AccountStatus.NEW;
-    private AccountType type_ = AccountType.PRIVATE;
+    private AccountType type_ ;
     
     /**
      * @return the accountId

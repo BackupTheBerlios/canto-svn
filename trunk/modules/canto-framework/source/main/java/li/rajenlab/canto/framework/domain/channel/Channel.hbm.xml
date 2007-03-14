@@ -3,9 +3,9 @@
     "-//Hibernate/Hibernate Mapping DTD//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="li.rajenlab.canto.common.domain.account">
+<hibernate-mapping package="li.rajenlab.canto.common.domain.channel">
 
-  <class name="Account" table="CANTO_ACCOUNT">
+  <class name="Channel" table="CANTO_CHANNEL">
   
 	<!-- Entity mapping -->
     <id name="id" column="ID" type="long">
@@ -19,13 +19,19 @@
     </property>
     
     <!-- Property mapping -->
-    <property name="accountId">
-    	<column name="ACCOUNT_UID" unique="true" not-null="true"/>
+    <property name="channelId">
+    	<column name="CHANNEL_UID" unique="true" not-null="true"/>
     </property>
-       <property name="status">
-       <column name="ACCOUNT_STATUS"/>
+       <property name="channelStatus">
+       <column name="CHANNEL_STATUS"/>
        <type name="li.rajenlab.common.hibernate.type.StringValuedEnumType">
-         <param name="enumClass">li.rajenlab.canto.framework.domain.account.AccountStatus</param>
+         <param name="enumClass">li.rajenlab.canto.framework.domain.channel.ChannelStatus</param>
+       </type>
+    </property>
+         <property name="channelMedia">
+       <column name="CHANNEL_MEDIA"/>
+       <type name="li.rajenlab.common.hibernate.type.StringValuedEnumType">
+         <param name="enumClass">li.rajenlab.canto.framework.domain.channel.ChannelMedia</param>
        </type>
     </property>
     

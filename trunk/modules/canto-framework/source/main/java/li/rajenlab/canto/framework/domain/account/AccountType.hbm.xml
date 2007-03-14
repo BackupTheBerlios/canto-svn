@@ -5,7 +5,7 @@
 
 <hibernate-mapping package="li.rajenlab.canto.common.domain.account">
 
-  <class name="Account" table="CANTO_ACCOUNT">
+  <class name="AccountType" table="CANTO_ACCOUNT_TYPE">
   
 	<!-- Entity mapping -->
     <id name="id" column="ID" type="long">
@@ -19,20 +19,9 @@
     </property>
     
     <!-- Property mapping -->
-    <property name="accountId">
-    	<column name="ACCOUNT_UID" unique="true" not-null="true"/>
+    <property name="name">
+    	<column name="ACCOUNT_TYPE" unique="true" not-null="true"/>
     </property>
-       <property name="status">
-       <column name="ACCOUNT_STATUS"/>
-       <type name="li.rajenlab.common.hibernate.type.StringValuedEnumType">
-         <param name="enumClass">li.rajenlab.canto.framework.domain.account.AccountStatus</param>
-       </type>
-    </property>
-    
-    <many-to-one name="legalContact" column="LEGAL_CONTACT_ID"/> 
-	<many-to-one name="billingContact" column="BILLING_CONTACT_ID"/> 
-	<many-to-one name="mailingContact" column="MAILING_CONTACT_ID"/> 
-	<many-to-one name="type" column="ACCOUNT_TYPE"/>
   
   </class>
     
