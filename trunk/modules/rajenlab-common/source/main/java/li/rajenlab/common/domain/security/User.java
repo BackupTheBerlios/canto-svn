@@ -60,6 +60,26 @@ public class User extends AbstractEntity implements UserDetails {
         
         externalAccessRights_.add(accessRights);
     }
+    
+    public void addAccessRights(AccessRights accessRights){
+        if (accessRights_ ==null){
+            accessRights_ = new Vector<AccessRights>();
+        }
+        accessRights_.add(accessRights);
+    }
+    
+    public void removeExternalAccessRights(AccessRights accessRights){
+        if (externalAccessRights_ != null){
+            externalAccessRights_.remove(accessRights);
+        }
+    }
+    
+    public void removeAccessRights(AccessRights accessRights){
+        if (accessRights_ !=null){
+            accessRights_.remove(accessRights);
+        }
+    
+    }
 
     /**
      * @see org.acegisecurity.userdetails.UserDetails#getPassword()
