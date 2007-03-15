@@ -22,10 +22,8 @@ import li.rajenlab.common.lang.StringValuedEnum;
 public enum UserStatus implements StringValuedEnum {
     
     
-    NEW("new"), 
     ACTIVE("active"), 
     BLOCKED("blocked"),
-    SUSPENDED("suspended"),
     DELETED("deleted");
     
     
