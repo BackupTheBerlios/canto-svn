@@ -11,6 +11,7 @@
 package li.rajenlab.common.dao.role;
 
 import li.rajenlab.common.dao.SimpleDao;
+import li.rajenlab.common.domain.security.Role;
 
 /**
  * @author  raph (raph@rajenlab.li)
