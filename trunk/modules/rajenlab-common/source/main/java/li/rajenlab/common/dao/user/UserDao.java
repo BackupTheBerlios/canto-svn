@@ -10,6 +10,8 @@
 
 package li.rajenlab.common.dao.user;
 
+
+import org.acegisecurity.userdetails.UserDetails;
 import org.acegisecurity.userdetails.UserDetailsService;
 
 /**
@@ -17,5 +19,8 @@ import org.acegisecurity.userdetails.UserDetailsService;
  * @version $Id$
  */
 public interface UserDao extends UserDetailsService {
+    
+    
+    public void persists(UserDetails user);
 
 }

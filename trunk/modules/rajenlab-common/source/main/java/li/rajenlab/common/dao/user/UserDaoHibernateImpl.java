@@ -60,13 +60,23 @@ public class UserDaoHibernateImpl
             throw new UsernameNotFoundException("no User ["+pUsername+"] found");
         } 
         
-        return (User)users.get(0);
+        return (UserDetails)users.get(0);
         
      
     }
+    
+    
     //-------------------------------------------------------------------------
     //PROTECTED METHODS
     //-------------------------------------------------------------------------
+
+    /**
+     * @see li.rajenlab.common.dao.user.UserDao#persists(org.acegisecurity.userdetails.UserDetails)
+     */
+    public void persists(UserDetails user) {
+        getHibernateTemplate().persist(user);
+    }
+
 
     /**
      * @return the userClass
