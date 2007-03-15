@@ -10,6 +10,8 @@
 
 package li.rajenlab.common.support.validation;
 
+import org.springframework.validation.BindException;
+
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
@@ -17,10 +19,10 @@ package li.rajenlab.common.support.validation;
 public interface Validator<E> {
     
     /**
-     * Validate an object
+     * validate
+     * @param errors
      * @param object
-     * @throws ValidationException
      */
-    public void validate(E object) throws ValidationException;
+    public void validate(BindException errors, E object);
 
 }
