@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="li.rajenlab.canto.core.domain.crm">
+
+  <class name="Contact" table="CONTACT">
+  	
+ 	<id name="id" column="ID" type="long">
+      <generator class="native"/>
+    </id>
+    <version column="VERSION" name="version"/>
+    <property name="creationTime" type="timestamp">
+      <column name="CREATION_TIME"/>
+    </property>
+    <property name="changeTime" type="timestamp">
+      <column name="CHANGE_TIME"/>
+    </property>
+  
+    <!-- Property mapping -->
+	<property name="city" not-null="true" length="150">
+      <column name="CITY"/>
+    </property>
+    <property name="zip" not-null="true" length="20">
+      <column name="ZIP"/>
+    </property>
+    <property name="streetNr" length="10">
+      <column name="STREET"/>
+    </property>
+    <property name="street" length="100">
+      <column name="STREET"/>
+    </property>
+    <property name="pobox" length="10">
+      <column name="POBOX"/>
+    </property>
+    <property name="mobilePhoneNumber" length="14">
+      <column name="MOBILE_PHONE"/>
+    </property>
+     <property name="phoneNumber" length="14">
+      <column name="PHONE"/>
+    </property>
+     <property name="directPhoneNumber" length="14">
+      <column name="DIRECT_PHONE"/>
+    </property>
+     <property name="faxNumber" length="14">
+      <column name="FAX_PHONE"/>
+    </property> 
+    <property name="email" length="50">
+      <column name="EMAIL"/>
+    </property>
+    <property name="lastName" length="150">
+      <column name="LASTNAME"/>
+    </property>
+    <property name="firstName" length="150">
+      <column name="FIRSTNAME"/>
+    </property>
+    <property name="companyName" length="150">
+      <column name="COMPANYNAME"/>
+    </property>
+    <property name="language">
+       <column name="LANGUAGE" not-null="true"/>
+       <type name="li.rajenlab.common.hibernate.type.StringValuedEnumType">
+         <param name="enumClass">li.rajenlab.canto.core.domain.crm.Language</param>
+       </type>
+    </property>
+        <property name="salutation">
+       <column name="SALUTATION" />
+       <type name="li.rajenlab.common.hibernate.type.StringValuedEnumType">
+         <param name="enumClass">li.rajenlab.canto.core.domain.crm.Salutation</param>
+       </type>
+    </property>
+    
+  </class>
+    
+</hibernate-mapping>  
