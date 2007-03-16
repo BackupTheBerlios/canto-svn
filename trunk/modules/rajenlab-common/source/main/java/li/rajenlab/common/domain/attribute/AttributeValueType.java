@@ -8,29 +8,32 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.common.domain;
+package li.rajenlab.common.domain.attribute;
 
+import li.rajenlab.common.lang.StringValuedEnum;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public abstract class AbstractLocalEntity extends AbstractEntity {
+public enum AttributeValueType implements StringValuedEnum {
     
-    private String localeKey_;
+    TEXT("TEXT"),
+    NUMBER("NUMBER"),
+    DECIMAL("DECIMAL"),
+    DATE("DATE"),
+    LIST("LIST");
 
+    private String type_;
     
-    /**
-     * @return the localeKey
-     */
-    public String getLocaleKey() {
-        return this.localeKey_;
+    private AttributeValueType(String type){
+        this.type_ = type;
     }
     /**
-     * @param localeKey the localeKey to set
+     * @see li.rajenlab.common.lang.StringValuedEnum#getValue()
      */
-    public void setLocaleKey(String localeKey) {
-        this.localeKey_ = localeKey;
+    public String getValue() {
+        return type_;
     }
-   
+
 }
