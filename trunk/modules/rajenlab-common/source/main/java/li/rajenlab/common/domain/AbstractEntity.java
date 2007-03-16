@@ -25,6 +25,8 @@ public abstract class AbstractEntity implements Serializable {
     private Serializable id_;
     private Date createTime_;
     private Date changeTime_;
+    private String ouid_;
+    private String name_;
     
     /**
      * @return the createTime
@@ -61,6 +63,30 @@ public abstract class AbstractEntity implements Serializable {
      */
     public void setChangeTime(Date changeTime) {
         this.changeTime_ = changeTime;
+    }
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return this.name_;
+    }
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name_ = name;
+    }
+    /**
+     * @return the ouid
+     */
+    public String getOuid() {
+        return this.ouid_;
+    }
+    /**
+     * @param ouid the ouid to set
+     */
+    public void setOuid(String ouid) {
+        this.ouid_ = ouid;
     }
 
     
