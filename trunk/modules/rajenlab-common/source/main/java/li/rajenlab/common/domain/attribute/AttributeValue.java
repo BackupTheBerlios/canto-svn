@@ -10,7 +10,6 @@
 
 package li.rajenlab.common.domain.attribute;
 
-import li.rajenlab.canto.core.domain.common.Attribute;
 import li.rajenlab.common.domain.AbstractLocaleEntity;
 
 /**
