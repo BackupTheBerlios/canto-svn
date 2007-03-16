@@ -30,6 +30,7 @@ public class Role extends AbstractEntity {
     /**
      * @return the name
      */
+    @Override
     public String getName() {
         return this.name_;
     }
@@ -38,6 +39,7 @@ public class Role extends AbstractEntity {
     /**
      * @param name the name to set
      */
+    @Override
     public void setName(String name) {
         this.name_ = name;
     }

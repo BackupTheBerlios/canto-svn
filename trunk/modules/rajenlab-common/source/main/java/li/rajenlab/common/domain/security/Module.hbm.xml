@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping package="li.rajenlab.common.domain.module">
+
+  <class name="Module" table="MODULE" mutable="false">
+  	<cache usage="nonstrict-read-write"/>
+    <!-- Entity mapping -->
+    <id name="id" column="ID" type="long">
+      <generator class="native" />
+    </id>
+
+    <property name="creationTime" type="timestamp">
+      <column name="CREATION_TIME" />
+    </property>
+    <property name="changeTime" type="timestamp">
+      <column name="CHANGE_TIME" />
+    </property>
+
+    <!-- Module mapping -->
+    <property name="name">
+      <column name="NAME" length="255" />
+    </property>
+
+    <!--  associations -->
+    <map name="controls" table="MODULE_CONTROL" mutable="false">
+      <key column="MODULE_ID" not-null="true"/>
+      <map-key column="NAME" type="string"/>
+      <composite-element class="li.rajenlab.common.domain.module.Control">
+        <property name="name" not-null="true">
+          <formula>NAME</formula>
+        </property>
+        <property name="setting">
+          <column name="SETTING" not-null="true" />
+          <type name="li.rajenlab.common.hibernate.type.StringValuedEnumType">
+            <param name="enumClass">li.rajenlab.common.domain.module.ControlSetting</param>
+          </type>
+        </property>
+        <property name="minRun">
+          <column name="MIN_RUN" not-null="true" default="1" />
+        </property>
+        <property name="maxRun">
+          <column name="MAX_RUN" not-null="true" default="1" />
+        </property>
+      </composite-element>
+    </map>
+
+  </class>
+
+</hibernate-mapping>

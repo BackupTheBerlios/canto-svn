@@ -34,7 +34,7 @@
     </property>
 
 	<!-- map of variables -->
-	<map name="variables" table="PROCESSVARIABLE" lazy="true">
+	<map name="variables" table="PROCESS_VARIABLE" lazy="true">
 	    <key column="INSTANCE" not-null="true"/>
 	     
 	    <map-key column="VAR_KEY"  type="string" length="100"/>
@@ -52,7 +52,7 @@
     </component>
     
 	<!-- map of data -->
-	<map name="data" table="PROCESSDATA" lazy="true">
+	<map name="data" table="PROCESS_DATA" lazy="true">
 	    <key column="INSTANCE" not-null="true"/>
 	     
 	    <map-key column="VAR_KEY"  type="string" length="100"/>

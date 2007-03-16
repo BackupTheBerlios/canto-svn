@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="li.rajenlab.common.domain.security">
+
+  <class name="User" table="USER">
+	<!-- Entity mapping -->
+    <id name="id" column="ID" type="long">
+      <generator class="native"/>
+    </id>
+    <property name="creationTime" type="timestamp">
+      <column name="CREATION_TIME"/>
+    </property>
+    <property name="changeTime" type="timestamp">
+      <column name="CHANGE_TIME"/>
+    </property>
+    
+    <!-- User mapping -->
+    <property name="username">
+      <column name="USERNAME" length="255" unique="true"/>
+    </property>
+    <property name="password">
+      <column name="PASSWORD" length="255"/>
+    </property>
+     <property name="userStatus">
+       <column name="STATUS"/>
+       <type name="li.rajenlab.common.hibernate.type.StringValuedEnumType">
+         <param name="enumClass">li.rajenlab.common.domain.security.UserStatus</param>
+       </type>
+    </property>
+        <property name="userType">
+       <column name="TYPE"/>
+       <type name="li.rajenlab.common.hibernate.type.StringValuedEnumType">
+         <param name="enumClass">li.rajenlab.common.domain.security.UserType</param>
+       </type>
+    </property>
+    <property name="lastSuccessfulLoginTime" type="timestamp">
+      <column name="LAST_SUCCESSFUL_LOGIN"/>
+    </property>
+    <property name="lastFailedLoginTime" type="timestamp">
+      <column name="LAST_FAILED_LOGIN"/>
+    </property>
+    <property name="nrFailedLogins">
+      <column name="NR_FAILED_LOGINS"/>
+    </property>
+    
+    <!-- associations -->
+    <list name="AccessRights" table="USER_ACCESS_RIGHTS" lazy="false">
+       <key column="USER_ID"/>
+       <index column="INDX"/>
+       <many-to-many column="ACCESS_RIGHTS_ID" class="li.rajenlab.common.domain.security.AccessRights"/>
+    </list>
+
+  </class>
+
+</hibernate-mapping>

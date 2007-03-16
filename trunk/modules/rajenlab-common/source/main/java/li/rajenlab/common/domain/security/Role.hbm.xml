@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping package="li.rajenlab.common.domain.security">
+
+ <class name="Role" table="ROLE">
+ 	<cache usage="nonstrict-read-write"/>
+    <!-- Entity mapping -->
+    <id name="id" column="ID" type="long">
+      <generator class="native"/>
+    </id>
+  
+    <property name="creationTime" type="timestamp">
+      <column name="CREATION_TIME"/>
+    </property>
+    <property name="changeTime" type="timestamp">
+      <column name="CHANGE_TIME"/>
+    </property>
+    
+    <!-- Role mapping -->
+    <property name="name">
+      <column name="NAME" length="255"/>
+    </property>
+    
+  </class>
+
+
+</hibernate-mapping>

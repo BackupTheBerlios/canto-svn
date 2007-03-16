@@ -58,7 +58,9 @@ public final class XmlHelper {
     
     public static String getRootElementName (final Document doc) {
         Element element = doc.getRootElement();
-        if ( element == null ) return "";
+        if ( element == null ) {
+            return "";
+        }
         return element.getName();
     }
     

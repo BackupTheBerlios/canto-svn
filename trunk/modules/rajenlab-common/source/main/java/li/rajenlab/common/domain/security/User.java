@@ -208,6 +208,34 @@ public class User extends AbstractEntity implements UserDetails {
         this.nrFailedLogins_ = nrFailedLogins;
     }
 
+    /**
+     * @return the accessRights
+     */
+    public List<AccessRights> getAccessRights() {
+        return this.accessRights_;
+    }
+
+    /**
+     * @param accessRights the accessRights to set
+     */
+    public void setAccessRights(List<AccessRights> accessRights) {
+        this.accessRights_ = accessRights;
+    }
+
+    /**
+     * @return the externalAccessRights
+     */
+    public List<AccessRights> getExternalAccessRights() {
+        return this.externalAccessRights_;
+    }
+
+    /**
+     * @param externalAccessRights the externalAccessRights to set
+     */
+    public void setExternalAccessRights(List<AccessRights> externalAccessRights) {
+        this.externalAccessRights_ = externalAccessRights;
+    }
+
     
     
 }

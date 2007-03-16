@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="li.rajenlab.common.domain.attribute">
+
+  <class name="AttributeValue" table="ATTRIBUTE_VALUE">
+  
+	<!-- Entity mapping -->
+    <id name="id" column="ID" type="long">
+      <generator class="native"/>
+    </id>
+   
+    <property name="creationTime" type="timestamp">
+      <column name="CREATION_TIME"/>
+    </property>
+    <property name="changeTime" type="timestamp">
+      <column name="CHANGE_TIME"/>
+    </property>
+    
+    <!-- Property mapping -->
+    <property name="value">
+    	<column name="value" not-null="true"/>
+    </property>
+   
+
+	<!-- Association mapping -->
+	 <many-to-one name="attribute" column="ATTRIBUTE_ID" not-null="true"/>
+    
+
+  </class>
+    
+</hibernate-mapping>   
