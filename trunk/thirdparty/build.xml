@@ -80,6 +80,9 @@
         <include name="servlet/servlet-api-2.4.jar"/>
         <include name="servlet/javax.servlet.jsp.jar"/>
 	</patternset>
+	<patternset id="jta.patternset">
+	        <include name="jta/jta-1.0.jar"/>
+	</patternset>
 	<patternset id="jms.patternset">
         <include name="jms/jms-1.1.jar"/>
 	</patternset>
@@ -99,6 +102,7 @@
 
 	<patternset id="runtime.provided.libs.patternset">
 		<patternset refid="servletapi.patternset"/>
+		<patternset refid="jta.patternset"/>
 		<patternset refid="jms.patternset"/>
 		<patternset refid="mail.patternset"/>
 		<patternset refid="junit.patternset"/>
