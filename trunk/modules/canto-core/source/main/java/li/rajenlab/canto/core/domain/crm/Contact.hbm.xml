@@ -70,6 +70,9 @@
          <param name="enumClass">li.rajenlab.canto.core.domain.crm.Salutation</param>
        </type>
     </property>
+    <property name="ouid">
+       <column name="CUSTOMER_NR" unique="true" not-null="true"/>
+    </property>
     
   </class>
     

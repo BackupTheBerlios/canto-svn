@@ -17,7 +17,13 @@
     <property name="changeTime" type="timestamp">
       <column name="CHANGE_TIME"/>
     </property>
-  
+    <property name="name">
+      <column name="NAME" length="80"/>
+    </property>
+    <property name="ouid">
+      <column name="ORG_ID" unique="true" not-null="true"/>
+    </property>
+    
     <!-- Association mapping -->
     <many-to-one name="legalContact"   column="LEGAL_CONTACT_ID" not-null="true"/>
     <many-to-one name="billingContact" column="BILLING_CONTACT_ID" not-null="true"/>

@@ -19,6 +19,7 @@ import li.rajenlab.common.lang.StringValuedEnum;
 public enum BookingStatus implements StringValuedEnum {
     
     NEW("NEW"),
+    OFFER("OFFER"),
     READY_FOR_APPROVAL("READY_FOR_APPROVAL"),
     CANCELLED("CANCELLED"),
     BOOKED("BOOKED");
