@@ -24,18 +24,20 @@
 	</patternset>
 
 	
-	<patternset id="hibernate.patternset">
-        <include name="dom4j/dom4j-1.6.1.jar"/>
-        <include name="ant/antlr-2.7.6rc1.jar"/>
-        <include name="hibernate/hibernate-3.2.2.jar"/>
-        <include name="ehcache/ehcache-1.2.4.jar"/>
+	<patternset id="jpa.patternset">
+		 <include name="jpa/glassfish-persistence-installer-v2-b38.jar"/> 
 	</patternset>
+	
+	
 	
 	<patternset id="spring.patternset">
         <include name="spring/spring-2.0.2.jar"/>
 		<include name="cglib/cglib-nodep-2.1_3.jar"/>
 		<include name="oro/oro-2.0.8.jar"/>
         <include name="acegi/acegi-security-1.0.3.jar"/> 
+		 <include name="dom4j/dom4j-1.6.1.jar"/>
+		        <include name="ant/antlr-2.7.6rc1.jar"/>
+		        <include name="ehcache/ehcache-1.2.4.jar"/>
     </patternset>
 
 	
@@ -69,7 +71,7 @@
 	<patternset id="runtime.libs.patternset">
 		<patternset refid="xml.patternset"/>
 		<patternset refid="commons.patternset"/>
-		<patternset refid="hibernate.patternset"/>
+		<patternset refid="jpa.patternset"/>
 		<patternset refid="spring.patternset"/>
 		<patternset refid="jstl.patternset"/>
 		<patternset refid="xpath.patternset"/>
