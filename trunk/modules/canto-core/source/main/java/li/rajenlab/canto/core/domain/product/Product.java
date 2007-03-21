@@ -35,6 +35,7 @@ public class Product extends AbstractLocaleEntity {
     private Set<ProductCategory> categories_;
     private List<AttributeValue> attributes_;
     private Set<Product> parts_;
+    private ProductStatus status_;
     
     /**
      * @return the categories
@@ -123,6 +124,18 @@ public class Product extends AbstractLocaleEntity {
         if (getParts()!=null){
             parts_.remove(product);
         }
+    }
+    /**
+     * @return the status
+     */
+    public ProductStatus getStatus() {
+        return this.status_;
+    }
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(ProductStatus status) {
+        this.status_ = status;
     }
 
 }

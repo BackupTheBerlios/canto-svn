@@ -8,7 +8,7 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.core.domain.payment;
+package li.rajenlab.canto.core.domain.product;
 
 import li.rajenlab.common.lang.StringValuedEnum;
 
@@ -16,23 +16,23 @@ import li.rajenlab.common.lang.StringValuedEnum;
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public enum PaymentType implements StringValuedEnum {
+public enum ProductStatus implements StringValuedEnum {
     
-    CASH("CASH"),
-    VOUCHER("VOUCHER"),
-    BILL("BILL");
+    ACTIVE("ACTIVE"),
+    INACTIVE("INACTIVE");
 
-    String paymentType_;
+    private String status_;
     
-    private PaymentType(String paymentType){
-        this.paymentType_ = paymentType;
+    private ProductStatus(String status){
+        this.status_ = status;
     }
-    
     /**
      * @see li.rajenlab.common.lang.StringValuedEnum#getValue()
      */
     public String getValue() {
-        return paymentType_;
+        return status_;
     }
+    
+    
 
 }

@@ -25,7 +25,13 @@
     <property name="ouid" unique="true" not-null="true">
       <column name="PRODUCT_UID"/>
     </property>
-  
+     <property name="status">
+       <column name="STATUS" not-null="true"/>
+       <type name="li.rajenlab.common.hibernate.type.StringValuedEnumType">
+         <param name="enumClass">li.rajenlab.canto.core.domain.product.ProductStatus</param>
+       </type>
+    </property>
+    
     <!-- Association mapping -->
     <many-to-one name="type" column="PRODUCT_TYPE_ID" not-null="true"/>
     <list name="attributes" lazy="true" table="PRODUCT_ATTRIBUTES">
