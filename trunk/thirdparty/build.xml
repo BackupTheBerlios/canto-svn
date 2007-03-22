@@ -25,7 +25,8 @@
 
 	
 	<patternset id="jpa.patternset">
-		 <include name="jpa/glassfish-persistence-installer-v2-b38.jar"/> 
+		 <include name="jpa/toplink-essentials-agent.jar"/> 
+		 <include name="jpa/toplink-essentials.jar"/> 
 	</patternset>
 	
 	
