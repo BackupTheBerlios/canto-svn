@@ -29,6 +29,9 @@
 		 <include name="jpa/toplink-essentials.jar"/> 
 	</patternset>
 	
+	<patternset id="hibernate.patternset">
+			 <include name="hibernate/hibernate-3.2.2.jar"/> 
+	</patternset>
 	
 	
 	<patternset id="spring.patternset">
@@ -111,6 +114,7 @@
 		<patternset refid="junit.patternset"/>
 		<patternset refid="xml.impl.patternset"/>
 		<patternset refid="ejb.patternset"/>
+		<patternset refid="hibernate.patternset"/>
 	</patternset>
 
 	<fileset id="log4j.libs" dir="${lib}">
