@@ -12,13 +12,13 @@ package li.rajenlab.canto.core.model.email;
 
 import java.util.List;
 
-import li.rajenlab.canto.core.model.Entity;
+import li.rajenlab.canto.core.model.BeanEntity;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class EmailTemplate extends Entity {
+public class EmailTemplate extends BeanEntity {
     
     
     /**

@@ -12,13 +12,13 @@ package li.rajenlab.canto.core.model.sales;
 
 import java.util.Map;
 
-import li.rajenlab.canto.core.model.Entity;
+import li.rajenlab.canto.core.model.BeanEntity;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class SalesStep extends Entity {
+public class SalesStep extends BeanEntity {
     
     /**
      * Comment for <code>serialVersionUID</code>

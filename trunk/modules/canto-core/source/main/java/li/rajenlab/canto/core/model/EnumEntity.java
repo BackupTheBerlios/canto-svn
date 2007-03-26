@@ -12,13 +12,26 @@ package li.rajenlab.canto.core.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
+@MappedSuperclass
 public abstract class EnumEntity implements Serializable {
     
+    @Column(name="NAME",unique=true,nullable=true, insertable = false, updatable = false)
     private String name_;
+    
+    @Id
+    @Column(name="ID", insertable = false, updatable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Serializable id_;
 
     /**

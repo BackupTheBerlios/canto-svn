@@ -12,13 +12,16 @@ package li.rajenlab.canto.core.model.account;
 
 import java.util.List;
 
-import li.rajenlab.canto.core.model.Entity;
+import javax.persistence.Entity;
+
+import li.rajenlab.canto.core.model.BeanEntity;
 import li.rajenlab.canto.core.model.call.Call;
 import li.rajenlab.canto.core.model.campaign.Campaign;
 import li.rajenlab.canto.core.model.cases.Case;
 import li.rajenlab.canto.core.model.common.Address;
 import li.rajenlab.canto.core.model.common.Contact;
 import li.rajenlab.canto.core.model.common.Industry;
+import li.rajenlab.canto.core.model.document.Document;
 import li.rajenlab.canto.core.model.email.Email;
 import li.rajenlab.canto.core.model.meeting.Meeting;
 import li.rajenlab.canto.core.model.notes.Notes;
@@ -26,22 +29,47 @@ import li.rajenlab.canto.core.model.oppportunity.Opportunity;
 import li.rajenlab.canto.core.model.product.Product;
 import li.rajenlab.canto.core.model.project.Project;
 import li.rajenlab.canto.core.model.task.Task;
+import javax.persistence.Table;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.TableGenerator;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Basic;
+import javax.persistence.Embedded;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class Account extends Entity {
+@Entity(name="Account")
+@Table(name="ACCOUNT")
+public class Account extends BeanEntity {
     
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = -1412380490817658383L;
    
+    // Entity Field
+    @Id
+    @Column(name="ACCOUNT_ID", insertable = true, updatable = true)
+    @GeneratedValue(strategy=GenerationType.TABLE)
+    @TableGenerator(name="PK_GENERATOR", table = "PK_GENERATOR", pkColumnName = "PK", valueColumnName = "VALUE", pkColumnValue = "PK_VALUE")
     private String accountId_;
-    private float annualRevenue_;
-    private Address billingAddress_;
     
+    @Column(name="ANNUAL_REVENUE")
+    private float annualRevenue_;
+    private Contact contact_;
+    private Address billingAddress_;
+    private Address legalAddress_;
     private String description_;
     private String email_;
     private String emailSecond_;
@@ -51,20 +79,27 @@ public class Account extends Entity {
     private String phoneAlternate_;
     private String fax_;
     private String website_;
+    @ManyToOne
+    @JoinColumn(name="accountType__ID", referencedColumnName = "ACCOUNT_TYPE_ID")
     private AccountType accountType_;
+    private AccountStatus status_;
     
-    private Contact contact_;
     
-    private List<Opportunity> opportunities_;
-    private List<Case> cases_;
-    private List<Task> tasks_;
-    private List<Notes> notes_;
-    private List<Meeting> meetings_;
-    private List<Call> calls_;
-    private List<Product> products_;
-    private List<Project> projects_;
-    private List<Campaign> campaigns_;
-    private List<Email> emails_;
+    // Relationshipts
+    @ManyToMany
+    @JoinTable(name="ACCOUNT_OPPORTUNITIES", joinColumns = @JoinColumn(name = "Account_ACCOUNT_ID", referencedColumnName = "ACCOUNT_ID"), inverseJoinColumns = {@JoinColumn(name = "Opportunity_OPPORTUNITY_ID", referencedColumnName = "OPPORTUNITY_ID")})
+    private List<Opportunity> opportunities_; // list of opportunities of the account
+    private List<Case> cases_; // list of the case of the acccount
+    private List<Task> tasks_; // list of taskf or the account
+    private List<Notes> notes_; // notes on the account
+    private List<Meeting> meetings_; // list of meetings for the account
+    private List<Call> calls_; // list of calls for the account
+    private List<Product> products_; // list of product that the account has
+    private List<Project> projects_; // list of projects that the account has
+    private List<Campaign> campaigns_; // list of campaings for the account
+    private List<Email> emails_; // list of emails for the account
+    private List<Document> documents_; // list of documents for the account (not link to a case, opportunigs...)
+    
     
     /**
      * @return the annualRevenue
@@ -354,6 +389,42 @@ public class Account extends Entity {
      */
     public void setEmails(List<Email> emails) {
         this.emails_ = emails;
+    }
+    /**
+     * @return the documents
+     */
+    public List<Document> getDocuments() {
+        return this.documents_;
+    }
+    /**
+     * @param documents the documents to set
+     */
+    public void setDocuments(List<Document> documents) {
+        this.documents_ = documents;
+    }
+    /**
+     * @return the legalAddress
+     */
+    public Address getLegalAddress() {
+        return this.legalAddress_;
+    }
+    /**
+     * @param legalAddress the legalAddress to set
+     */
+    public void setLegalAddress(Address legalAddress) {
+        this.legalAddress_ = legalAddress;
+    }
+    /**
+     * @return the status
+     */
+    public AccountStatus getStatus() {
+        return this.status_;
+    }
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(AccountStatus status) {
+        this.status_ = status;
     }
    
     

@@ -10,13 +10,13 @@
 
 package li.rajenlab.canto.core.model.document;
 
-import li.rajenlab.canto.core.model.Entity;
+import li.rajenlab.canto.core.model.BeanEntity;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class Revision extends Entity {
+public class Revision extends BeanEntity {
     
     /**
      * Comment for <code>serialVersionUID</code>

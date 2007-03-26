@@ -12,7 +12,7 @@ package li.rajenlab.canto.core.model.project;
 
 import java.util.Date;
 
-import li.rajenlab.canto.core.model.Entity;
+import li.rajenlab.canto.core.model.BeanEntity;
 import li.rajenlab.canto.core.model.account.Account;
 import li.rajenlab.canto.core.model.common.Contact;
 import li.rajenlab.canto.core.model.oppportunity.Opportunity;
@@ -21,7 +21,7 @@ import li.rajenlab.canto.core.model.oppportunity.Opportunity;
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class Project extends Entity {
+public class Project extends BeanEntity {
 
     /**
      * Comment for <code>serialVersionUID</code>

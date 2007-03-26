@@ -12,11 +12,16 @@ package li.rajenlab.canto.core.model.common;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Embeddable;
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
+@Embeddable
 public class Contact implements Serializable {
     
     

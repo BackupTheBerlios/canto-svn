@@ -10,7 +10,7 @@
 
 package li.rajenlab.canto.core.model.employee;
 
-import li.rajenlab.canto.core.model.Entity;
+import li.rajenlab.canto.core.model.BeanEntity;
 import li.rajenlab.canto.core.model.common.Address;
 import li.rajenlab.canto.core.model.common.MessengerType;
 import li.rajenlab.common.domain.security.User;
@@ -19,7 +19,7 @@ import li.rajenlab.common.domain.security.User;
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class Employee extends Entity {
+public class Employee extends BeanEntity {
     
     /**
      * Comment for <code>serialVersionUID</code>

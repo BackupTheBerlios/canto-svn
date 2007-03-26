@@ -12,7 +12,7 @@ package li.rajenlab.canto.core.model.cases;
 
 import java.util.List;
 
-import li.rajenlab.canto.core.model.Entity;
+import li.rajenlab.canto.core.model.BeanEntity;
 import li.rajenlab.canto.core.model.account.Account;
 import li.rajenlab.canto.core.model.call.Call;
 import li.rajenlab.canto.core.model.email.Email;
@@ -24,7 +24,7 @@ import li.rajenlab.canto.core.model.task.Task;
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class Case extends Entity {
+public class Case extends BeanEntity {
 
     /**
      * Comment for <code>serialVersionUID</code>

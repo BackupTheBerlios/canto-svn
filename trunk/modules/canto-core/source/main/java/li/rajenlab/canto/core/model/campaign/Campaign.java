@@ -13,14 +13,14 @@ package li.rajenlab.canto.core.model.campaign;
 import java.util.Date;
 import java.util.List;
 
-import li.rajenlab.canto.core.model.Entity;
+import li.rajenlab.canto.core.model.BeanEntity;
 import li.rajenlab.canto.core.model.account.Account;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class Campaign extends Entity {
+public class Campaign extends BeanEntity {
     
     
     /**

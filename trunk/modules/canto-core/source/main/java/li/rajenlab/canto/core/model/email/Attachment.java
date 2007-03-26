@@ -10,14 +10,14 @@
 
 package li.rajenlab.canto.core.model.email;
 
-import li.rajenlab.canto.core.model.Entity;
+import li.rajenlab.canto.core.model.BeanEntity;
 import li.rajenlab.canto.core.model.document.Document;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class Attachment extends Entity {
+public class Attachment extends BeanEntity {
     
     
     /**

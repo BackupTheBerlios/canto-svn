@@ -10,13 +10,13 @@
 
 package li.rajenlab.canto.core.model.calendar.outlook;
 
-import li.rajenlab.canto.core.model.Entity;
+import li.rajenlab.canto.core.model.BeanEntity;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class MSOutlook extends Entity {
+public class MSOutlook extends BeanEntity {
 
     /**
      * Comment for <code>serialVersionUID</code>

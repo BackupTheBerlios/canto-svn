@@ -13,7 +13,7 @@ package li.rajenlab.canto.core.model.email;
 import java.util.Date;
 import java.util.List;
 
-import li.rajenlab.canto.core.model.Entity;
+import li.rajenlab.canto.core.model.BeanEntity;
 import li.rajenlab.canto.core.model.account.Account;
 import li.rajenlab.canto.core.model.cases.Case;
 import li.rajenlab.canto.core.model.common.Contact;
@@ -23,7 +23,7 @@ import li.rajenlab.canto.core.model.oppportunity.Opportunity;
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class Email extends Entity {
+public class Email extends BeanEntity {
     
     
     /**

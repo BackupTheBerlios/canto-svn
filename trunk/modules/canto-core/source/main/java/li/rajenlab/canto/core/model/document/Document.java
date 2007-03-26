@@ -12,13 +12,13 @@ package li.rajenlab.canto.core.model.document;
 
 import java.util.Date;
 
-import li.rajenlab.canto.core.model.Entity;
+import li.rajenlab.canto.core.model.BeanEntity;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class Document extends Entity {
+public class Document extends BeanEntity {
     
     
     /**
