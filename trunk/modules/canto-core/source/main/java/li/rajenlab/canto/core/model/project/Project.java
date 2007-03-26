@@ -16,11 +16,23 @@ import li.rajenlab.canto.core.model.BeanEntity;
 import li.rajenlab.canto.core.model.account.Account;
 import li.rajenlab.canto.core.model.common.Contact;
 import li.rajenlab.canto.core.model.oppportunity.Opportunity;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.InheritanceType;
+import javax.persistence.Inheritance;
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
+@Entity
+@Table(name="PROJECT")
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Project extends BeanEntity {
 
     /**
@@ -30,12 +42,24 @@ public class Project extends BeanEntity {
     
     
     
+    @Column(name="START_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startDate_;
+    @Column(name="END_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date endDate_;
+    @ManyToOne
+    @JoinColumn(name="ACCOUNT_ID", referencedColumnName = "ACCOUNT_ID")
     private Account account_;
+    @ManyToOne
+    @JoinColumn(name="CONTACT_ID", referencedColumnName = "ID")
     private Contact contact_;
+    @ManyToOne
+    @JoinColumn(name="OPPORTUNITY_ID")
     private Opportunity opportunity_;
+    @Column(name="ESTIMATED_EFFORS")
     private int estimatedEfforts_;
+    @Column(name="ACCTUAL_EFFORTS")
     private int actualEfforts_;
 
     /**

@@ -12,7 +12,17 @@ package li.rajenlab.canto.core.model.account;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 import li.rajenlab.canto.core.model.BeanEntity;
 import li.rajenlab.canto.core.model.call.Call;
@@ -29,21 +39,6 @@ import li.rajenlab.canto.core.model.oppportunity.Opportunity;
 import li.rajenlab.canto.core.model.product.Product;
 import li.rajenlab.canto.core.model.project.Project;
 import li.rajenlab.canto.core.model.task.Task;
-import javax.persistence.Table;
-import javax.persistence.ManyToMany;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.TableGenerator;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Basic;
-import javax.persistence.Embedded;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 
 /**
  * @author  raph (raph@rajenlab.li)
@@ -87,7 +82,7 @@ public class Account extends BeanEntity {
     
     // Relationshipts
     @ManyToMany
-    @JoinTable(name="ACCOUNT_OPPORTUNITIES", joinColumns = @JoinColumn(name = "Account_ACCOUNT_ID", referencedColumnName = "ACCOUNT_ID"), inverseJoinColumns = {@JoinColumn(name = "Opportunity_OPPORTUNITY_ID", referencedColumnName = "OPPORTUNITY_ID")})
+    @JoinTable(name="ACCOUNT_OPPORTUNITIES", joinColumns = @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ACCOUNT_ID"))
     private List<Opportunity> opportunities_; // list of opportunities of the account
     private List<Case> cases_; // list of the case of the acccount
     private List<Task> tasks_; // list of taskf or the account

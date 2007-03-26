@@ -10,46 +10,29 @@
 
 package li.rajenlab.canto.core.model.common;
 
-import java.io.Serializable;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+import li.rajenlab.canto.core.model.EnumEntity;
+import javax.persistence.Table;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class Industry implements Serializable {
+@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Table(name="INDUSTRY")
+public class Industry extends EnumEntity {
     
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = -3267750108572881037L;
-    private int id_;
-    private String industry_;
-    
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return this.id_;
-    }
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id_ = id;
-    }
-    /**
-     * @return the industry
-     */
-    public String getIndustry() {
-        return this.industry_;
-    }
-    /**
-     * @param industry the industry to set
-     */
-    public void setIndustry(String industry) {
-        this.industry_ = industry;
-    }
-    
     
 
 }

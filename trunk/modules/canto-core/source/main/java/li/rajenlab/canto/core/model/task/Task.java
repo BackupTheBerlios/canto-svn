@@ -12,28 +12,52 @@ package li.rajenlab.canto.core.model.task;
 
 import java.util.Date;
 
+import li.rajenlab.canto.core.model.BeanEntity;
 import li.rajenlab.canto.core.model.account.Account;
 import li.rajenlab.common.domain.AbstractEntity;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.InheritanceType;
+import javax.persistence.Inheritance;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class Task extends AbstractEntity {
+@Entity
+@Table(name="TASK")
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public class Task extends BeanEntity {
 
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = -8953170409141192203L;
-    private String name_;
-    private String description_;
+    @Column(name="STATUS")
     private TaskStatus status_;
     
+    @Column(name="DATE_DUE")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateDue_;
+    @Column(name="DATE_START")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateStart_;
+    @Column(name="PRIORTY")
     private int priority_;
+    @Column(name="PARENT")
+    @ManyToOne
+    @JoinColumn(name="PARENT_ID", referencedColumnName = "ID")
     private Task parent_;
+    @ManyToOne
+    @JoinColumn(name="ACCOUNT_ID", referencedColumnName = "ACCOUNT_ID")
     private Account account_;
+    @Column(name="TYPE")
     private TaskType type_;
     
     /**
@@ -72,32 +96,7 @@ public class Task extends AbstractEntity {
     public void setDateStart(Date dateStart) {
         this.dateStart_ = dateStart;
     }
-    /**
-     * @return the description
-     */
-    public String getDescription() {
-        return this.description_;
-    }
-    /**
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description_ = description;
-    }
-    /**
-     * @return the name
-     */
-    @Override
-    public String getName() {
-        return this.name_;
-    }
-    /**
-     * @param name the name to set
-     */
-    @Override
-    public void setName(String name) {
-        this.name_ = name;
-    }
+    
     /**
      * @return the parent
      */

@@ -16,6 +16,12 @@ import java.util.Date;
 import javax.persistence.MappedSuperclass;
 
 import li.rajenlab.common.domain.security.User;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 /**
  * @author  raph (raph@rajenlab.li)
@@ -24,14 +30,34 @@ import li.rajenlab.common.domain.security.User;
 @MappedSuperclass
 public abstract class BeanEntity implements Serializable {
     
+    @Id
+    @Column(name="ID")
     private Serializable id_;
+    @Column(name="ENTERED")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date entered_;
+    @Column(name="MODIFIED")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date modified_;
+    @Column(name="MODIFIED_BY")
+    @ManyToOne
+    @JoinColumn(name="MODIFY_BY_USER", referencedColumnName = "ID")
     private User modifiedBy_;
+    @Column(name="ASSIGNED_TO")
+    @ManyToOne
+    @JoinColumn(name="ASSIGNED_TO_USER", referencedColumnName = "ID")
     private User assignedTo_;
+    @Column(name="CREATE_BY")
+    @ManyToOne
+    @JoinColumn(name="CREATE_BY_USER", referencedColumnName = "ID")
     private User createdBy_;
+    @Column(name="OWNER")
+    @ManyToOne
+    @JoinColumn(name="OWNER_USER", referencedColumnName = "ID")
     private User owner_;
+    @Column(name="NAME")
     private String name_;
+    @Column(name="DESCRIPTION")
     private String description_;
     
     /**

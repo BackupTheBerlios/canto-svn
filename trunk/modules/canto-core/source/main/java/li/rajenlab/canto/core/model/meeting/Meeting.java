@@ -20,11 +20,18 @@ import li.rajenlab.canto.core.model.cases.Case;
 import li.rajenlab.canto.core.model.common.Contact;
 import li.rajenlab.canto.core.model.employee.Employee;
 import li.rajenlab.canto.core.model.oppportunity.Opportunity;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.InheritanceType;
+import javax.persistence.Inheritance;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
+@Entity
+@Table(name="MEETING")
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Meeting extends BeanEntity {
 
     /**

@@ -2,5 +2,10 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
 <persistence-unit name="canto">
 <provider>glassfish</provider>
+<class>li.rajenlab.canto.core.model.BeanEntity</class>
+<class>li.rajenlab.canto.core.model.EnumEntity</class>
+<class>li.rajenlab.canto.core.model.account.Account</class>
+<class>li.rajenlab.canto.core.model.account.AccountType</class>
+<class>li.rajenlab.canto.core.model.common.Contact</class>
 </persistence-unit>
 </persistence>

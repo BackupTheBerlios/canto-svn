@@ -23,33 +23,71 @@ import li.rajenlab.canto.core.model.product.Product;
 import li.rajenlab.canto.core.model.project.Project;
 import li.rajenlab.canto.core.model.sales.SalesStep;
 import li.rajenlab.canto.core.model.task.Task;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.InheritanceType;
+import javax.persistence.Inheritance;
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.JoinTable;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
+@Entity
+@Table(name="OPPORTUNITY")
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Opportunity extends BeanEntity {
     
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 3360863813386467468L;
-    private String name_;
-    private String description_;
     private OpportunityType opportunityType_;
+    @Column(name="AMOUNT")
     private float amount_;
+    @Column(name="CURRENCY")
     private String currency_;
+    @Column(name="DATE_CLOSED")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateClosed_;
+    @ManyToOne
+    @JoinColumn(name="NEXT_STEP_ID", referencedColumnName = "ID")
     private SalesStep nextStep_;
+    @Column(name="PROB_IN_PRECENT")
     private float  probabilityInPercent_;
+    @Column(name="ACCOUNT")
+    @ManyToOne
+    @JoinColumn(name="ACCOUNT_ID", referencedColumnName = "ACCOUNT_ID")
     private Account account_;
     
+    @ManyToMany
+    @JoinColumn(name="products__null")
+    @OrderBy
+    @JoinTable(joinColumns=@JoinColumn(name="OPPORTUNITY_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID"), name = "OPPORTUNITY_PRODUCTS")
     private List<Product> products_;
+    @ManyToOne
+    @JoinColumn(name="PROJECT_ID)", referencedColumnName = "ID")
     private Project project_;
+    @ManyToMany
+    @JoinTable(joinColumns=@JoinColumn(name="OPPORTUNITY_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "MEETING_ID", referencedColumnName = "ID"), name = "OPPORTUNTY_MEETINGS")
     private List<Meeting> meetings_;
+    @ManyToMany
+    @JoinTable(name="OPPORTUNITY_CALLS", joinColumns = @JoinColumn(name = "OPPORTUNITY_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "CALL_ID", referencedColumnName = "ID"))
     private List<Call> calls_;
+    @ManyToMany
     private List<Task> tasks_;
+    @ManyToOne
+    @JoinColumn(name="CONTACT_ID", referencedColumnName = "ID")
     private Contact contact_;
+    @ManyToMany
+    @JoinTable(name="OPPORTUNITY_NOTES")
     private List<Notes> notes_;
     
     /**
@@ -125,18 +163,6 @@ public class Opportunity extends BeanEntity {
         this.dateClosed_ = dateClosed;
     }
     /**
-     * @return the description
-     */
-    public String getDescription() {
-        return this.description_;
-    }
-    /**
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description_ = description;
-    }
-    /**
      * @return the meetings
      */
     public List<Meeting> getMeetings() {
@@ -148,20 +174,7 @@ public class Opportunity extends BeanEntity {
     public void setMeetings(List<Meeting> meetings) {
         this.meetings_ = meetings;
     }
-    /**
-     * @return the name
-     */
-    @Override
-    public String getName() {
-        return this.name_;
-    }
-    /**
-     * @param name the name to set
-     */
-    @Override
-    public void setName(String name) {
-        this.name_ = name;
-    }
+  
     /**
      * @return the nextStep
      */

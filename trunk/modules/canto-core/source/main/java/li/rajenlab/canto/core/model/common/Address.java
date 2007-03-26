@@ -12,10 +12,13 @@ package li.rajenlab.canto.core.model.common;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
+
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
+@Embeddable
 public class Address implements Serializable {
     
     /**
