@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="/thirdparty/ejb/ejb-2.1.jar"/>
 	<classpathentry kind="lib" path="/thirdparty/castor/castor-1.0.3.jar"/>
 	<classpathentry kind="lib" path="/thirdparty/castor/castor-1.0.3-xml.jar"/>
+	<classpathentry kind="lib" path="/thirdparty/jpa/toplink-essentials.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
