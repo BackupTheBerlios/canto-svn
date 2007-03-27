@@ -10,22 +10,15 @@
 
 package li.rajenlab.canto.core.model.leads;
 
-import java.util.List;
-
 import li.rajenlab.canto.core.model.BeanEntity;
 import li.rajenlab.canto.core.model.account.Account;
-import li.rajenlab.canto.core.model.call.Call;
-import li.rajenlab.canto.core.model.cases.Case;
+import li.rajenlab.canto.core.model.campaign.Campaign;
 import li.rajenlab.canto.core.model.common.Address;
-import li.rajenlab.canto.core.model.common.Contact;
-import li.rajenlab.canto.core.model.email.Email;
-import li.rajenlab.canto.core.model.employee.Employee;
-import li.rajenlab.canto.core.model.meeting.Meeting;
-import li.rajenlab.canto.core.model.notes.Notes;
-import li.rajenlab.canto.core.model.oppportunity.Opportunity;
-import li.rajenlab.canto.core.model.task.Task;
 
 /**
+ * Leads are early contacts in the sales process. 
+ * After they have been evaluated and assessed, you can convert them into contacts, opportunities, 
+ * and accounts
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
@@ -35,58 +28,55 @@ public class Lead extends BeanEntity {
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = -2389190673097736723L;
-    private Employee employee_;
-    private Contact leadContact_;
-    private boolean doNotCall_;
-    private Contact referedBy_;
-    private Address primaryAddress_;
-    private Address altAddress_;
-    private Account leadAccount_;
-    private Opportunity opportunity_;
-    private LeadStatus status_;
-    private Case case_;
-    private List<Task> tasks_;
-    private List<Notes> notes_;
-    private List<Meeting> meetings_;
-    private List<Email> emails_;
-    private List<Call> calls_;
+    
     private LeadSource leadSource_;
+    private LeadStatus leadStatus_;
+    private Campaign   campaign_;
+    private String referedBy_;
+    private String statusDescription_;
+    private String leadDescription_;
+    private String leadCompanyName_;
+    private String leadTitle_;
+    private String leadFirstName_;
+    private String leadLastName_;
+    private String leadOfficePhone_;
+    private String leadMobilePhone_;
+    private String leadOtherPhone_;
+    private String leadFax_;
+    private String leadEmail_;
+    private String leadEmailSecond_;
+    private Account account_;
+    private boolean emailNotShared_; // the lead opted to not share their email address with you
+    private boolean invalidEmail_; // If an email address is invalid
+    // The lead’s name to the Do Not Call list. 
+    // This is to ensure that the lead is not targeted during campaigns.
+    private boolean doNotCall_; 
+    private Address primaryAddress_;
+    private Address otherAddress_;
     
     /**
-     * @return the altAddress
+     * @return the account
      */
-    public Address getAltAddress() {
-        return this.altAddress_;
+    public Account getAccount() {
+        return this.account_;
     }
     /**
-     * @param altAddress the altAddress to set
+     * @param account the account to set
      */
-    public void setAltAddress(Address altAddress) {
-        this.altAddress_ = altAddress;
+    public void setAccount(Account account) {
+        this.account_ = account;
     }
     /**
-     * @return the calls
+     * @return the campaign
      */
-    public List<Call> getCalls() {
-        return this.calls_;
+    public Campaign getCampaign() {
+        return this.campaign_;
     }
     /**
-     * @param calls the calls to set
+     * @param campaign the campaign to set
      */
-    public void setCalls(List<Call> calls) {
-        this.calls_ = calls;
-    }
-    /**
-     * @return the case
-     */
-    public Case getCase() {
-        return this.case_;
-    }
-    /**
-     * @param case1 the case to set
-     */
-    public void setCase(Case case1) {
-        this.case_ = case1;
+    public void setCampaign(Campaign campaign) {
+        this.campaign_ = campaign;
     }
     /**
      * @return the doNotCall
@@ -101,52 +91,136 @@ public class Lead extends BeanEntity {
         this.doNotCall_ = doNotCall;
     }
     /**
-     * @return the emails
+     * @return the emailNotShared
      */
-    public List<Email> getEmails() {
-        return this.emails_;
+    public boolean isEmailNotShared() {
+        return this.emailNotShared_;
     }
     /**
-     * @param emails the emails to set
+     * @param emailNotShared the emailNotShared to set
      */
-    public void setEmails(List<Email> emails) {
-        this.emails_ = emails;
+    public void setEmailNotShared(boolean emailNotShared) {
+        this.emailNotShared_ = emailNotShared;
     }
     /**
-     * @return the employee
+     * @return the invalidEmail
      */
-    public Employee getEmployee() {
-        return this.employee_;
+    public boolean isInvalidEmail() {
+        return this.invalidEmail_;
     }
     /**
-     * @param employee the employee to set
+     * @param invalidEmail the invalidEmail to set
      */
-    public void setEmployee(Employee employee) {
-        this.employee_ = employee;
+    public void setInvalidEmail(boolean invalidEmail) {
+        this.invalidEmail_ = invalidEmail;
     }
     /**
-     * @return the leadAccount
+     * @return the leadDescription
      */
-    public Account getLeadAccount() {
-        return this.leadAccount_;
+    public String getLeadDescription() {
+        return this.leadDescription_;
     }
     /**
-     * @param leadAccount the leadAccount to set
+     * @param leadDescription the leadDescription to set
      */
-    public void setLeadAccount(Account leadAccount) {
-        this.leadAccount_ = leadAccount;
+    public void setLeadDescription(String leadDescription) {
+        this.leadDescription_ = leadDescription;
     }
     /**
-     * @return the leadContact
+     * @return the leadEmail
      */
-    public Contact getLeadContact() {
-        return this.leadContact_;
+    public String getLeadEmail() {
+        return this.leadEmail_;
     }
     /**
-     * @param leadContact the leadContact to set
+     * @param leadEmail the leadEmail to set
      */
-    public void setLeadContact(Contact leadContact) {
-        this.leadContact_ = leadContact;
+    public void setLeadEmail(String leadEmail) {
+        this.leadEmail_ = leadEmail;
+    }
+    /**
+     * @return the leadEmailSecond
+     */
+    public String getLeadEmailSecond() {
+        return this.leadEmailSecond_;
+    }
+    /**
+     * @param leadEmailSecond the leadEmailSecond to set
+     */
+    public void setLeadEmailSecond(String leadEmailSecond) {
+        this.leadEmailSecond_ = leadEmailSecond;
+    }
+    /**
+     * @return the leadFax
+     */
+    public String getLeadFax() {
+        return this.leadFax_;
+    }
+    /**
+     * @param leadFax the leadFax to set
+     */
+    public void setLeadFax(String leadFax) {
+        this.leadFax_ = leadFax;
+    }
+    /**
+     * @return the leadFirstName
+     */
+    public String getLeadFirstName() {
+        return this.leadFirstName_;
+    }
+    /**
+     * @param leadFirstName the leadFirstName to set
+     */
+    public void setLeadFirstName(String leadFirstName) {
+        this.leadFirstName_ = leadFirstName;
+    }
+    /**
+     * @return the leadLastName
+     */
+    public String getLeadLastName() {
+        return this.leadLastName_;
+    }
+    /**
+     * @param leadLastName the leadLastName to set
+     */
+    public void setLeadLastName(String leadLastName) {
+        this.leadLastName_ = leadLastName;
+    }
+    /**
+     * @return the leadMobilePhone
+     */
+    public String getLeadMobilePhone() {
+        return this.leadMobilePhone_;
+    }
+    /**
+     * @param leadMobilePhone the leadMobilePhone to set
+     */
+    public void setLeadMobilePhone(String leadMobilePhone) {
+        this.leadMobilePhone_ = leadMobilePhone;
+    }
+    /**
+     * @return the leadOfficePhone
+     */
+    public String getLeadOfficePhone() {
+        return this.leadOfficePhone_;
+    }
+    /**
+     * @param leadOfficePhone the leadOfficePhone to set
+     */
+    public void setLeadOfficePhone(String leadOfficePhone) {
+        this.leadOfficePhone_ = leadOfficePhone;
+    }
+    /**
+     * @return the leadOtherPhone
+     */
+    public String getLeadOtherPhone() {
+        return this.leadOtherPhone_;
+    }
+    /**
+     * @param leadOtherPhone the leadOtherPhone to set
+     */
+    public void setLeadOtherPhone(String leadOtherPhone) {
+        this.leadOtherPhone_ = leadOtherPhone;
     }
     /**
      * @return the leadSource
@@ -161,40 +235,40 @@ public class Lead extends BeanEntity {
         this.leadSource_ = leadSource;
     }
     /**
-     * @return the meetings
+     * @return the leadStatus
      */
-    public List<Meeting> getMeetings() {
-        return this.meetings_;
+    public LeadStatus getLeadStatus() {
+        return this.leadStatus_;
     }
     /**
-     * @param meetings the meetings to set
+     * @param leadStatus the leadStatus to set
      */
-    public void setMeetings(List<Meeting> meetings) {
-        this.meetings_ = meetings;
+    public void setLeadStatus(LeadStatus leadStatus) {
+        this.leadStatus_ = leadStatus;
     }
     /**
-     * @return the notes
+     * @return the leadTitle
      */
-    public List<Notes> getNotes() {
-        return this.notes_;
+    public String getLeadTitle() {
+        return this.leadTitle_;
     }
     /**
-     * @param notes the notes to set
+     * @param leadTitle the leadTitle to set
      */
-    public void setNotes(List<Notes> notes) {
-        this.notes_ = notes;
+    public void setLeadTitle(String leadTitle) {
+        this.leadTitle_ = leadTitle;
     }
     /**
-     * @return the opportunity
+     * @return the otherAddress
      */
-    public Opportunity getOpportunity() {
-        return this.opportunity_;
+    public Address getOtherAddress() {
+        return this.otherAddress_;
     }
     /**
-     * @param opportunity the opportunity to set
+     * @param otherAddress the otherAddress to set
      */
-    public void setOpportunity(Opportunity opportunity) {
-        this.opportunity_ = opportunity;
+    public void setOtherAddress(Address otherAddress) {
+        this.otherAddress_ = otherAddress;
     }
     /**
      * @return the primaryAddress
@@ -211,39 +285,38 @@ public class Lead extends BeanEntity {
     /**
      * @return the referedBy
      */
-    public Contact getReferedBy() {
+    public String getReferedBy() {
         return this.referedBy_;
     }
     /**
      * @param referedBy the referedBy to set
      */
-    public void setReferedBy(Contact referedBy) {
+    public void setReferedBy(String referedBy) {
         this.referedBy_ = referedBy;
     }
-  
     /**
-     * @return the status
+     * @return the statusDescription
      */
-    public LeadStatus getStatus() {
-        return this.status_;
+    public String getStatusDescription() {
+        return this.statusDescription_;
     }
     /**
-     * @param status the status to set
+     * @param statusDescription the statusDescription to set
      */
-    public void setStatus(LeadStatus status) {
-        this.status_ = status;
+    public void setStatusDescription(String statusDescription) {
+        this.statusDescription_ = statusDescription;
     }
     /**
-     * @return the tasks
+     * @return the leadCompanyName
      */
-    public List<Task> getTasks() {
-        return this.tasks_;
+    public String getLeadCompanyName() {
+        return this.leadCompanyName_;
     }
     /**
-     * @param tasks the tasks to set
+     * @param leadCompanyName the leadCompanyName to set
      */
-    public void setTasks(List<Task> tasks) {
-        this.tasks_ = tasks;
+    public void setLeadCompanyName(String leadCompanyName) {
+        this.leadCompanyName_ = leadCompanyName;
     }
     
     

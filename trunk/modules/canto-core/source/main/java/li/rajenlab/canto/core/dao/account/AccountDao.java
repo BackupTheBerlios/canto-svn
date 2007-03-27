@@ -16,8 +16,8 @@ import li.rajenlab.canto.core.model.account.Account;
 import li.rajenlab.canto.core.model.account.AccountSearchCriteria;
 import li.rajenlab.canto.core.model.account.AccountStatus;
 import li.rajenlab.canto.core.model.account.AccountType;
-import li.rajenlab.canto.core.model.common.Contact;
 import li.rajenlab.canto.core.model.common.Industry;
+import li.rajenlab.canto.core.model.contact.Contact;
 import li.rajenlab.common.dao.EntityNotFoundException;
 import li.rajenlab.common.dao.SimpleDao;
 

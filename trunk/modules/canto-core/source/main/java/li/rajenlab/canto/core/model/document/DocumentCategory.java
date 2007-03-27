@@ -8,26 +8,37 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.core.model.task;
+package li.rajenlab.canto.core.model.document;
 
 import li.rajenlab.canto.core.model.EnumEntity;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.InheritanceType;
-import javax.persistence.Inheritance;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-@Entity
-@Table(name="TASK_TYPE")
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public class TaskType extends EnumEntity {
-
+public class DocumentCategory extends EnumEntity {
+    
+    
     /**
      * Comment for <code>serialVersionUID</code>
      */
-    private static final long serialVersionUID = 666157833337440255L;
+    private static final long serialVersionUID = -1828763480337772120L;
+    private DocumentCategory parent_;
+
+    /**
+     * @return the parent
+     */
+    public DocumentCategory getParent() {
+        return this.parent_;
+    }
+
+    /**
+     * @param parent the parent to set
+     */
+    public void setParent(DocumentCategory parent) {
+        this.parent_ = parent;
+    }
+    
+    
 
 }

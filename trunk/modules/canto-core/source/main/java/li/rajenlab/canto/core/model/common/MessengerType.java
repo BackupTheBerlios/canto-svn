@@ -10,11 +10,12 @@
 
 package li.rajenlab.canto.core.model.common;
 
-import li.rajenlab.canto.core.model.EnumEntity;
 import javax.persistence.Entity;
-import javax.persistence.InheritanceType;
 import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+
+import li.rajenlab.canto.core.model.EnumEntity;
 
 /**
  * @author  raph (raph@rajenlab.li)

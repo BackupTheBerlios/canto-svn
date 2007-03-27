@@ -8,28 +8,21 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.core.model.common;
+package li.rajenlab.canto.core.model.product;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
-
-import li.rajenlab.canto.core.model.EnumEntity;
+import li.rajenlab.canto.core.model.BeanEntity;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-@Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="INDUSTRY")
-public class Industry extends EnumEntity {
+public class ProductSupportTerm extends BeanEntity {
     
     /**
      * Comment for <code>serialVersionUID</code>
      */
-    private static final long serialVersionUID = -3267750108572881037L;
-    
+    private static final long serialVersionUID = -3199893599411013253L;
+    private String name_;
+    private String description_;
 
 }

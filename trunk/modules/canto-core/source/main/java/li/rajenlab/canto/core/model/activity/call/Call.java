@@ -8,29 +8,36 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.core.model.notes;
+package li.rajenlab.canto.core.model.activity.call;
 
 import li.rajenlab.canto.core.model.BeanEntity;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.InheritanceType;
-import javax.persistence.Inheritance;
+import li.rajenlab.canto.core.model.activity.ActivityDirection;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-@Entity
-@Table(name="NOTES")
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public class Notes extends BeanEntity {
-
+public class Call extends BeanEntity {
+    
     /**
      * Comment for <code>serialVersionUID</code>
      */
-    private static final long serialVersionUID = -6383507254130177726L;
-    
-    
-    private String message_;
+    private static final long serialVersionUID = 5879361567030131227L;
+    private ActivityDirection direction_;
+
+    /**
+     * @return the direction
+     */
+    public ActivityDirection getDirection() {
+        return this.direction_;
+    }
+
+    /**
+     * @param direction the direction to set
+     */
+    public void setDirection(ActivityDirection direction) {
+        this.direction_ = direction;
+    }
+   
 
 }

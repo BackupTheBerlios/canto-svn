@@ -24,7 +24,8 @@ public class Revision extends BeanEntity {
     private static final long serialVersionUID = 6384406929911344567L;
     private String revisionUrl_;
     private byte[] revision_;
-    private Document revisionOf_;
+    private String revisionName_;
+
     
     /**
      * @return the revision
@@ -38,17 +39,18 @@ public class Revision extends BeanEntity {
     public void setRevision(byte[] revision) {
         this.revision_ = revision;
     }
+   
     /**
-     * @return the revisionOf
+     * @return the revisionName
      */
-    public Document getRevisionOf() {
-        return this.revisionOf_;
+    public String getRevisionName() {
+        return this.revisionName_;
     }
     /**
-     * @param revisionOf the revisionOf to set
+     * @param revisionName the revisionName to set
      */
-    public void setRevisionOf(Document revisionOf) {
-        this.revisionOf_ = revisionOf;
+    public void setRevisionName(String revisionName) {
+        this.revisionName_ = revisionName;
     }
     /**
      * @return the revisionUrl

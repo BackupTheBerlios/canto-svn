@@ -10,17 +10,12 @@
 
 package li.rajenlab.canto.core.model.cases;
 
-import java.util.List;
-
 import li.rajenlab.canto.core.model.BeanEntity;
 import li.rajenlab.canto.core.model.account.Account;
-import li.rajenlab.canto.core.model.call.Call;
-import li.rajenlab.canto.core.model.email.Email;
-import li.rajenlab.canto.core.model.meeting.Meeting;
-import li.rajenlab.canto.core.model.notes.Notes;
-import li.rajenlab.canto.core.model.task.Task;
 
 /**
+ * Use the Cases module to track and manage problems 
+ * with your services that are reported by your users and customers.
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
@@ -31,18 +26,13 @@ public class Case extends BeanEntity {
      */
     private static final long serialVersionUID = -3134358677233735280L;
     
-    private String caseId_;
-    private String resolution_;
-    private int priority_;
+    private String name_;
+    private String description_;
     private CaseStatus status_;
     private CaseType type_;
-    
     private Account account_;
-    private List<Task> tasks_;
-    private List<Notes> notes_;
-    private List<Call> calls_;
-    private List<Meeting> meetings_;
-    private List<Email> emails_;
+    private String resolution_;
+    private String priority_;
     
     /**
      * @return the account
@@ -57,75 +47,39 @@ public class Case extends BeanEntity {
         this.account_ = account;
     }
     /**
-     * @return the calls
+     * @return the description
      */
-    public List<Call> getCalls() {
-        return this.calls_;
+    public String getDescription() {
+        return this.description_;
     }
     /**
-     * @param calls the calls to set
+     * @param description the description to set
      */
-    public void setCalls(List<Call> calls) {
-        this.calls_ = calls;
+    public void setDescription(String description) {
+        this.description_ = description;
     }
     /**
-     * @return the caseId
+     * @return the name
      */
-    public String getCaseId() {
-        return this.caseId_;
+    public String getName() {
+        return this.name_;
     }
     /**
-     * @param caseId the caseId to set
+     * @param name the name to set
      */
-    public void setCaseId(String caseId) {
-        this.caseId_ = caseId;
-    }
-    /**
-     * @return the emails
-     */
-    public List<Email> getEmails() {
-        return this.emails_;
-    }
-    /**
-     * @param emails the emails to set
-     */
-    public void setEmails(List<Email> emails) {
-        this.emails_ = emails;
-    }
-    /**
-     * @return the meetings
-     */
-    public List<Meeting> getMeetings() {
-        return this.meetings_;
-    }
-    /**
-     * @param meetings the meetings to set
-     */
-    public void setMeetings(List<Meeting> meetings) {
-        this.meetings_ = meetings;
-    }
-    /**
-     * @return the notes
-     */
-    public List<Notes> getNotes() {
-        return this.notes_;
-    }
-    /**
-     * @param notes the notes to set
-     */
-    public void setNotes(List<Notes> notes) {
-        this.notes_ = notes;
+    public void setName(String name) {
+        this.name_ = name;
     }
     /**
      * @return the priority
      */
-    public int getPriority() {
+    public String getPriority() {
         return this.priority_;
     }
     /**
      * @param priority the priority to set
      */
-    public void setPriority(int priority) {
+    public void setPriority(String priority) {
         this.priority_ = priority;
     }
     /**
@@ -151,18 +105,6 @@ public class Case extends BeanEntity {
      */
     public void setStatus(CaseStatus status) {
         this.status_ = status;
-    }
-    /**
-     * @return the tasks
-     */
-    public List<Task> getTasks() {
-        return this.tasks_;
-    }
-    /**
-     * @param tasks the tasks to set
-     */
-    public void setTasks(List<Task> tasks) {
-        this.tasks_ = tasks;
     }
     /**
      * @return the type

@@ -40,6 +40,7 @@ public class Employee extends BeanEntity {
     private EmployeeStatus status_;
     private String messagenrId_;
     private MessengerType messengerType_;
+    private String notes_;
     
     /**
      * @return the address
@@ -220,6 +221,18 @@ public class Employee extends BeanEntity {
      */
     public void setUser(User user) {
         this.user_ = user;
+    }
+    /**
+     * @return the notes
+     */
+    public String getNotes() {
+        return this.notes_;
+    }
+    /**
+     * @param notes the notes to set
+     */
+    public void setNotes(String notes) {
+        this.notes_ = notes;
     }
 
 

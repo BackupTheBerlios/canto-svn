@@ -18,4 +18,9 @@ import li.rajenlab.canto.core.model.EnumEntity;
  */
 public class AccountStatus extends EnumEntity {
 
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 6657079409920641138L;
+
 }

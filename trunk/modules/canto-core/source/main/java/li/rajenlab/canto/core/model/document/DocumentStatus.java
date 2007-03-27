@@ -8,7 +8,7 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.core.model.call;
+package li.rajenlab.canto.core.model.document;
 
 import li.rajenlab.canto.core.model.EnumEntity;
 
@@ -16,11 +16,13 @@ import li.rajenlab.canto.core.model.EnumEntity;
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class Direction extends EnumEntity {
+public class DocumentStatus extends EnumEntity {
 
     /**
      * Comment for <code>serialVersionUID</code>
      */
-    private static final long serialVersionUID = 2040876551943545220L;
+    private static final long serialVersionUID = -5831074630069479142L;
+    
+    
 
 }

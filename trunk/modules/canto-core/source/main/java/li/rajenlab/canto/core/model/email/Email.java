@@ -14,10 +14,6 @@ import java.util.Date;
 import java.util.List;
 
 import li.rajenlab.canto.core.model.BeanEntity;
-import li.rajenlab.canto.core.model.account.Account;
-import li.rajenlab.canto.core.model.cases.Case;
-import li.rajenlab.canto.core.model.common.Contact;
-import li.rajenlab.canto.core.model.oppportunity.Opportunity;
 
 /**
  * @author  raph (raph@rajenlab.li)
@@ -43,51 +39,11 @@ public class Email extends BeanEntity {
     private String messageId_;
     private String rawSource_;
     private String replyToAddress_;
-   
-    
     private List<Attachment> attachments_;
     
-    private Account account_;
-    private Opportunity opportunty_;
-    private Case case_;
-    private Contact contact_;
+ 
     
-    /**
-     * @return the account
-     */
-    public Account getAccount() {
-        return this.account_;
-    }
-    /**
-     * @param account the account to set
-     */
-    public void setAccount(Account account) {
-        this.account_ = account;
-    }
-    /**
-     * @return the case
-     */
-    public Case getCase() {
-        return this.case_;
-    }
-    /**
-     * @param case1 the case to set
-     */
-    public void setCase(Case case1) {
-        this.case_ = case1;
-    }
-    /**
-     * @return the contact
-     */
-    public Contact getContact() {
-        return this.contact_;
-    }
-    /**
-     * @param contact the contact to set
-     */
-    public void setContact(Contact contact) {
-        this.contact_ = contact;
-    }
+   
     /**
      * @return the contenctAsHtml
      */
@@ -112,18 +68,7 @@ public class Email extends BeanEntity {
     public void setContentAsText(String contentAsText) {
         this.contentAsText_ = contentAsText;
     }
-    /**
-     * @return the opportunty
-     */
-    public Opportunity getOpportunty() {
-        return this.opportunty_;
-    }
-    /**
-     * @param opportunty the opportunty to set
-     */
-    public void setOpportunty(Opportunity opportunty) {
-        this.opportunty_ = opportunty;
-    }
+   
     /**
      * @return the sendDate
      */

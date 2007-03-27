@@ -8,26 +8,24 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.core.model.task;
+package li.rajenlab.canto.core.model.product;
 
-import li.rajenlab.canto.core.model.EnumEntity;
-import javax.persistence.Entity;
-import javax.persistence.InheritanceType;
-import javax.persistence.Inheritance;
-import javax.persistence.Table;
+import li.rajenlab.canto.core.model.BeanEntity;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-@Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Table(name="TASK_STATUS")
-public class TaskStatus extends EnumEntity {
-
+public class ProductCatalog extends BeanEntity {
+    
+    
     /**
      * Comment for <code>serialVersionUID</code>
      */
-    private static final long serialVersionUID = 5467035685078407349L;
+    private static final long serialVersionUID = 7774848401916832775L;
+    private String name_;
+    private ProductCatalog parent_;
     
+    
+
 }

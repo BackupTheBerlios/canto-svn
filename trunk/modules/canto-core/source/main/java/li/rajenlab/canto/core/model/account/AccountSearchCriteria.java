@@ -17,4 +17,9 @@ package li.rajenlab.canto.core.model.account;
  */
 public class AccountSearchCriteria extends Account {
 
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 8518147142242789764L;
+
 }

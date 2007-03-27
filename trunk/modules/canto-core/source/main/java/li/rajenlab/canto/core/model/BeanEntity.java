@@ -13,15 +13,15 @@ package li.rajenlab.canto.core.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.MappedSuperclass;
-
-import li.rajenlab.common.domain.security.User;
-import javax.persistence.Id;
 import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
+
+import li.rajenlab.common.domain.security.User;
 
 /**
  * @author  raph (raph@rajenlab.li)
@@ -55,10 +55,7 @@ public abstract class BeanEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name="OWNER_USER", referencedColumnName = "ID")
     private User owner_;
-    @Column(name="NAME")
-    private String name_;
-    @Column(name="DESCRIPTION")
-    private String description_;
+  
     
     /**
      * @return the assignedTo
@@ -144,21 +141,5 @@ public abstract class BeanEntity implements Serializable {
     public void setOwner(User owner) {
         this.owner_ = owner;
     }
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return this.name_;
-    }
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name_ = name;
-    }
     
-    
-    
-    
-
 }
