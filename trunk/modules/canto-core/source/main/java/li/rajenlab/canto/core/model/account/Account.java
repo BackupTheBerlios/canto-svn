@@ -10,9 +10,22 @@
 
 package li.rajenlab.canto.core.model.account;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import li.rajenlab.canto.core.model.BeanEntity;
 import li.rajenlab.canto.core.model.common.Address;
 import li.rajenlab.canto.core.model.organization.Organization;
+import javax.persistence.Basic;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.Embedded;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 
 /**
  * An account contains your customer information such as name and address. 
@@ -21,6 +34,9 @@ import li.rajenlab.canto.core.model.organization.Organization;
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
+@Entity(name="Account")
+@Table(name="ACCOUNT")
+
 public class Account extends BeanEntity {
     
     /**
@@ -29,6 +45,7 @@ public class Account extends BeanEntity {
     private static final long serialVersionUID = -1412380490817658383L;
    
     // Entity Field
+    private String accountId_;
     private String accountName_;
     private String webSite_;
     private String tickerSymbol_;
@@ -252,6 +269,25 @@ public class Account extends BeanEntity {
      */
     public void setRating(String rating) {
         this.rating_ = rating;
+    }
+    /**
+     * @return the accountId
+     */
+    public String getAccountId() {
+        return this.accountId_;
+    }
+    /**
+     * @param accountId the accountId to set
+     */
+    public void setAccountId(String accountId) {
+        this.accountId_ = accountId;
+    }
+    /**
+     * @see li.rajenlab.canto.core.model.BeanEntity#getId()
+     */
+    @Override
+    public Serializable getId() {
+        return getAccountId();
     }
     
     

@@ -14,14 +14,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import li.rajenlab.common.domain.security.User;
+import li.rajenlab.canto.core.model.user.User;
+import javax.persistence.EmbeddedId;
 
 /**
  * @author  raph (raph@rajenlab.li)
@@ -30,29 +35,31 @@ import li.rajenlab.common.domain.security.User;
 @MappedSuperclass
 public abstract class BeanEntity implements Serializable {
     
-    @Id
-    @Column(name="ID")
-    private Serializable id_;
     @Column(name="ENTERED")
     @Temporal(TemporalType.TIMESTAMP)
     private Date entered_;
+    
     @Column(name="MODIFIED")
     @Temporal(TemporalType.TIMESTAMP)
     private Date modified_;
+    
     @Column(name="MODIFIED_BY")
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER, optional = true, targetEntity = li.rajenlab.canto.core.model.user.User.class)
     @JoinColumn(name="MODIFY_BY_USER", referencedColumnName = "ID")
     private User modifiedBy_;
+    
     @Column(name="ASSIGNED_TO")
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER, optional = true, targetEntity = li.rajenlab.canto.core.model.user.User.class)
     @JoinColumn(name="ASSIGNED_TO_USER", referencedColumnName = "ID")
     private User assignedTo_;
+    
     @Column(name="CREATE_BY")
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER, optional = true, targetEntity = li.rajenlab.canto.core.model.user.User.class)
     @JoinColumn(name="CREATE_BY_USER", referencedColumnName = "ID")
     private User createdBy_;
+    
     @Column(name="OWNER")
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER, optional = true, targetEntity = li.rajenlab.canto.core.model.user.User.class)
     @JoinColumn(name="OWNER_USER", referencedColumnName = "ID")
     private User owner_;
   
@@ -96,15 +103,8 @@ public abstract class BeanEntity implements Serializable {
     /**
      * @return the id
      */
-    public Serializable getId() {
-        return this.id_;
-    }
-    /**
-     * @param id the id to set
-     */
-    public void setId(Serializable id) {
-        this.id_ = id;
-    }
+    public abstract Serializable getId();
+    
     /**
      * @return the modified
      */

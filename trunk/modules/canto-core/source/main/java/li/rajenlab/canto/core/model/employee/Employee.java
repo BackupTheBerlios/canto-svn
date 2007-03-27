@@ -13,7 +13,8 @@ package li.rajenlab.canto.core.model.employee;
 import li.rajenlab.canto.core.model.BeanEntity;
 import li.rajenlab.canto.core.model.common.Address;
 import li.rajenlab.canto.core.model.common.MessengerType;
-import li.rajenlab.common.domain.security.User;
+import li.rajenlab.canto.core.model.user.User;
+
 
 /**
  * @author  raph (raph@rajenlab.li)

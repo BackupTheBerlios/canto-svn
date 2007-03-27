@@ -10,12 +10,17 @@
 
 package li.rajenlab.canto.core.model.campaign;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import li.rajenlab.canto.core.model.EnumEntity;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
+@Entity(name="CampaignType")
+@DiscriminatorValue("CampaignType")
 public class CampaignType extends EnumEntity {
 
     /**

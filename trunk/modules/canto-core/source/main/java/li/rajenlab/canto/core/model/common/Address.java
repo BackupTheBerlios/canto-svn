@@ -10,28 +10,55 @@
 
 package li.rajenlab.canto.core.model.common;
 
-import java.io.Serializable;
-
-import javax.persistence.Embeddable;
+import li.rajenlab.canto.core.model.BeanEntity;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.InheritanceType;
+import javax.persistence.Inheritance;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-@Embeddable
-public class Address implements Serializable {
+@Entity
+@Table(name="ADDRESS")
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public class Address extends BeanEntity {
     
     /**
      * Comment for <code>serialVersionUID</code>
      */
     private static final long serialVersionUID = 4747846292442336135L;
+    
+    @Column(name="STREET", nullable=false, length=150)
     private String street_;
+    
+    @Column(name="STREET_NR",length=5)
     private String streetNr_;
+    
+    @Column(name="PO_BOX",length=20)
     private String poBox_;
+    
+    @Column(name="CITY",length=150)
     private String city_;
+    
+    @Column(name="STATE",length=100)
     private String state_;
+    
+    @Column(name="COUNTRY",length=3)
     private String country_;
+    
+    @Column(name="ZIP",length=10)
     private String postalcode_;
+    
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private String id_;
     
     /**
      * @return the city
@@ -116,6 +143,18 @@ public class Address implements Serializable {
      */
     public void setStreetNr(String streetNr) {
         this.streetNr_ = streetNr;
+    }
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return this.id_;
+    }
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id_ = id;
     }
     
     

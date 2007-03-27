@@ -39,7 +39,7 @@ public class Contact extends BeanEntity {
     private String mobilePhone_;
     private String homePhone_;
     private String companyName_;
-    // Account Name. Enter the account name associated with the contact; alternatively, click Select to choose from the existing list of accounts.
+    // Account Name. Enter the account name associated with the contact;
     private Account account_;
     private LeadSource leadSource_;
     private Campaign campaign_;

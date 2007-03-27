@@ -8,24 +8,32 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.core.model.cases;
+package li.rajenlab.canto.core.model.user;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-
-import li.rajenlab.canto.core.model.EnumEntity;
+import org.acegisecurity.GrantedAuthority;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-@Entity(name="CaseStatus")
-@DiscriminatorValue("CaseStatus")
-public class CaseStatus extends EnumEntity {
+public class Role implements GrantedAuthority {
+
+    private String authority_;
+    
+    /**
+     * @see org.acegisecurity.GrantedAuthority#getAuthority()
+     */
+    public String getAuthority() {
+        return authority_;
+    }
 
     /**
-     * Comment for <code>serialVersionUID</code>
+     * @param authority the authority to set
      */
-    private static final long serialVersionUID = -7610032448680774234L;
+    public void setAuthority(String authority) {
+        this.authority_ = authority;
+    }
+    
+    
 
 }

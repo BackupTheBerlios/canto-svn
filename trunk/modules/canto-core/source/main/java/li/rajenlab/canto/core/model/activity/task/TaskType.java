@@ -10,12 +10,17 @@
 
 package li.rajenlab.canto.core.model.activity.task;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import li.rajenlab.canto.core.model.EnumEntity;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
+@Entity(name="TaskType")
+@DiscriminatorValue("TaskType")
 public class TaskType extends EnumEntity {
 
     /**
