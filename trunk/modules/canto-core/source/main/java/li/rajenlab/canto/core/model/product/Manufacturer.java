@@ -10,14 +10,14 @@
 
 package li.rajenlab.canto.core.model.product;
 
-import li.rajenlab.canto.core.model.BeanEntity;
+import li.rajenlab.canto.core.model.SimpleIdBeanEntity;
 import li.rajenlab.canto.core.model.common.Address;
 
 /**
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class Manufacturer extends BeanEntity {
+public class Manufacturer extends SimpleIdBeanEntity {
     
     /**
      * Comment for <code>serialVersionUID</code>

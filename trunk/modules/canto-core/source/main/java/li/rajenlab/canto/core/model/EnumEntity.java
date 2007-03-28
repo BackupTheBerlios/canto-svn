@@ -32,39 +32,39 @@ import javax.persistence.Table;
 public abstract class EnumEntity implements Serializable {
     
     @Column(name="NAME",unique=true,nullable=true, insertable = false, updatable = false)
-    private String name_;
+    private String name;
     
     @Id
     @Column(name="ID", insertable = false, updatable = false)
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Serializable id_;
+    private Serializable id;
 
     /**
      * @return the name
      */
     public String getName() {
-        return this.name_;
+        return this.name;
     }
 
     /**
      * @param name the name to set
      */
     public void setName(String name) {
-        this.name_ = name;
+        this.name = name;
     }
 
     /**
      * @return the id
      */
     public Serializable getId() {
-        return this.id_;
+        return this.id;
     }
 
     /**
      * @param id the id to set
      */
     public void setId(Serializable id) {
-        this.id_ = id;
+        this.id = id;
     }
     
     

@@ -15,10 +15,16 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import li.rajenlab.canto.core.model.SimpleIdBeanEntity;
 
 import org.acegisecurity.GrantedAuthority;
 import org.acegisecurity.userdetails.UserDetails;
@@ -29,32 +35,47 @@ import org.acegisecurity.userdetails.UserDetails;
  */
 @Entity(name="User")
 @Table(name="USER")
-public class User implements UserDetails {
+public class User extends SimpleIdBeanEntity implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private String id_;
-    
+    /**
+     * Comment for <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = 264291769954586859L;
+
     @Column(name="USERNAME")
-    private String username_;
-    private String password_;
-    private UserStatus status_;
-    private Date credentialChangeOnDate_;
-    private boolean credentialsNonExpired_;
-    private List<Role> roles_;
+    private String username;
+    
+    @Column(name="PASSWORD")
+    private String password;
+    
+    
+    @Column(name="STATUS")
+    private UserStatus status;
+    
+    @Column(name = "CREDENTIALCHANGEDATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date credentialChangeOnDate;
+    
+    @Column(name="CREDENTIALNONEXPIRED")
+    private boolean credentialsNonExpired;
+    
+    @ManyToMany(mappedBy="id", fetch = FetchType.LAZY)
+    @OrderBy("authority ASC")
+    @JoinTable(name="USERROLE", joinColumns = @JoinColumn(name = "USERID", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "ROLEID", referencedColumnName = "id"))
+    private List<Role> roles;
     
     /**
      * @return the roles
      */
     public List<Role> getRoles() {
-        return this.roles_;
+        return this.roles;
     }
 
     /**
      * @param roles the roles to set
      */
     public void setRoles(List<Role> roles) {
-        this.roles_ = roles;
+        this.roles = roles;
     }
 
     /**
@@ -62,7 +83,7 @@ public class User implements UserDetails {
      */
     public GrantedAuthority[] getAuthorities() {
         if (getRoles()!=null){
-            return roles_.toArray(new GrantedAuthority[roles_.size()]);
+            return roles.toArray(new GrantedAuthority[roles.size()]);
         }
         return new GrantedAuthority[0];
     }
@@ -71,14 +92,14 @@ public class User implements UserDetails {
      * @see org.acegisecurity.userdetails.UserDetails#getPassword()
      */
     public String getPassword() {
-        return password_;
+        return password;
     }
 
     /**
      * @see org.acegisecurity.userdetails.UserDetails#getUsername()
      */
     public String getUsername() {
-        return username_;
+        return username;
     }
 
     /**
@@ -99,7 +120,7 @@ public class User implements UserDetails {
      * @see org.acegisecurity.userdetails.UserDetails#isCredentialsNonExpired()
      */
     public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired_;
+        return credentialsNonExpired;
     }
 
     /**
@@ -113,63 +134,49 @@ public class User implements UserDetails {
      * @param password the password to set
      */
     public void setPassword(String password) {
-        this.password_ = password;
+        this.password = password;
     }
 
     /**
      * @param username the username to set
      */
     public void setUsername(String username) {
-        this.username_ = username;
+        this.username = username;
     }
 
     /**
      * @return the status
      */
     public UserStatus getStatus() {
-        return this.status_;
+        return this.status;
     }
 
     /**
      * @param status the status to set
      */
     public void setStatus(UserStatus status) {
-        this.status_ = status;
+        this.status = status;
     }
 
     /**
      * @return the credentialChangeOnDate
      */
     public Date getCredentialChangeOnDate() {
-        return this.credentialChangeOnDate_;
+        return this.credentialChangeOnDate;
     }
 
     /**
      * @param credentialChangeOnDate the credentialChangeOnDate to set
      */
     public void setCredentialChangeOnDate(Date credentialChangeOnDate) {
-        this.credentialChangeOnDate_ = credentialChangeOnDate;
+        this.credentialChangeOnDate = credentialChangeOnDate;
     }
 
-    /**
-     * @return the id
-     */
-    public String getId() {
-        return this.id_;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(String id) {
-        this.id_ = id;
-    }
-
-    /**
+     /**
      * @param credentialsNonExpired the credentialsNonExpired to set
      */
     public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired_ = credentialsNonExpired;
+        this.credentialsNonExpired = credentialsNonExpired;
     }
     
     

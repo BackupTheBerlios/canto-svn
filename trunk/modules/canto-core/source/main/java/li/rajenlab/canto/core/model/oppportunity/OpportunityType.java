@@ -12,9 +12,6 @@ package li.rajenlab.canto.core.model.oppportunity;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
 
 import li.rajenlab.canto.core.model.EnumEntity;
 

@@ -12,7 +12,7 @@ package li.rajenlab.canto.core.model.product;
 
 import java.util.Date;
 
-import li.rajenlab.canto.core.model.BeanEntity;
+import li.rajenlab.canto.core.model.SimpleIdBeanEntity;
 import li.rajenlab.canto.core.model.account.Account;
 import li.rajenlab.canto.core.model.contact.Contact;
 
@@ -20,7 +20,7 @@ import li.rajenlab.canto.core.model.contact.Contact;
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public class Product extends BeanEntity {
+public class Product extends SimpleIdBeanEntity {
 
     /**
      * Comment for <code>serialVersionUID</code>

@@ -10,15 +10,16 @@
 
 package li.rajenlab.canto.core.model.common;
 
-import li.rajenlab.canto.core.model.BeanEntity;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.InheritanceType;
-import javax.persistence.Inheritance;
 import javax.persistence.Column;
-import javax.persistence.Id;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+
+import li.rajenlab.canto.core.model.BeanEntity;
 
 /**
  * @author  raph (raph@rajenlab.li)

@@ -10,12 +10,12 @@
 
 package li.rajenlab.canto.core.model.document;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import li.rajenlab.canto.core.model.EnumEntity;
-import javax.persistence.Basic;
-import javax.persistence.Column;
 
 /**
  * @author  raph (raph@rajenlab.li)
