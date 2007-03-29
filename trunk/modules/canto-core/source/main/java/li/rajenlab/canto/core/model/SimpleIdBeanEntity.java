@@ -10,8 +10,6 @@
 
 package li.rajenlab.canto.core.model;
 
-import java.io.Serializable;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,11 +28,7 @@ public abstract class SimpleIdBeanEntity extends BeanEntity {
     @TableGenerator(name="ID_GENERATOR", table = "ID_GENERATOR", pkColumnName = "KEY", valueColumnName = "VALUE", pkColumnValue = "PK_ID")
     private String id;
     
-    /**
-     * @see li.rajenlab.canto.core.model.BeanEntity#getId()
-     */
-    @Override
-    public Serializable getId() {
+    public String getId() {
         return id;
     }
 

@@ -60,7 +60,7 @@ public class User extends SimpleIdBeanEntity implements UserDetails {
     private boolean credentialsNonExpired;
     
     @ManyToMany(mappedBy="id", fetch = FetchType.LAZY)
-    @OrderBy("authority ASC")
+    @OrderBy
     @JoinTable(name="USERROLE", joinColumns = @JoinColumn(name = "USERID", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "ROLEID", referencedColumnName = "id"))
     private List<Role> roles;
     
