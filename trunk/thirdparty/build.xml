@@ -24,13 +24,10 @@
 	</patternset>
 
 	
-	<patternset id="jpa.patternset">
-		 <include name="jpa/toplink-essentials-agent.jar"/> 
-		 <include name="jpa/toplink-essentials.jar"/> 
-	</patternset>
-	
 	<patternset id="hibernate.patternset">
 			 <include name="hibernate/hibernate-3.2.2.jar"/> 
+			 <include name="hibernate/hibernate-annotations-3.3.0.jar"/>
+			 <include name="hibernate/hibernate-entitymanager-3.3.1.jar"/>
 	</patternset>
 	
 	
@@ -75,11 +72,11 @@
 	<patternset id="runtime.libs.patternset">
 		<patternset refid="xml.patternset"/>
 		<patternset refid="commons.patternset"/>
-		<patternset refid="jpa.patternset"/>
 		<patternset refid="spring.patternset"/>
 		<patternset refid="jstl.patternset"/>
 		<patternset refid="xpath.patternset"/>
 		<patternset refid="castor.patternset"/>
+		<patternset refid="hibernate.patternset"/>
 	</patternset>
 	
 	<patternset id="servletapi.patternset">
@@ -114,7 +111,6 @@
 		<patternset refid="junit.patternset"/>
 		<patternset refid="xml.impl.patternset"/>
 		<patternset refid="ejb.patternset"/>
-		<patternset refid="hibernate.patternset"/>
 	</patternset>
 
 	<fileset id="log4j.libs" dir="${lib}">
