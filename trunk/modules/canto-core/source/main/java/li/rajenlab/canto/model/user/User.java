@@ -12,7 +12,6 @@ package li.rajenlab.canto.model.user;
 
 import java.util.List;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -51,7 +50,7 @@ public class User implements UserDetails {
     
     @ManyToMany(fetch=FetchType.LAZY)
     @OrderBy
-    @JoinTable(name="USER_ROLE", joinColumns = @JoinColumn(name = "user_USERNAME", referencedColumnName = "USERNAME"), inverseJoinColumns = @JoinColumn(name = "role_ROLE_ID", referencedColumnName = "ROLE_ID"))
+    @JoinTable(name="USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "USERNAME"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID"))
     private List<Role> roles;
     
     

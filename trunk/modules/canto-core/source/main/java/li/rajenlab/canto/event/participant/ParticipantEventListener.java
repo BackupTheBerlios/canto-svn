@@ -8,9 +8,9 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.event.conference;
+package li.rajenlab.canto.event.participant;
 
-import li.rajenlab.canto.model.conference.Participant;
+import li.rajenlab.canto.model.participant.Participant;
 import li.rajenlab.common.domain.event.Event;
 import li.rajenlab.common.domain.event.EventListener;
 

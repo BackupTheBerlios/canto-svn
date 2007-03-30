@@ -8,21 +8,19 @@
  * $HeadURL$
  ******************************************************************************/
 
-package li.rajenlab.canto.model.conference;
+package li.rajenlab.canto.model.participant;
 
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import li.rajenlab.canto.model.user.User;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
-import javax.persistence.Transient;
 
 /**
  * @author  raph (raph@rajenlab.li)
@@ -46,7 +44,7 @@ public class Participant implements Serializable {
     
     @Column(name="USER")
     @ManyToOne
-    @JoinColumn(name="user_USERNAME", referencedColumnName = "USERNAME")
+    @JoinColumn(name="USER_ID", referencedColumnName = "USERNAME")
     private User user;
     
     @Transient
@@ -54,6 +52,7 @@ public class Participant implements Serializable {
     
     @Transient
     private ParticipantState participantState;
+   
 
     /**
      * @return the displayName

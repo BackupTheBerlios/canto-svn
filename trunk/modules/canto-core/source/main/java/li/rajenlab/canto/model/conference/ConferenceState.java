@@ -14,12 +14,11 @@ package li.rajenlab.canto.model.conference;
  * @author  raph (raph@rajenlab.li)
  * @version $Id$
  */
-public enum Presence {
+public enum ConferenceState {
     
-    ONLINE,
-    OFFLINE,
-    IN_MEETING,
-    AWAY,
-    DO_NOT_DISTIRTB
+    IN_PREPARATION,
+    SCHEDULED,
+    LIVE,
+    ARCHIVED
 
 }
