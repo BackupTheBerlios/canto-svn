@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-
-<project name="canto-modules-generated" basedir=".">
-	<import file="${build.support}/module-group/build.xml"/>
-</project>
