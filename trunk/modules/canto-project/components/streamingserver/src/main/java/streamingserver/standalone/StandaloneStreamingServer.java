@@ -18,6 +18,7 @@ public class StandaloneStreamingServer implements StreamingServer {
 	private	String		rtmpUrl;
 	private	String		rtmptUrl;
 	private	int			maxNumberOfStreams;
+	private	int		currentNumberOfStreams = 0;
 	private	Vector<String>		supportedStreamTypes;
 	private StandaloneStreamingEventListener streamingServerEventListener;
 	
@@ -27,7 +28,7 @@ public class StandaloneStreamingServer implements StreamingServer {
 		this.rtmptUrl = rtmptUrl;
 		this.maxNumberOfStreams = maxNumberOfStreams;
 		this.supportedStreamTypes = supportedStreamTypes;
-		this.streamingServerEventListener = new StandaloneStreamingEventListener();
+		this.streamingServerEventListener = new StandaloneStreamingEventListener(this);
 	
 	}
 	
@@ -36,7 +37,10 @@ public class StandaloneStreamingServer implements StreamingServer {
 	 * @see streamingserver.StreamingServer#getAvailableStreams()
 	 */
 	public int getAvailableStreams() {
-		return (maxNumberOfStreams - streamingServerEventListener.getCurrentNumberOfStreams());
+		if (maxNumberOfStreams < 0) {
+			return	-1;
+		}
+		return (maxNumberOfStreams - getCurrentNumberOfStreams());
 	}
 
 	/* (non-Javadoc)
@@ -75,7 +79,7 @@ public class StandaloneStreamingServer implements StreamingServer {
 		if (maxNumberOfStreams < 0) {
 			return	true;
 		}
-		return (streamingServerEventListener.getCurrentNumberOfStreams()
+		return (getCurrentNumberOfStreams()
 				< maxNumberOfStreams);
 	}
 
@@ -94,5 +98,11 @@ public class StandaloneStreamingServer implements StreamingServer {
 	return false;
 	}
 	
-
+	protected void setCurrentNumberOfStreams(int currentNumberOfStreams){
+		this.currentNumberOfStreams = currentNumberOfStreams;
+	}
+	
+	protected int getCurrentNumberOfStreams(){
+		return currentNumberOfStreams;
+	}
 }

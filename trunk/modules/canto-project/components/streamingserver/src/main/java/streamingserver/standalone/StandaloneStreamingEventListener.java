@@ -10,11 +10,11 @@ public class StandaloneStreamingEventListener implements
 
 	
 	private HashMap<String,MeetingStreamInfo>		meetingStreamInfos;
-	private	int		currentNumberOfStreams;
+	private StandaloneStreamingServer streamingServer;
 	
-	public StandaloneStreamingEventListener(){
-		meetingStreamInfos = new HashMap<String,MeetingStreamInfo>();
-		currentNumberOfStreams = 0;
+	public StandaloneStreamingEventListener(StandaloneStreamingServer streamingServer){
+		this.meetingStreamInfos = new HashMap<String,MeetingStreamInfo>();
+		this.streamingServer = streamingServer;
 	}
 	
 	
@@ -37,11 +37,12 @@ public class StandaloneStreamingEventListener implements
 	/* (non-Javadoc)
 	 * @see streamingserver.StreamingServerEventListener#meetingClosed(java.lang.String)
 	 */
-	public void meetingClosed(String meetingKey) {
+	public synchronized void meetingClosed(String meetingKey) {
 		MeetingStreamInfo ms = meetingStreamInfos.get(meetingKey);
 		if (ms != null) {
 			meetingStreamInfos.remove(meetingKey);
-			currentNumberOfStreams -= ms.getTotalNumberOfStreams();
+			streamingServer.setCurrentNumberOfStreams(
+					streamingServer.getCurrentNumberOfStreams() - ms.getTotalNumberOfStreams());
 		}
 
 	}
@@ -49,7 +50,7 @@ public class StandaloneStreamingEventListener implements
 	/* (non-Javadoc)
 	 * @see streamingserver.StreamingServerEventListener#meetingStarted(java.lang.String, int, int)
 	 */
-	public void meetingStarted(String meetingKey, int maxExpectedParticipants,
+	public synchronized void meetingStarted(String meetingKey, int maxExpectedParticipants,
 			int maxExpectedMeetingLengthMinutes) {
 		MeetingStreamInfo ms = meetingStreamInfos.get(meetingKey);
 		if (ms == null) {
@@ -61,11 +62,12 @@ public class StandaloneStreamingEventListener implements
 	/* (non-Javadoc)
 	 * @see streamingserver.StreamingServerEventListener#participantJoined(java.lang.String, java.lang.String)
 	 */
-	public void participantJoined(String meetingKey, String participantId) {
+	public synchronized void participantJoined(String meetingKey, String participantId) {
 		MeetingStreamInfo ms = meetingStreamInfos.get(meetingKey);
 		if (ms != null) {
 			ms.addParticipant(participantId);
-			currentNumberOfStreams += 1;
+			streamingServer.setCurrentNumberOfStreams(
+					streamingServer.getCurrentNumberOfStreams()+1);
 		}
 
 	}
@@ -73,20 +75,14 @@ public class StandaloneStreamingEventListener implements
 	/* (non-Javadoc)
 	 * @see streamingserver.StreamingServerEventListener#participantLeft(java.lang.String, java.lang.String)
 	 */
-	public void participantLeft(String meetingKey, String participantId) {
+	public synchronized void participantLeft(String meetingKey, String participantId) {
 		MeetingStreamInfo ms = meetingStreamInfos.get(meetingKey);
 		if (ms != null) {
 			ms.removeParticipant(participantId);
-			currentNumberOfStreams -= 1;
+			streamingServer.setCurrentNumberOfStreams(
+					streamingServer.getCurrentNumberOfStreams()-1);
 		}
 
 	}
-
-
-	public int getCurrentNumberOfStreams() {
-		return currentNumberOfStreams;
-	}
-	
-	
 	
 }
