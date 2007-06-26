@@ -7,7 +7,7 @@ package streamingserver;
  * @author tzhrora2
  *
  */
-public enum StreamingServerAdapterType {
+public enum StreamingServerType {
 	
 	STANDALONE;
 

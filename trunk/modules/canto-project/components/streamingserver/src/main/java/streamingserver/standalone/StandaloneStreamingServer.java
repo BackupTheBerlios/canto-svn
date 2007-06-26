@@ -2,8 +2,8 @@ package streamingserver.standalone;
 
 import java.util.Vector;
 
+import streamingserver.StreamType;
 import streamingserver.StreamingServer;
-import streamingserver.StreamingServerConstants;
 import streamingserver.StreamingServerEventListener;
 
 /**
@@ -19,11 +19,11 @@ public class StandaloneStreamingServer implements StreamingServer {
 	private	String		rtmptUrl;
 	private	int			maxNumberOfStreams;
 	private	int		currentNumberOfStreams = 0;
-	private	Vector<String>		supportedStreamTypes;
+	private	Vector<StreamType>		supportedStreamTypes;
 	private StandaloneStreamingEventListener streamingServerEventListener;
 	
 	public	StandaloneStreamingServer(String rtmpUrl, String rtmptUrl,
-			int maxNumberOfStreams, Vector<String> supportedStreamTypes) {
+			int maxNumberOfStreams, Vector<StreamType> supportedStreamTypes) {
 		this.rtmpUrl = rtmpUrl;
 		this.rtmptUrl = rtmptUrl;
 		this.maxNumberOfStreams = maxNumberOfStreams;
@@ -83,15 +83,15 @@ public class StandaloneStreamingServer implements StreamingServer {
 				< maxNumberOfStreams);
 	}
 
-	/* (non-Javadoc)
-	 * @see streamingserver.StreamingServer#supportsStreamType(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * @see streamingserver.StreamingServer#supportsStreamType(streamingserver.StreamType)
 	 */
-	public boolean supportsStreamType(String streamType) {
+	public boolean supportsStreamType(StreamType streamType) {
 		if (supportedStreamTypes != null &&
 				supportedStreamTypes.size() > 0) {
-			if (supportedStreamTypes.contains(streamType) ||
-			supportedStreamTypes.contains(StreamingServerConstants.ANY_STREAMS)) {
-			return	true;
+			if (supportedStreamTypes.contains(streamType)) {
+				return	true;
 			}
 		}
 		

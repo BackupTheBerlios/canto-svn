@@ -40,7 +40,7 @@ public interface StreamingServer {
 	 * @param streamType
 	 * @return
 	 */
-	public	boolean		supportsStreamType(String streamType);
+	public	boolean		supportsStreamType(StreamType streamType);
 	
 	
 	/**
