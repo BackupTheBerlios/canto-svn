@@ -7,9 +7,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import pareon.canto.components.logging.SystemLogger;
 import pareon.canto.framework.domain.component.Component;
 
 /**
@@ -19,7 +17,7 @@ import pareon.canto.framework.domain.component.Component;
  */
 public class ComponentServiceImpl implements ComponentService {
 	
-	private Log logger = LogFactory.getLog(ComponentService.class);
+	private SystemLogger logger = new SystemLogger(getClass());
 	private Hashtable<String,pareon.canto.framework.domain.component.Component>components;
 	
 	
@@ -53,9 +51,9 @@ public class ComponentServiceImpl implements ComponentService {
 	public synchronized void registerComponent(Component component) {
 		if (!components.containsKey(component.getName())){
 			components.put(component.getName(),component);
-			logger.info("Component ["+component.getName()+"] registred");
+			logger.logInfo("Component ["+component.getName()+"] registred");
 		} else {
-			logger.info("Component ["+component.getName()+"] already registred");
+			logger.logInfo("Component ["+component.getName()+"] already registred");
 		}
 		
 	}
@@ -67,9 +65,9 @@ public class ComponentServiceImpl implements ComponentService {
 	public synchronized void unregisterComponent(Component component) {
 		if (components.containsKey(component.getName())){
 			components.remove(component.getName());
-			logger.info("Component ["+component.getName()+"] unregistred");
+			logger.logInfo("Component ["+component.getName()+"] unregistred");
 		} else {
-			logger.info("Component ["+component.getName()+"] already unregistred");
+			logger.logInfo("Component ["+component.getName()+"] already unregistred");
 		}
 	}
 	

@@ -13,6 +13,7 @@ import pareon.canto.framework.domain.DomainEntity;
 public class Component extends DomainEntity {
 	
 	private String name;
+	private String description;
 	private boolean enabled;
 	
 	public String getName() {
@@ -26,6 +27,12 @@ public class Component extends DomainEntity {
 	}
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

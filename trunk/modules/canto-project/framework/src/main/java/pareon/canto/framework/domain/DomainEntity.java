@@ -3,7 +3,12 @@ package pareon.canto.framework.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-public class DomainEntity implements Serializable {
+/**
+ * Base class of Entity
+ * @author tzhrora2
+ *
+ */
+public abstract class DomainEntity implements Serializable {
 	
 	
 	/**
@@ -19,12 +24,7 @@ public class DomainEntity implements Serializable {
 		return id;
 	}
 	
-	/**
-	 * The id is set by the Persistence layer
-	 * @param id
-	 */
-	@SuppressWarnings("unused")
-	private void setId(Long id){
+	public void setId(Long id){
 		this.id = id;
 	}
 
