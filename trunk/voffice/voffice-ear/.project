@@ -1,0 +1,11 @@
+<projectDescription>
+  <name>voffice-ear</name>
+  <comment/>
+  <projects>
+    <project>voffice-servlets-adminconsole</project>
+    <project>voffice-core</project>
+    <project>voffice-servlets-webconsole</project>
+  </projects>
+  <buildSpec/>
+  <natures/>
+</projectDescription>

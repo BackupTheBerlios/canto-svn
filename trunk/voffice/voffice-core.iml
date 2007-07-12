@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module relativePaths="false" type="JAVA_MODULE" version="4">
+  <component name="ModuleRootManager" />
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/voffice-core/target/test-classes" />
+    <exclude-output />
+    <output-test url="file://$MODULE_DIR$/voffice-core/target/test-classes" />
+    <content url="file://$MODULE_DIR$/voffice-core">
+      <sourceFolder url="file://$MODULE_DIR$/voffice-core/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/voffice-core/src/test/java" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="M2_REPO/commons-logging/commons-logging/1.1/commons-logging-1.1.jar">
+        <CLASSES>
+          <root url="jar:///home/tzhrora2/sandbox/maven2/repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="M2_REPO/springframework/spring/2.0.6/spring-2.0.6.jar">
+        <CLASSES>
+          <root url="jar:///home/tzhrora2/sandbox/maven2/repository/springframework/spring/2.0.6/spring-2.0.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="M2_REPO/org/hibernate/hibernate/3.1/hibernate-3.1.jar">
+        <CLASSES>
+          <root url="jar:///home/tzhrora2/sandbox/maven2/repository/org/hibernate/hibernate/3.1/hibernate-3.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="M2_REPO/acegisecurity/acegi-security/1.0.4/acegi-security-1.0.4.jar">
+        <CLASSES>
+          <root url="jar:///home/tzhrora2/sandbox/maven2/repository/acegisecurity/acegi-security/1.0.4/acegi-security-1.0.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntryProperties />
+  </component>
+  <component name="POM File Configuration" pomFile="file://$MODULE_DIR$/voffice-core/pom.xml" />
+</module>
+

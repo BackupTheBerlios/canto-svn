@@ -1,0 +1,17 @@
+<project>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>blueglue.voffice.components</groupId>
+   <version>1.0</version>
+   <artifactId>voffice-components</artifactId>
+   <packaging>pom</packaging>
+   <name>Virtual Office :: Components Projects</name>
+   <parent>
+      <groupId>blueglue.voffice</groupId>
+      <artifactId>project</artifactId>
+      <version>1.0</version>
+      <relativePath>../voffice-container/pom.xml</relativePath>
+   </parent>
+   <modules>
+      
+   </modules>
+</project>

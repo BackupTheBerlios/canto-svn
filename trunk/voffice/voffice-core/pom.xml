@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>project</artifactId>
+    <groupId>blueglue.voffice</groupId>
+    <version>1.0</version>
+    <relativePath>../voffice-container/pom.xml</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>blueglue.voffice</groupId>
+  <artifactId>voffice-core</artifactId>
+  <name>Virtual Office :: Core Classes</name>
+  <build />
+  <dependencies>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate</artifactId>
+      <version>3.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>acegisecurity</groupId>
+      <artifactId>acegi-security</artifactId>
+      <version>1.0.4</version>
+    </dependency>
+  </dependencies>
+</project>
+
